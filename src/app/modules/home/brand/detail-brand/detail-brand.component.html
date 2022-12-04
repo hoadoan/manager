@@ -1,0 +1,74 @@
+<main id="main" class="main">
+  <div class="pagetitle d-flex justify-content-between">
+    <div>
+      <h1>Danh sách sản phẩm được cung cấp</h1>
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a routerLink="/dashboard">Trang chủ</a>
+          </li>
+          <li class="breadcrumb-item">
+            <a routerLink="/dashboard/brands">Nhà sản xuất</a>
+          </li>
+          <li class="breadcrumb-item active">Danh sách sản phẩm được cung cấp</li>
+        </ol>
+      </nav>
+    </div>
+  </div>
+
+  <div class="row" *ngIf="brandDetail == null">
+    <b class="col-8" style="font-size: 20px">Chưa có sản phẩm từ nhà cung cấp {{brandOld}}</b>
+    <div class="col-4" style="text-align: right">
+                <button nz-button (click)="showModal()" style=" border-radius: 20px; background-color: rgb(71, 160, 243); color: white">
+                  <span nz-icon nzType="edit" nzTheme="outline" style="font-size: 20px">Thay đổi tên nhà sản xuất</span></button>
+                <nz-modal [(nzVisible)]="isVisible" nzTitle="Thay đổi tên nhà sản xuất"
+                    nzCancelText="Hủy" nzOkText="Thay đổi" (nzOnOk)="handleOk()" (nzOnCancel)="handleCancel()">
+                    <ng-container *nzModalContent>
+                        <nz-form-label nzRequired for="inputName5" class="form-label">Tên nhà sản xuất</nz-form-label>
+                        <input type="text" class="form-control" id="inputName" [(ngModel)]="brandName" >
+                        <div *ngIf="checkError == true">
+                            <small style="color: red;">Vui lòng nhập tên nhà sản xuất</small>
+                        </div>
+                    </ng-container>
+                </nz-modal>
+            </div>
+  </div>
+  <div *ngIf="brandDetail != null">
+    <div class="row">
+      <b class="col-8" style="font-size: 20px">Sản phẩm của được cung cấp từ {{brandOld}}</b>
+    <div class="col-4" style="text-align: right">
+                <button nz-button (click)="showModal()" style=" border-radius: 20px; background-color: rgb(71, 160, 243); color: white">
+                  <span nz-icon nzType="edit" nzTheme="outline" style="font-size: 20px">Thay đổi tên nhà sản xuất</span></button>
+                <nz-modal [(nzVisible)]="isVisible" nzTitle="Thay đổi tên nhà sản xuất"
+                    nzCancelText="Hủy" nzOkText="Thay đổi" (nzOnOk)="handleOk()" (nzOnCancel)="handleCancel()">
+                    <ng-container *nzModalContent>
+                        <nz-form-label nzRequired for="inputName5" class="form-label">Tên nhà sản xuất</nz-form-label>
+                        <input type="text" class="form-control" id="inputName" [(ngModel)]="brandName" >
+                        <div *ngIf="checkError == true">
+                            <small style="color: red;">Vui lòng nhập tên nhà sản xuất</small>
+                        </div>
+                    </ng-container>
+                </nz-modal>
+            </div>
+    </div>
+    <div class="col-12">
+      <nz-table #basicTable [nzData]="brandDetail" style="text-align: center; font-size: 18px;">
+        <thead>
+          <tr>
+            <th scope="col" style="text-align: center;">Mã đăng kí</th>
+            <th scope="col" style="text-align: center;">Tên sản phẩm</th>
+            <th scope="col" style="text-align: center;"></th>
+          </tr>
+        </thead>
+        <tbody *ngFor="let products of basicTable.data" style="text-align: center;">
+          <tr>
+            <td scope="row">{{products.drugRegistrationNumber}}</td>
+            <td >{{products.name}}</td>
+            <td>
+              <a (click)="detail(products.id)" style="color: rgb(55, 158, 248)">Xem chi tiết sản phẩm</a>
+          </td>
+        </tbody>
+      </nz-table>
+    </div>
+  </div>
+</main>

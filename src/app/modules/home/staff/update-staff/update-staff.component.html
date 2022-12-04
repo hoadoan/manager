@@ -1,0 +1,29 @@
+<button nz-button nzType="primary" (click)="showModalChangeInfo()" class="col-lg-9 col-md-8"><i></i>
+    <span>Thay đổi thông tin</span></button>
+<nz-modal [(nzVisible)]="isVisibleChangeInfo" nzTitle="Thay đổi thông tin nhân viên"
+    nzOkText="Thay đổi thông tin nhân viên" nzCancelText="Hủy" (nzOnOk)="handleChangeInfoOk()"
+    (nzOnCancel)="handleChangeInfoCancel()">
+    <ng-container *nzModalContent>
+        <nz-form-label for="inputAvatar" class="form-label">Ảnh đại diện</nz-form-label>
+        <div class="row">
+            <div class="col-lg-9 col-md-8 label"><input type="file" (change)="uploadImage($event)" class="form-label">
+            </div>
+            <div class="col-lg-3 col-md-4">
+                <img [src]="updateInfo.avartar" alt="newAvatar" width="42" height="42" style="border-radius: 20px;">
+            </div>
+        </div>
+        <nz-form-label for="inputName" class="form-label">Họ và tên</nz-form-label>
+        <input type="text" class="form-control" id="inputName" id="inputName" [placeholder]="updateInfo.fullName" [(ngModel)]="updateInfo.fullName" (ngModelChange)="changeInfo()">
+        <nz-form-label for="inputDate" class="form-label">Ngày sinh</nz-form-label>
+        <input type="datetime-local" class="form-control" [(ngModel)]="updateInfo.dateOfBirth" (ngModelChange)="changeInfo()">
+        <nz-form-label for="inputPhonenumber" class="form-label">Số điện thoại</nz-form-label>
+        <input type="text" class="form-control" id="inputPhonenumber" [placeholder]="updateInfo.phoneNumber" [(ngModel)]="updateInfo.phoneNumber"  (ngModelChange)="changeInfo()">
+        <nz-form-label class="form-label">Giới tính</nz-form-label>
+        <select class="form-control" [(ngModel)]="updateInfo.isMale"  (ngModelChange)="changeInfo()">
+            <option value="true">Nam</option>
+            <option value="false">Nữ</option>
+        </select>
+        <br>
+        <!-- <button>Cập nhật thông tin</button> -->
+    </ng-container>
+</nz-modal>

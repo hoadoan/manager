@@ -1,0 +1,7 @@
+{
+    "/api/*": {
+        "target": "https://utnhandrugstore.ga",
+        "secure": false,
+        "logLevel": "debug"
+    }
+}

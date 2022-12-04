@@ -1,0 +1,85 @@
+<main id="main" class="main">
+  <div class="pagetitle d-flex justify-content-between">
+    <div>
+      <h1>Chi tiết nhà cung cấp</h1>
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a routerLink="/dashboard">Trang chủ</a>
+          </li>
+          <li class="breadcrumb-item">
+            <a routerLink="/dashboard/supplier">Nhà cung cấp</a>
+          </li>
+          <li class="breadcrumb-item active">Chi tiết nhà cung cấp</li>
+        </ol>
+      </nav>
+    </div>
+  </div>
+  <div class="row" *ngIf="supplierDetail == null">
+    <b class="col-8" style="font-size: 20px">Chưa có lô hàng đến từ nhà cung cấp {{nameOld}}</b>
+    <div class="col-4" style="text-align: right">
+                <button nz-button (click)="showModal()" style=" border-radius: 20px; background-color: rgb(71, 160, 243); color: white">
+                  <span nz-icon nzType="edit" nzTheme="outline" style="font-size: 20px">Thay đổi tên nhà cung cấp</span></button>
+                <nz-modal [(nzVisible)]="isVisible" nzTitle="Thay đổi tên nhà cung cấp"
+                    nzCancelText="Hủy" nzOkText="Thay đổi" (nzOnOk)="handleOk()" (nzOnCancel)="handleCancel()">
+                    <ng-container *nzModalContent>
+                        <nz-form-label nzRequired for="inputName5" class="form-label">Tên nhà cung cấp</nz-form-label>
+                        <input type="text" class="form-control" id="inputName" [(ngModel)]="supplierName" >
+                        <div *ngIf="checkError == true">
+                            <small style="color: red;">Vui lòng nhập tên nhà cung cấp</small>
+                        </div>
+                    </ng-container>
+                </nz-modal>
+            </div>
+  </div>
+  <div *ngIf="supplierDetail != null">
+    <div class="row">
+      <b class="col-8" style="font-size: 20px">Lô hàng đến từ nhà cung cấp {{nameOld}}</b>
+    <div class="col-4" style="text-align: right">
+      <button nz-button (click)="showModal()" style=" border-radius: 20px; background-color: rgb(71, 160, 243); color: white">
+        <span nz-icon nzType="edit" nzTheme="outline" style="font-size: 20px">Thay đổi tên nhà cung cấp</span></button>
+      <nz-modal [(nzVisible)]="isVisible" nzTitle="Thay đổi tên nhà cung cấp"
+          nzCancelText="Hủy" nzOkText="Thay đổi" (nzOnOk)="handleOk()" (nzOnCancel)="handleCancel()">
+          <ng-container *nzModalContent>
+              <nz-form-label nzRequired for="inputName5" class="form-label">Tên nhà cung cấp</nz-form-label>
+              <input type="text" class="form-control" id="inputName" [(ngModel)]="supplierName" >
+              <div *ngIf="checkError == true">
+                  <small style="color: red;">Vui lòng nhập tên nhà cung cấp</small>
+              </div>
+          </ng-container>
+      </nz-modal>
+            </div>
+    </div>
+
+    <div class="col-xl-12">
+      <div class="card">
+        <div class="card-body pt-3">
+          <nz-table #basicTable [nzData]="supplierDetail" style="font-size: 18px;">
+            <thead style="text-align: center">
+              <tr>
+                <th scope="col" style="text-align: center;">Mã lô hàng</th>
+                <th scope="col" style="text-align: center;">Barcode lô hàng</th>
+                <th scope="col" style="text-align: center;">Người tạo</th>
+                <th scope="col" style="text-align: center;">Ngày tạo</th>
+                <th scope="col" style="text-align: center;">Ngày sản xuất</th>
+                <th scope="col" style="text-align: center;">Hạn sử dụng</th>
+              </tr>
+            </thead>
+            <tbody  *ngFor="let batches of supplierDetail" style="text-align: center;">
+              <tr>
+                <td scope="row" (click)="detailGoodsReceiptNote(batches.id)">{{batches.id}}</td>
+                <td (click)="detailGoodsReceiptNote(batches.id)"><ngx-barcode bc-value={{batches.batchBarcode}} [bc-display-value]="true" [bc-width]="1" [bc-height]="35"></ngx-barcode></td>
+                <td (click)="detailGoodsReceiptNote(batches.id)">{{batches.createdBy.name}}</td>
+                <td (click)="detailGoodsReceiptNote(batches.id)">{{batches.createdAt | date:'dd-MM-yyyy'}}</td>
+                <td (click)="detailGoodsReceiptNote(batches.id)">{{batches.manufacturingDate | date:'dd-MM-yyyy'}}</td>
+                <td (click)="detailGoodsReceiptNote(batches.id)">{{batches.expiryDate | date:'dd-MM-yyyy'}}</td>
+              </tr>
+            </tbody>
+          </nz-table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+</main>

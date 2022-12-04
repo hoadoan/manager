@@ -1,0 +1,25 @@
+<button (click)="showModalChangeInfo()" nz-button nzType="primary" [nzSize]="'default'" style="border-radius: 10px">
+  <i class="fas fa-plus"></i>
+</button>
+<nz-modal [(nzVisible)]="isVisibleChangeInfo" nzTitle="Thêm đơn vị bán mới"
+  nzOkText="Thêm đơn vị" nzCancelText="Hủy" (nzOnOk)="handleChangeInfoOk()"
+  (nzOnCancel)="handleChangeInfoCancel()">
+  <ng-container *nzModalContent>
+    <nz-form-label nzRequired for="unit" class="form-label">Tên đơn vị</nz-form-label>
+    <input type="text" class="form-control" id="unit" [(ngModel)]="productUnitData.value.unit" (ngModelChange)="changeInfo()">
+    <div *ngIf="checkErrorUnit == true">
+      <small style="color: red;">Vui lòng nhập tên đơn vị</small>
+  </div>
+    <nz-form-label nzRequired for="inputName" class="form-label">Giá trị quy đổi</nz-form-label>
+    <input type="number" class="form-control" id="inputName" id="inputName" [(ngModel)]="productUnitData.value.conversionValue" (ngModelChange)="changeInfo()">
+    <div *ngIf="checkErrorConversionValue == true">
+      <small style="color: red;">Vui lòng nhập giá trị quy đổi</small>
+  </div>
+    <nz-form-label nzRequired for="inputName" class="form-label">Giá bán</nz-form-label>
+    <input type="number" class="form-control" id="inputName" id="inputName" [(ngModel)]="productUnitData.value.price" (ngModelChange)="changeInfo()">
+    <div *ngIf="checkErrorPrice == true">
+      <small style="color: red;">Vui lòng nhập giá bán</small>
+  </div>
+    </ng-container>
+</nz-modal>
+

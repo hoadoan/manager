@@ -1,0 +1,34 @@
+<button (click)="showModalChangeInfo()" nz-button nzType="primary" [nzSize]="'default'" style="border-radius: 10px">
+  <span nz-icon nzType="edit" nzTheme="outline"></span>
+</button>
+<nz-modal [(nzVisible)]="isVisibleChangeInfo" nzTitle="Thay đổi thông tin sản phẩm"
+  nzOkText="Thay đổi thông tin sản phẩm" nzCancelText="Hủy" (nzOnOk)="handleChangeInfoOk()"
+  (nzOnCancel)="handleChangeInfoCancel()">
+  <ng-container *nzModalContent>
+    <nz-form-label for="inputName" class="form-label">Tên sản phẩm</nz-form-label>
+      <input type="text" class="form-control" id="inputName" id="inputName" [placeholder]="updateInfoProduct.name" [(ngModel)]="updateInfoProduct.name" (ngModelChange)="changeInfo()">
+      <nz-form-label for="inputName" class="form-label">Mã đăng kí</nz-form-label>
+      <input type="text" class="form-control" id="inputName" id="inputName" [placeholder]="updateInfoProduct.drugRegistrationNumber" [(ngModel)]="updateInfoProduct.drugRegistrationNumber" (ngModelChange)="changeInfo()">
+      <nz-form-label class="form-label">Kệ hàng</nz-form-label>
+        <nz-select class="form-control" [(ngModel)]="updateInfoProduct.shelfId" (ngModelChange)="changeInfo()" >
+        <nz-option *ngFor="let listShelfs of shelf" nzValue="{{ listShelfs.id }}" nzLabel="{{ listShelfs.name }}" nzDisabled="{{!listShelfs.isActive}}" >
+        </nz-option>
+      </nz-select>
+      <nz-form-label class="form-label">Nhà sản xuất</nz-form-label>
+        <nz-select class="form-control" [(ngModel)]="updateInfoProduct.brandId" (ngModelChange)="changeInfo()" >
+        <nz-option *ngFor="let listBrand of brand" nzValue="{{ listBrand.id }}" nzLabel="{{ listBrand.name }}" nzDisabled="{{!listBrand.isActive}}" >
+        </nz-option>
+      </nz-select>
+      <nz-form-label class="form-label">Đường dùng</nz-form-label>
+        <nz-select class="form-control" (ngModelChange)="changeInfo()" [(ngModel)]="updateInfoProduct.routeOfAdministrationId">
+        <nz-option *ngFor="let listROA of listROA" nzValue="{{ listROA.id }}" nzLabel="{{ listROA.name }}" >
+        </nz-option>
+      </nz-select>
+      <nz-form-label for="inputName" class="form-label">Mức tồn kho tối thiểu</nz-form-label>
+      <input type="number" class="form-control" id="inputName" id="inputName" [placeholder]="updateInfoProduct.mininumInventory" [(ngModel)]="updateInfoProduct.mininumInventory" (ngModelChange)="changeInfo()">
+        <nz-form-label [nzSpan]="6">Bán theo liều</nz-form-label>
+        <nz-switch (click)="clickIsUseDose()" [(ngModel)]="isUseDose" (ngModelChange)="changeInfo()"></nz-switch>
+        <nz-form-label [nzSpan]="10">Quản lý theo lô, Hạn sử dụng</nz-form-label>
+        <nz-switch (click)="clickIsManagedInBatches()" [(ngModel)]="isManagedInBatches" (ngModelChange)="changeInfo()"></nz-switch>
+    </ng-container>
+</nz-modal>

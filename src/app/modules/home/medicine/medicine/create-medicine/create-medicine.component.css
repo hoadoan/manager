@@ -1,0 +1,9 @@
+nz-select {
+    width: 100%;
+  }
+  input.ng-invalid.ng-touched{
+    border: red 1px solid;
+    }
+  select.ng-invalid.ng-touched{
+    border: red 1px solid;
+  } 

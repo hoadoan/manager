@@ -1,0 +1,75 @@
+<main id="main" class="main">
+    <div class="pagetitle d-flex justify-content-between">
+        <div>
+            <h1>Danh sách nhân viên</h1>
+            <nav>
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a routerLink="/dashboard">Trang chủ</a></li>
+                    <li class="breadcrumb-item active">Nhân viên</li>
+                </ol>
+            </nav>
+        </div>
+        <div>
+            <button id="create-button" nz-button nzType="primary" nzSize="large" style="border-radius: 10px">
+                <a routerLink="/dashboard/create-staff">
+                    <i class="bi bi-plus"></i>
+                    <span>Tạo nhân viên</span>
+                </a>
+            </button>
+        </div>
+    </div>
+    <div id="search">
+        <nz-input-group nzSearch nzSize="large" [nzAddOnAfter]="suffixButton">
+            <input type="text" nz-input placeholder="Nhập mã, tên, số điện thoại nhân viên" [(ngModel)]="searchData"
+                (ngModelChange)="getListSearch()" />
+        </nz-input-group>
+        <ng-template #suffixButton>
+            <button nz-button nzType="primary" nzSize="large" nzSearch>
+                <nz-select [(ngModel)]="selectedProvince" nzSize="large" (ngModelChange)="SearchOption($event)">
+                    <nz-option nzValue="searchID" nzLabel="Mã nhân viên"></nz-option>
+                    <nz-option nzValue="SearchName" nzLabel="Tên nhân viên"></nz-option>
+                    <nz-option nzValue="SearchPhone" nzLabel="Số điện thoại nhân viên"></nz-option>
+                </nz-select>
+            </button>
+        </ng-template>
+    </div>
+    <section class="section">
+        <!-- [nzScroll]="{ x: '1150px', y: '600px' }" -->
+        <nz-table [nzLoading]="loading" [nzData]="listsearch" #basicTable [nzPageSize]="5"
+            [nzPageSizeOptions]="[5,10,15,20,25,30]" nzShowSizeChanger >
+            <thead>
+                <tr>
+                    <th style="text-align: center;">Ảnh đại diện</th>
+                    <th style="text-align: center;">Mã nhân viên</th>
+                    <th style="text-align: center;">Họ và Tên</th>
+                    <th style="text-align: center;">Số điện thoại</th>
+                    <th [nzFilters]="nameList"
+                    [nzFilterMultiple]="true"
+                    [nzFilterFn]="nameFilterFn" style="text-align: center;">Hoạt động</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr style="cursor: pointer;" *ngFor="let data of basicTable.data" style="text-align: center;">
+                    <td (click)="detail(data.userId)">
+                        <img src={{data.avatar}} alt="avatar" width="50" height="50">
+                    </td>
+                    <td (click)="detail(data.userId)">{{ data.userId}}</td>
+                    <td (click)="detail(data.userId)">{{ data.fullname}}</td>
+                    <td (click)="detail(data.userId)">{{ data.phoneNumber }}</td>
+                    <td>
+                        <!-- <a><button type="button" class="btn btn-outline-secondary">Cập nhật</button></a> -->
+                        <!-- <nz-divider nzType="vertical"></nz-divider> -->
+                        <span *ngIf="data.isActive == false; else ElseBan ">
+                            <button type="button" class="btn btn-outline-success action__button"
+                                (click)="clickUnBan(data.userId)">Bỏ chặn</button>
+                        </span>
+                    </td>
+                    <ng-template #ElseBan>
+                        <button type="button" class="btn btn-outline-danger action__button"
+                            (click)="clickBan(data.userId)">Chặn</button>
+                    </ng-template>
+                </tr>
+            </tbody>
+        </nz-table>
+    </section>
+</main>

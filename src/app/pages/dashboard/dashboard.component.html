@@ -1,0 +1,263 @@
+<main id="main" class="main">
+   <div class="pagetitle">
+      <h1>Trang chủ</h1>
+      <nav>
+         <ol class="breadcrumb">
+            <li class="breadcrumb-item active">Trang chủ</li>
+         </ol>
+      </nav>
+   </div>
+   <section class="section dashboard">
+      <div class="row">
+         <div class="col-lg-12">
+            <div class="row">
+               <div class="col-xxl-3 col-md-6">
+                  <div class="card info-card sales-card">
+                     <!-- <div class="filter">
+                        <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
+                        <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                           <li class="dropdown-header text-start">
+                              <h6>Filter</h6>
+                           </li>
+                           <li><a class="dropdown-item" >Hôm nay</a></li>
+                           <li><a class="dropdown-item" >Tháng này</a></li>
+                           <li><a class="dropdown-item" >Năm nay</a></li>
+                        </ul>
+                     </div> -->
+                     <div class="card-body">
+                        <h5 class="card-title">Bán hàng <span>| Hôm nay</span></h5>
+                        <div class="d-flex align-items-center">
+                           <div class="card-icon rounded-circle d-flex align-items-center justify-content-center"> <i
+                                 class="bi bi-cart"></i></div>
+                           <div class="ps-3" *ngIf="percentQuantityOrder > 0">
+                              <h6>{{quantityOrder}}</h6>
+                              <span class="text-muted small pt-2 ps-1">Tăng</span>
+                              <span class="text-success small pt-1 fw-bold"> {{percentQuantityOrderStr}}%</span>
+                           </div>
+                           <div class="ps-3" *ngIf="percentQuantityOrder == 0">
+                            <h6>{{quantityOrder}}</h6>
+                            <!-- <span class="text-muted small pt-2 ps-1">Tăng</span> -->
+                            <span class="text-success small pt-1 fw-bold"> {{percentQuantityOrderStr}}%</span>
+                         </div>
+                           <div class="ps-3" *ngIf="percentQuantityOrder < 0">
+                            <h6>{{quantityOrder}}</h6>
+                            <span class="text-muted small pt-2 ps-1">Giảm</span>
+                            <span class="text-danger small pt-1 fw-bold"> {{percentQuantityOrderStr}}%</span>
+                         </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <div class="col-xxl-3 col-md-6">
+                  <div class="card info-card expense-card">
+                     <!-- <div class="filter">
+                        <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
+                        <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                           <li class="dropdown-header text-start">
+                              <h6>Filter</h6>
+                           </li>
+                           <li><a class="dropdown-item" href="#">Hôm nay</a></li>
+                           <li><a class="dropdown-item" href="#">Tháng này</a></li>
+                           <li><a class="dropdown-item" href="#">Năm nay</a></li>
+                        </ul>
+                     </div> -->
+                     <div class="card-body">
+                        <h5 class="card-title">Chi phí <span>| Hôm nay</span></h5>
+                        <div class="d-flex align-items-center">
+                           <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                              <i class="bi bi-currency-dollar"></i>
+                           </div>
+                           <div class="ps-3" *ngIf="percentCost > 0">
+                              <h6>{{costStr}}</h6>
+                              <span class="text-muted small pt-2 ps-1">Tăng</span>
+                              <span class="text-success small pt-1 fw-bold"> {{percentCostStr}}%</span>
+                           </div>
+                           <div class="ps-3" *ngIf="percentCost == 0">
+                            <h6>{{costStr}}</h6>
+                            <!-- <span class="text-muted small pt-2 ps-1">Tăng</span> -->
+                            <span class="text-success small pt-1 fw-bold"> {{percentCostStr}}%</span>
+                         </div>
+                           <div class="ps-3" *ngIf="percentCost < 0">
+                            <h6>{{costStr}}</h6>
+                            <span class="text-muted small pt-2 ps-1">Giảm</span>
+                            <span class="text-danger small pt-1 fw-bold"> {{percentCostStr}}%</span>
+                         </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <div class="col-xxl-3 col-md-6">
+                  <div class="card info-card revenue-card">
+                     <!-- <div class="filter">
+                        <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
+                        <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                           <li class="dropdown-header text-start">
+                              <h6>Filter</h6>
+                           </li>
+                           <li><a class="dropdown-item" href="#">Hôm nay</a></li>
+                           <li><a class="dropdown-item" href="#">Tháng này</a></li>
+                           <li><a class="dropdown-item" href="#">Năm nay</a></li>
+                        </ul>
+                     </div> -->
+                     <div class="card-body">
+                        <h5 class="card-title">Doanh thu <span>| Hôm nay</span></h5>
+                        <div class="d-flex align-items-center">
+                           <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                              <i class="bi bi-currency-dollar"></i>
+                           </div>
+                           <div class="ps-3" *ngIf="percentTurnover > 0">
+                              <h6>{{turnoverStr}}</h6>
+                              <span class="text-muted small pt-2 ps-1 ">Tăng</span>
+                              <span class="text-success small pt-1 fw-bold"> {{percentTurnoverStr}}%</span>
+                           </div>
+                           <div class="ps-3" *ngIf="percentTurnover == 0">
+                            <h6>{{turnoverStr}}</h6>
+                            <!-- <span class="text-muted small pt-2 ps-1">Tăng</span> -->
+                            <span class="text-success small pt-1 fw-bold"> {{percentTurnoverStr}}%</span>
+                         </div>
+                           <div class="ps-3" *ngIf="percentTurnover < 0">
+                            <h6>{{turnoverStr}}</h6>
+                            <span class="text-muted small pt-2 ps-1 ">Giảm</span>
+                            <span class="text-danger small pt-1 fw-bold"> {{percentTurnoverStr}}%</span>
+                         </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <div class="col-xxl-3 col-xl-12">
+                  <div class="card info-card profit-card">
+                     <!-- <div class="filter">
+                        <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
+                        <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                           <li class="dropdown-header text-start">
+                              <h6>Filter</h6>
+                           </li>
+                           <li><a class="dropdown-item" href="#">Hôm nay</a></li>
+                           <li><a class="dropdown-item" href="#">Tháng này</a></li>
+                           <li><a class="dropdown-item" href="#">Năm nay</a></li>
+                        </ul>
+                     </div> -->
+                     <div class="card-body">
+                        <h5 class="card-title">Lợi nhuận <span>| Hôm nay</span></h5>
+                        <div class="d-flex align-items-center">
+                           <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                              <i class="bi bi-currency-dollar"></i>
+                           </div>
+                           <div class="ps-3" *ngIf="percentProfit > 0">
+                              <h6>{{profitStr}}</h6>
+                              <span class="text-muted small pt-2 ps-1">Tăng</span>
+                              <span class="text-success small pt-1 fw-bold"> {{percentProfitStr}}%</span>
+                           </div>
+                           <div class="ps-3" *ngIf="percentProfit == 0">
+                            <h6>{{profitStr}}</h6>
+                            <!-- <span class="text-muted small pt-2 ps-1">Tăng</span> -->
+                            <span class="text-success small pt-1 fw-bold"> {{percentProfitStr}}%</span>
+                         </div>
+                           <div class="ps-3" *ngIf="percentProfit < 0">
+                            <h6>{{profitStr}}</h6>
+                            <span class="text-muted small pt-2 ps-1">Giảm</span>
+                            <span class="text-danger small pt-1 fw-bold"> {{percentProfitStr}}%</span>
+                         </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <div class="col-12">
+                  <div class="card">
+                     <div class="filter">
+                        <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
+                        <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                           <li class="dropdown-header text-start">
+                              <h6>Filter</h6>
+                           </li>
+                           <li><a class="dropdown-item" href="#">Hôm nay</a></li>
+                           <li><a class="dropdown-item" href="#">Tháng này</a></li>
+                           <li><a class="dropdown-item" href="#">Năm nay</a></li>
+                        </ul>
+                     </div>
+                     <!-- chart -->
+                     <div class="card-body">
+                        <h5 class="card-title">Báo cáo <span>/tuần này</span></h5>
+                        <!-- <div id="reportChart" style="width: 300px; height: 300px;"></div> -->
+                        <div echarts [options]="option" id="reportsChart"></div>
+
+                     </div>
+                  </div>
+               </div>
+               <div class="col-12">
+                  <div class="card recent-sales overflow-auto">
+                     <div class="card-body">
+                        <h2 class="card-title">Đơn hàng gần nhất</h2>
+                        <nz-table class="table table-borderless datatable" [nzData]="recentSales" #basicTable [nzPageSize]="5"
+                        [nzPageSizeOptions]="[5,10,15,20]" nzShowSizeChanger>
+                           <thead>
+                              <tr style="background-color: dodgerblue;">
+                                 <th scope="col" style="text-align: center">Mã đơn hàng</th>
+                                 <th scope="col" style="text-align: center">Khách hàng</th>
+                                 <th scope="col" style="text-align: center">Tổng tiền</th>
+                                 <th scope="col" style="text-align: center">Ngày tạo</th>
+                              </tr>
+                           </thead>
+                           <tbody *ngFor="let recentSales of basicTable.data" style="text-align: center">
+                              <tr >
+                                 <td scope="row" (click)="detailRecentSale(recentSales.id)">{{recentSales.id}}</td>
+                                 <td (click)="detailRecentSale(recentSales.id)">{{recentSales.customer.name}}</td>
+                                 <td (click)="detailRecentSale(recentSales.id)">{{recentSales.totalPrice| number}} đ</td>
+                                 <td (click)="detailRecentSale(recentSales.id)">{{recentSales.createAt|date:'dd-MM-yyyy'}}</td>
+                              </tr>
+                           </tbody>
+                        </nz-table>
+                     </div>
+                  </div>
+               </div>
+               <div class="col-12">
+                  <div class="card top-selling overflow-auto">
+                     <div class="filter">
+                        <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
+                        <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                           <li class="dropdown-header text-start">
+                              <h6>Chọn danh sách</h6>
+                           </li>
+                           <li><a class="dropdown-item" (click)="changeListTopSelling('day')">Hôm nay</a></li>
+                           <li><a class="dropdown-item" (click)="changeListTopSelling('month')">Tháng này</a></li>
+                           <li><a class="dropdown-item" (click)="changeListTopSelling('year')">Năm nay</a></li>
+                        </ul>
+                     </div>
+                     <div class="card-body pb-0">
+                        <h5 class="card-title">Sản phẩm bán chạy nhất <span>| {{getTypeText}}</span></h5>
+                        <nz-table class="table table-borderless" [nzData]="topSelling" #basicTableTopSelling [nzPageSize]="5"
+                        [nzPageSizeOptions]="[5,10,15,20]" nzShowSizeChanger>
+                           <thead>
+                              <tr style="background-color: dodgerblue;">
+                                 <th scope="col" style="text-align: center">Tên sản phẩm</th>
+                                 <th scope="col" style="text-align: center">Số lượng đã bán</th>
+                                 <th scope="col" style="text-align: center">Đơn vị</th>
+                                 <th scope="col" style="text-align: center">Giá bán</th>
+                                 <th scope="col" style="text-align: center">Doanh thu</th>
+                              </tr>
+                           </thead>
+                           <tbody *ngFor="let topSelling of basicTableTopSelling.data" style="text-align: center">
+                              <tr >
+                                 <td scope="row" (click)="detailProduct(topSelling.productId)">{{topSelling.productName}}</td>
+                                 <td (click)="detailProduct(topSelling.productId)">{{topSelling.sold}}</td>
+                                 <td (click)="detailProduct(topSelling.productId)">{{topSelling.unit}}</td>
+                                 <td (click)="detailProduct(topSelling.productId)">{{topSelling.price| number}} đ</td>
+                                 <td (click)="detailProduct(topSelling.productId)">{{topSelling.revenue| number}} đ</td>
+                              </tr>
+
+                           </tbody>
+                        </nz-table>
+                        <br>
+                        <br>
+                        <br>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <br>
+      <br>
+      <br>
+   </section>
+</main>

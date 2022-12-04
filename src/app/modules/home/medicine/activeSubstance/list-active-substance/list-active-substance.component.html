@@ -1,0 +1,74 @@
+<main id="main" class="main">
+    <div class="pagetitle d-flex justify-content-between">
+        <div>
+            <h1>Danh sách hoạt chất</h1>
+            <nav>
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a routerLink="/dashboard">Trang chủ</a></li>
+                    <li class="breadcrumb-item active">Hoạt chất</li>
+                </ol>
+            </nav>
+        </div>
+        <div>
+            <button nz-button nzType="primary" (click)="showModal()" nzSize="large"><i class="bi bi-plus"></i>
+                <span>Tạo hoạt chất</span></button>
+            <nz-modal [(nzVisible)]="isVisible" nzTitle="Tạo hoạt chất" nzOkText="Tạo hoạt chất" nzCancelText="Hủy"
+                (nzOnOk)="handleOk()" (nzOnCancel)="handleCancel()">
+                <ng-container *nzModalContent>
+                    <nz-form-label nzRequired for="inputName5" class="form-label">Tên hoạt chất</nz-form-label>
+                    <input type="text" class="form-control" id="inputName" [(ngModel)]="activeSubstanceName">
+                    <div *ngIf="checkError == true">
+                        <small style="color: red;">Vui lòng nhập hoạt chất</small>
+                    </div>
+                </ng-container>
+            </nz-modal>
+        </div>
+    </div>
+    <div id="search">
+        <nz-input-group nzSearch nzSize="large" [nzAddOnAfter]="">
+          <!-- [nzAddOnAfter]="suffixButton"> -->
+            <input type="text" nz-input placeholder="Nhập tên hoạt chất ..." [(ngModel)]="searchData"
+                (ngModelChange)="getListSearch()" />
+        </nz-input-group>
+        <!-- <ng-template #suffixButton>
+            <button nz-button nzType="primary" nzSize="large" nzSearch>
+                <nz-select [(ngModel)]="selectedProvince" nzSize="large" (ngModelChange)="SearchOption($event)">
+                    <nz-option nzValue="searchID" nzLabel="Mã hoạt chất"></nz-option>
+                    <nz-option nzValue="SearchName" nzLabel="Tên hoạt chất"></nz-option>
+                </nz-select>
+            </button>
+        </ng-template> -->
+    </div>
+    <section class="section">
+
+        <nz-table [nzLoading]="loading" [nzData]="listsearch" #basicTable [nzPageSize]="5"
+            [nzPageSizeOptions]="[5,10,15,20,25,30]" nzShowSizeChanger >
+            <thead>
+                <tr>
+                    <!-- <th style="text-align: center">Mã hoạt chất</th> -->
+                    <th style="text-align: center">Tên hoạt chất</th>
+                    <th style="text-align: center">Ngày tạo</th>
+                    <th [nzFilters]="nameList" [nzFilterMultiple]="true" [nzFilterFn]="nameFilterFn" style="text-align: center">Hoạt động</th>
+            </thead>
+            <tbody>
+                <tr style="cursor: pointer;" *ngFor="let data of basicTable.data" style="text-align: center">
+                  <!-- <td (click)="detail(data.id)">{{ data.id }}</td> -->
+                  <td (click)="detail(data.id)">{{ data.name || null }}</td>
+                  <td (click)="detail(data.id)">{{ data.createdAt |date:'dd-MM-yyyy' }}</td>
+                  <td>
+                      <div *ngIf="data.isActive == true; else isActive">
+                          <nz-tag [nzColor]="'green'" (click)="deleteActiveSubstance(data.id)">Hoạt động</nz-tag>
+                      </div>
+                      <ng-template #isActive>
+                          <div >
+                              <nz-tag [nzColor]="'red'" (click)="ActiveSubstance(data.id)">Ngừng hoạt động</nz-tag>
+                          </div>
+                      </ng-template>
+                  </td>
+                </tr>
+            </tbody>
+        </nz-table>
+    </section>
+
+
+</main>

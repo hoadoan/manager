@@ -1,0 +1,75 @@
+<main id="main" class="main">
+  <div class="pagetitle d-flex justify-content-between">
+    <div>
+      <h1>Chi tiết kệ hàng</h1>
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a routerLink="/dashboard">Trang chủ</a>
+          </li>
+          <li class="breadcrumb-item">
+            <a routerLink="/dashboard/medicine-category">Kệ hàng</a>
+          </li>
+          <li class="breadcrumb-item active">Chi tiết kệ hàng</li>
+        </ol>
+      </nav>
+    </div>
+  </div>
+  <div class="row" *ngIf="shelfs == null">
+    <b class="col-8" style="font-size: 20px">Chưa có sản phẩm trong kệ hàng {{nameOld}}</b>
+    <div class="col-4" style="text-align: right">
+                <button nz-button (click)="showModal()" style=" border-radius: 20px; background-color: rgb(71, 160, 243); color: white;">
+                  <span nz-icon nzType="edit" nzTheme="outline" style="font-size: 20px">Thay đổi tên kệ hàng</span></button>
+                <nz-modal [(nzVisible)]="isVisible" nzTitle="Thay đổi tên kệ hàng" nzOkText="Thay đổi tên kệ hàng"
+                    nzCancelText="Hủy" nzOkText="Thay đổi" (nzOnOk)="handleOk()" (nzOnCancel)="handleCancel()">
+                    <ng-container *nzModalContent>
+                        <nz-form-label nzRequired for="inputName5" class="form-label">Tên kệ hàng</nz-form-label>
+                        <input type="text" class="form-control" id="inputName" [(ngModel)]="name" >
+                        <div *ngIf="checkError == true">
+                            <small style="color: red;">Vui lòng nhập tên kệ hàng mới</small>
+                        </div>
+                    </ng-container>
+                </nz-modal>
+            </div>
+  </div>
+  <div *ngIf="shelfs != null">
+    <div class="row">
+      <b class="col-8" style="font-size: 20px">Sản phẩm trong kệ hàng {{nameOld}}</b>
+    <div class="col-4" style="text-align: right">
+                <button nz-button (click)="showModal()" style=" border-radius: 20px; background-color: rgb(71, 160, 243); color: white">
+                  <span nz-icon nzType="edit" nzTheme="outline" style="font-size: 20px">Thay đổi tên kệ hàng</span></button>
+                <nz-modal [(nzVisible)]="isVisible" nzTitle="Thay đổi tên kệ hàng" nzOkText="Thay đổi tên kệ hàng"
+                    nzCancelText="Hủy" nzOkText="Thay đổi" (nzOnOk)="handleOk()" (nzOnCancel)="handleCancel()">
+                    <ng-container *nzModalContent>
+                        <nz-form-label nzRequired for="inputName5" class="form-label">Tên kệ hàng</nz-form-label>
+                        <input type="text" class="form-control" id="inputName" [(ngModel)]="name" >
+                        <div *ngIf="checkError == true">
+                            <small style="color: red;">Vui lòng nhập tên kệ hàng mới</small>
+                        </div>
+                    </ng-container>
+                </nz-modal>
+            </div>
+    </div>
+  <div class="col-12">
+    <nz-table #basicTable [nzData]="shelfs" style="text-align: center; font-size: 18px;">
+      <thead>
+        <tr>
+          <th scope="col" style="text-align: center;">Mã đăng kí</th>
+          <th scope="col" style="text-align: center;">Tên sản phẩm</th>
+          <th scope="col" style="text-align: center;"></th>
+        </tr>
+      </thead>
+      <tbody *ngFor="let shelfs of basicTable.data" style="text-align: center;">
+        <tr>
+          <td scope="row">{{shelfs.drugRegistrationNumber}}</td>
+          <td>{{shelfs.name}}</td>
+          <td>
+            <a (click)="detail(shelfs.id)" style="color: rgb(55, 158, 248)">Xem chi tiết sản phẩm</a>
+        </td>
+
+      </tbody>
+    </nz-table>
+  </div>
+  </div>
+
+</main>

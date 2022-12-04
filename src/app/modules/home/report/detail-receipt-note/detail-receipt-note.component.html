@@ -1,0 +1,103 @@
+<main id="main" class="main">
+  <div class="pagetitle d-flex justify-content-between">
+    <div>
+      <h1>Thông tin nhập hàng</h1>
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a routerLink="/dashboard">Trang chủ</a>
+          </li>
+          <li class="breadcrumb-item active">Thông tin nhập hàng</li>
+        </ol>
+      </nav>
+    </div>
+  </div>
+  <div class="section">
+    <div class="row">
+      <div class="col-xl-7">
+        <div class="card">
+          <div class="card-body pt-3">
+            <b style="font-size: 20px;">Thông tin nhập hàng</b>
+
+            <div class="tab-pane fade show active profile-overview" id="profile-overview" style="margin-right: 20px">
+              <br>
+              <div class="row">
+                <b class="col-lg-5 col-md-6 label">Mã nhập hàng</b>
+                <div class="col-lg-7 col-md-6">{{ id }}</div>
+              </div>
+              <br>
+              <div class="row">
+                <b class="col-lg-5 col-md-6 label">Dạng nhập hàng</b>
+                <div class="col-lg-7 col-md-6">{{ goodsReceiptNoteType }}</div>
+              </div>
+              <br>
+              <div class="row" *ngIf="isActiveSupplier" >
+                <b class="col-lg-5 col-md-6 label">Nơi cung cấp</b>
+                <a class="col-lg-7 col-md-6" nz-button nzType="text" style="text-align: left;font-size: 13.9px;padding-left: 10px;" (click)="detailSupplier(supplierId)">{{ supplierName }}</a>
+              </div>
+              <div class="row" *ngIf="isActiveSupplier == false" >
+                <b class="col-lg-5 col-md-6 label">Nơi cung cấp</b>
+                <div class="col-lg-7 col-md-6">{{ supplierName }} đã ngừng hoạt động</div>
+              </div>
+              <br>
+              <div class="row">
+                <b class="col-lg-5 col-md-6 label">Số lượng nhập</b>
+                <div class="col-lg-7 col-md-6">{{ quantity }} {{unit}}</div>
+              </div>
+              <br>
+              <div class="row">
+                <b class="col-lg-5 col-md-6 label">Giá bán đơn vị cơ bản</b>
+                <div class="col-lg-7 col-md-6">{{ baseUnitPrice | number}} đ / {{unit}}</div>
+              </div>
+              <br>
+              <div class="row">
+                <b class="col-lg-5 col-md-6 label">Tổng tiền</b>
+                <div class="col-lg-7 col-md-6">{{ totalPrice | number}} đ </div>
+              </div>
+              <br>
+              <div class="row">
+                <b class="col-lg-5 col-md-6 label">Ngày tạo</b>
+                <div class="col-lg-7 col-md-6">{{ createdAt|date:'dd-MM-yyyy' }}</div>
+              </div>
+              <br>
+              <div class="row">
+                <b class="col-lg-5 col-md-6 label">Người tạo</b>
+                <div class="col-lg-7 col-md-6">{{ createBy }}</div>
+              </div>
+              <br>
+            </div>
+
+          </div>
+        </div>
+      </div>
+      <div class="col-xl-5">
+        <div class="card">
+          <div class="card-body pt-3">
+            <b style="font-size: 20px;">Thông tin lô hàng</b>
+            <div class="tab-pane fade show active profile-overview" id="profile-overview" style="margin-right: 20px">
+              <br>
+              <div class="row">
+                <b class="col-lg-5 col-md-6 label">Mã lô hàng</b>
+                <a class="col-lg-7 col-md-6" nz-button nzType="text" style="text-align: left;font-size: 13.9px;padding-left: 10px;" (click)="detailGoodsReceiptNote(batchId)">{{ batchBarcode }}</a>
+              </div>
+              <br>
+              <div class="row">
+                <b class="col-lg-5 col-md-6 label">Ngày sản xuất</b>
+                <div class="col-lg-7 col-md-6">{{ manufacturingDate |date:'dd-MM-yyyy'}}</div>
+              </div>
+              <br>
+              <div class="row">
+                <b class="col-lg-5 col-md-6 label">Hạn sử dụng</b>
+                <div class="col-lg-7 col-md-6">{{ expiryDate |date:'dd-MM-yyyy'}}</div>
+              </div>
+              <br>
+
+            </div>
+          </div>
+        </div>
+    </div>
+    </div>
+  </div>
+
+
+</main>

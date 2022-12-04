@@ -1,0 +1,91 @@
+<main id="main" class="main">
+  <div class="pagetitle d-flex justify-content-between">
+    <div>
+      <h1>Thông tin xuất hàng</h1>
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a routerLink="/dashboard">Trang chủ</a>
+          </li>
+          <li class="breadcrumb-item active">Thông tin xuất hàng</li>
+        </ol>
+      </nav>
+    </div>
+  </div>
+  <div class="section">
+    <div class="col-xl-12">
+      <div class="card">
+        <div class="card-body pt-3">
+          <b  style="font-size: 20px;">Thông tin xuất hàng</b>
+          <ngx-barcode bc-value={{barcodeInvoice}} [bc-display-value]="true" [bc-width]="1"
+                              [bc-height]="30"></ngx-barcode>
+          <div class="tab-pane fade show active profile-overview" id="profile-overview" style="margin-right: 20px">
+            <br>
+            <div class="row" style="margin-bottom: -10px ">
+              <b class="col-lg-3 col-md-4 label">Tên nhân viên</b>
+              <a class="col-lg-9 col-md-8" nz-button nzType="text" style="text-align: left;font-size: 13.9px;padding-left: 10px;" (click)="detailStaff(staffId)">{{ staffName }}</a>
+            </div>
+            <br>
+            <div class="row">
+              <b class="col-lg-3 col-md-4 label">Tên khách hàng</b>
+              <div class="col-lg-9 col-md-8">{{ customerName }}</div>
+            </div>
+            <br>
+            <div class="row">
+              <b class="col-lg-3 col-md-4 label">Số điện thoại khách hàng</b>
+              <div class="col-lg-9 col-md-8">{{ customerPhone }}</div>
+            </div>
+            <br>
+            <div class="row">
+              <b class="col-lg-3 col-md-4 label">Khuyến mãi</b>
+              <div class="col-lg-9 col-md-8">{{ discount }}</div>
+            </div>
+            <br>
+            <div class="row">
+              <b class="col-lg-3 col-md-4 label">Ngày tạo hoá đơn</b>
+              <div class="col-lg-9 col-md-8">{{ createdAt| date: 'dd-MM-yyyy' }}</div>
+            </div>
+          </div>
+          <br>
+          <nz-table [nzData]="invoiceDetails"
+          [nzFrontPagination]="false"
+          [nzShowPagination]="false">
+            <thead style="text-align: center">
+              <tr>
+                <th scope="col" style="text-align: center;">Mã lô hàng</th>
+                <th scope="col" style="text-align: center;">Dạng hoá đơn</th>
+                <th scope="col" style="text-align: center;">Tên sản phẩm</th>
+                <th scope="col" style="text-align: center;">Số lượng</th>
+                <th scope="col" style="text-align: center;">Đơn vị</th>
+                <th scope="col" style="text-align: center;">Giá bán</th>
+                <th scope="col" style="text-align: center;">Thành tiền</th>
+              </tr>
+            </thead>
+            <tbody  *ngFor="let invoiceDetail of invoiceDetails" style="text-align: center;">
+              <tr>
+                <td ><a (click)="detailGoodsReceiptNote(invoiceDetail.batch.id)">{{invoiceDetail.batch.name}}</a></td>
+                <td >{{invoiceDetail.goodsIssueNoteType.name}}</td>
+                <td ><a (click)="detailMedicine(invoiceDetail.product.id)">{{invoiceDetail.product.name}}</a></td>
+                <td >{{invoiceDetail.quantity}}</td>
+                <td >{{invoiceDetail.unit}}</td>
+                <td >{{invoiceDetail.unitPrice| number}} đ</td>
+                <td >{{(invoiceDetail.quantity*invoiceDetail.unitPrice)|number}} đ</td>
+              </tr>
+            </tbody>
+            <br>
+              <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <th style="text-align: center">Tổng tiền</th>
+                <th style="text-align: center">{{totalPrice| number}} đ</th>
+              </tr>
+          </nz-table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</main>

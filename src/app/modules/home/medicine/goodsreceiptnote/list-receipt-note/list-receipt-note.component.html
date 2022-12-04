@@ -1,0 +1,122 @@
+<main id="main" class="main">
+  <div class="pagetitle d-flex justify-content-between">
+    <div>
+      <h1>Chi tiết lô hàng</h1>
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a routerLink="/dashboard">Trang chủ</a>
+          </li>
+          <li class="breadcrumb-item active">Chi tiết lô hàng</li>
+        </ol>
+      </nav>
+    </div>
+  </div>
+
+  <nz-tabset>
+    <nz-tab nzTitle="Thông tin lô hàng">
+      <div class="col-xl-8" >
+        <div class="card">
+          <div class="card-body pt-6">
+            <div class="tab-pane fade show active profile-overview" id="profile-overview">
+              <br>
+              <div class="row">
+                <b class="col-lg-5 col-md-7 label">Mã lô hàng</b>
+                <div class="col-lg-7 col-md-6" >{{ batchBarcode }}</div>
+              </div>
+              <br>
+              <div class="row" style="margin-bottom: -10px">
+                <b class="col-lg-5 col-md-7 label" >Tên sản phẩm</b>
+                <a class="col-lg-7 col-md-6" nz-button nzType="text" style="text-align: left;font-size: 13.9px;padding-left: 10px;" (click)="detailMedicine(productId)">{{ productName }}</a>
+              </div>
+              <br>
+              <div class="row">
+                <b class="col-lg-5 col-md-7 label">Ngày sản xuất</b>
+                <div class="col-lg-7 col-md-6">{{ manufacturingDate | date:'dd-MM-yyyy' }}</div>
+              </div>
+              <br>
+              <div class="row">
+                <b class="col-lg-5 col-md-7 label">Hạn sử dụng</b>
+                <div class="col-lg-7 col-md-6">{{ expiryDate | date:'dd-MM-yyyy' }}</div>
+              </div>
+              <br>
+              <div class="row">
+                <b class="col-lg-5 col-md-7 label">Ngày tạo lô hàng</b>
+                <div class="col-lg-7 col-md-6">{{ createdAt | date:'dd-MM-yyyy' }}</div>
+              </div>
+              <br>
+              <div class="row">
+                <b class="col-lg-5 col-md-7 label">Người tạo lô hàng</b>
+                <div class="col-lg-7 col-md-6">{{ createdBy }}</div>
+              </div>
+              <br>
+              <div class="row">
+                <b class="col-lg-5 col-md-7 label">Số lượng sản phẩm hiện tại</b>
+                <div class="col-lg-7 col-md-6">{{ currentQuantity }} {{ currentQuantityUnit}}</div>
+              </div>
+              <br>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nz-tab>
+
+    <nz-tab nzTitle="Phiếu nhập">
+      <nz-table #sortTable  [nzData]="goodReceiptNote" style="font-size: 18px;" nzTableLayout="fixed">
+        <thead style="text-align: center">
+          <tr>
+            <th *ngFor="let column of goodReceiptNoteTitle" [nzSortFn]="column.compare" [nzSortPriority]="column.priority" style="text-align: center">
+              {{ column.title }}
+            </th>
+          </tr>
+        </thead>
+        <tbody  *ngFor="let goodReceiptNotes of sortTable.data" style="text-align: center;">
+          <tr *ngIf="goodReceiptNotes.supplier.isActive" >
+            <td scope="row">{{goodReceiptNotes.id}}</td>
+            <td (click)="detailReceiptNote(goodReceiptNotes.id)">{{goodReceiptNotes.goodsReceiptNoteType.name}}</td>
+            <td ><a (click)="detailSupplier(goodReceiptNotes.supplier.id)">{{goodReceiptNotes.supplier.name}}</a></td>
+            <td (click)="detailReceiptNote(goodReceiptNotes.id)">{{goodReceiptNotes.createdAt|date:'dd-MM-yyyy'}}</td>
+            <td (click)="detailReceiptNote(goodReceiptNotes.id)">{{goodReceiptNotes.quantity}}</td>
+            <td (click)="detailReceiptNote(goodReceiptNotes.id)">{{goodReceiptNotes.totalPrice|number }} đ</td>
+          </tr>
+          <tr *ngIf="goodReceiptNotes.supplier.isActive == false" style="background-color: rgba(255, 0, 0, 0.253)">
+            <td scope="row">{{goodReceiptNotes.id}}</td>
+            <td (click)="detailReceiptNote(goodReceiptNotes.id)">{{goodReceiptNotes.goodsReceiptNoteType.name}}</td>
+            <td ><a (click)="detailSupplier(goodReceiptNotes.supplier.id)">{{goodReceiptNotes.supplier.name}}</a></td>
+            <td (click)="detailReceiptNote(goodReceiptNotes.id)">{{goodReceiptNotes.createdAt|date:'dd-MM-yyyy'}}</td>
+            <td (click)="detailReceiptNote(goodReceiptNotes.id)">{{goodReceiptNotes.quantity}}</td>
+            <td (click)="detailReceiptNote(goodReceiptNotes.id)">{{goodReceiptNotes.totalPrice|number }} đ</td>
+          </tr>
+        </tbody>
+      </nz-table>
+    </nz-tab>
+
+    <nz-tab nzTitle="Phiếu xuất">
+      <nz-table #sortTable2 [nzData]="goodIssueNote" style="font-size: 18px;">
+        <thead style="text-align: center">
+          <tr>
+            <!-- <th scope="col" style="text-align: center;">Mã xuất hàng</th>
+            <th scope="col" style="text-align: center;">Dạng xuất</th>
+            <th scope="col" style="text-align: center;">Số lượng</th>
+             <th scope="col" style="text-align: center;">Đơn vị</th>
+            <th scope="col" style="text-align: center;">Tổng tiền</th> -->
+            <th scope="col" *ngFor="let column of goodIssueNoteTitle" [nzSortFn]="column.compare" [nzSortPriority]="column.priority" style="text-align: center">
+              {{ column.title }}
+            </th>
+          </tr>
+        </thead>
+        <tbody  *ngFor="let goodIssueNotes of sortTable2.data" style="text-align: center;">
+          <tr>
+            <td scope="row">{{goodIssueNotes.id}}</td>
+            <td (click)="detailIssueNote(goodIssueNotes.id)">{{goodIssueNotes.goodsIssueNoteType.name}}</td>
+            <td (click)="detailIssueNote(goodIssueNotes.id)">{{goodIssueNotes.quantity}}</td>
+            <td (click)="detailIssueNote(goodIssueNotes.id)">{{goodIssueNotes.unit}}</td>
+            <td (click)="detailIssueNote(goodIssueNotes.id)">{{goodIssueNotes.totalPrice|number }} đ</td>
+          </tr>
+        </tbody>
+      </nz-table>
+    </nz-tab>
+  </nz-tabset>
+
+
+</main>

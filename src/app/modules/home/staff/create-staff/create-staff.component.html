@@ -1,0 +1,164 @@
+<main id="main" class="main">
+   <div class="pagetitle d-flex justify-content-between">
+      <div>
+         <h1>Tạo nhân viên</h1>
+         <nav>
+            <ol class="breadcrumb">
+               <li class="breadcrumb-item"><a routerLink="/dashboard">Trang chủ</a></li>
+               <li class="breadcrumb-item"><a routerLink="/dashboard/staff">Nhân viên</a></li>
+               <li class="breadcrumb-item active">Tạo nhân viên</li>
+            </ol>
+         </nav>
+      </div>
+   </div>
+   <section class="section">
+      <div class="card container">
+         <div class="card-body">
+            <h5 class="card-title"></h5>
+            <form class="row g-3" (ngSubmit)="onSubmit()" [formGroup]="StaffData">
+               <div class="col-md-12">
+                  <nz-form-label nzRequired for="inputName5" class="form-label">Tài khoản</nz-form-label>
+                  <input type="text" class="form-control" id="inputName" formControlName="loginName">
+                  <div
+                     *ngIf="statusError.loginName.invalid && (statusError.loginName.dirty || statusError.loginName.touched) ">
+                     <div *ngIf="statusError.loginName.errors">
+                        <div *ngIf="statusError.loginName.errors!['required']">
+                           <small style="color: red;">Vui lòng nhập tài khoản</small>
+                        </div>
+                        <div *ngIf="statusError.loginName.errors!['pattern']">
+                           <small style="color: red;">Tài khoản không đúng định dạng (6-20 kí tự và không chứa kí tự đặt
+                              biệt)</small>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <div class="col-md-6">
+                  <nz-form-label nzRequired for="inputPassword" class="form-label">Mật khẩu</nz-form-label>
+                  <input type="password" class="form-control" id="inputPassword" formControlName="password"
+                     placeholder="******">
+                  <div
+                     *ngIf="statusError.password.invalid && (statusError.password.dirty || statusError.password.touched) ">
+                     <div *ngIf="statusError.password.errors">
+                        <div *ngIf="statusError.password.errors!['required']">
+                           <small style="color: red;">Vui lòng nhập mật khẩu</small>
+                        </div>
+                        <div *ngIf="statusError.password.errors!['minlength']">
+                           <small style="color: red;">Vui lòng nhập mật khẩu có ít nhất 6 kí tự</small>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <div class="col-md-6">
+                  <nz-form-label nzRequired for="inputComfirmPassword" class="form-label">Nhập lại mật khẩu
+                  </nz-form-label>
+                  <input type="password" class="form-control" id="inputComfirmPassword"
+                     formControlName="passwordConfirm" placeholder="******">
+                  <div
+                     *ngIf="statusError.passwordConfirm.invalid && (statusError.passwordConfirm.dirty || statusError.passwordConfirm.touched) ">
+                     <div *ngIf="statusError.passwordConfirm.errors">
+                        <div *ngIf="statusError.passwordConfirm.errors!['required']">
+                           <small style="color: red;">Vui lòng nhập mật khẩu</small>
+                        </div>
+                        <div *ngIf="statusError.passwordConfirm.errors!['minlength']">
+                           <small style="color: red;">Vui lòng nhập mật khẩu có ít nhất 6 kí tự</small>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <div class="col-6">
+                  <nz-form-label nzRequired for="inputFullname" class="form-label">Họ và tên</nz-form-label>
+                  <input type="text" class="form-control" id="inputFullname" placeholder="Nguyễn Văn A"
+                     formControlName="fullname">
+                  <div
+                     *ngIf="statusError.fullname.invalid && (statusError.fullname.dirty || statusError.fullname.touched) ">
+                     <div *ngIf="statusError.fullname.errors">
+                        <div *ngIf="statusError.fullname.errors!['required']">
+                           <small style="color: red;">Vui lòng nhập tên nhân viên</small>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <div class="col-6">
+                <nz-form-label nzRequired for="inputEmail" class="form-label">Email</nz-form-label>
+                <input type="text" class="form-control" id="inputEmail" placeholder="abc1234@gmail.com"
+                   formControlName="email">
+                <div
+                   *ngIf="statusError.email.invalid && (statusError.email.dirty || statusError.email.touched) ">
+                   <div *ngIf="statusError.email.errors">
+                      <div *ngIf="statusError.email.errors!['required']">
+                         <small style="color: red;">Vui lòng nhập email</small>
+                      </div>
+                      <div *ngIf="statusError.email.errors!['email']">
+                        <small style="color: red;">Địa chỉ email không hợp lệ. Vui lòng nhập lại email</small>
+                     </div>
+                   </div>
+                </div>
+             </div>
+               <div class="col-md-4">
+                  <nz-form-label for="inputPhonenumber" class="form-label" nzRequired>Số điện thoại</nz-form-label>
+                  <input type="text" class="form-control" id="inputPhonenumber" placeholder="0912345678"
+                     formControlName="phoneNumber">
+                  <div
+                     *ngIf="statusError.phoneNumber.invalid && (statusError.phoneNumber.dirty || statusError.phoneNumber.touched) ">
+                     <div *ngIf="statusError.phoneNumber.errors">
+                        <div *ngIf="statusError.phoneNumber.errors!['required']">
+                           <small style="color: red;">Vui lòng nhập số điện thoại</small>
+                        </div>
+                        <div *ngIf="statusError.phoneNumber.errors!['pattern']">
+                           <small style="color: red;">Số điện thoại không đúng định dạng (bắt đầu bằng số 0 và có 10 chữ
+                              số)</small>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <div class="col-md-4">
+                  <nz-form-label nzRequired for="inputDate" class="form-label">Ngày sinh</nz-form-label>
+                  <input type="date" class="form-control" formControlName="dob">
+                  <div *ngIf="statusError.dob.invalid && (statusError.dob.dirty || statusError.dob.touched) ">
+                     <div *ngIf="statusError.dob.errors">
+                        <div *ngIf="statusError.dob.errors!['required']">
+                           <small style="color: red;">Vui lòng nhập ngày sinh</small>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <div class="col-md-4">
+                  <nz-form-label nzRequired class="form-label">Giới tính</nz-form-label>
+                  <select class="form-control" formControlName="isMale">
+                     <option value="true" selected>Nam</option>
+                     <option value="false">Nữ</option>
+                  </select>
+               </div>
+               <div class="col-6">
+                  <nz-form-label for="inputAvatar">Ảnh đại diện</nz-form-label>
+                  <input type="file" (change)="uploadImage($event)" class="form-control">
+               </div>
+               <div class="col-6">
+                  <div style="width: 100px; height: 100px;border-radius: 50px;">
+                     <img [src]="imageURL" alt="avatar" width="100" height="100" style="border-radius: 50px;">
+                     <input type="hidden" formControlName="avatar" [value]="imageURL">
+                  </div>
+               </div>
+               <div *ngIf="statusError.avatar.invalid && (statusError.avatar.dirty || statusError.avatar.touched) ">
+                  <div *ngIf="statusError.avatar.errors">
+                     <div *ngIf="statusError.avatar.errors!['required']">
+                        <small style="color: red;">Vui lòng chọn ảnh đại diện</small>
+                     </div>
+                  </div>
+               </div>
+               <div class="d-flex justify-content-end">
+                  <div class="col-3 mt-4">
+                     <button *ngIf="statusError == null; else submitButton" class="w-100" nz-button nzType="primary"
+                        nzSize="large">Tạo nhân viên</button>
+                  </div>
+                  <ng-template #submitButton>
+                     <button class="w-100" nz-button nzType="primary" nzSize="large"
+                        title="điền thông tin để tạo nhân viên">Tạo nhân viên</button>
+                  </ng-template>
+               </div>
+            </form>
+         </div>
+      </div>
+
+   </section>
+</main>

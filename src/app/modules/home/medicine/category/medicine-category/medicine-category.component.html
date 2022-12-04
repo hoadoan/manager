@@ -1,0 +1,78 @@
+<main id="main" class="main">
+    <div class="pagetitle d-flex justify-content-between">
+        <div>
+            <h1>Danh sách kệ hàng</h1>
+            <nav>
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a routerLink="/dashboard">Trang chủ</a></li>
+                    <li class="breadcrumb-item active">Quản lý kệ hàng</li>
+                </ol>
+            </nav>
+        </div>
+        <div>
+            <button nz-button nzType="primary" (click)="showModal()" nzSize="large" style="border-radius: 10px"><i class="bi bi-plus"></i>
+                <span>Tạo kệ hàng</span></button>
+            <nz-modal [(nzVisible)]="isVisible" nzTitle="Tạo kệ hàng" nzOkText="Tạo kệ hàng"
+                nzCancelText="Hủy" (nzOnOk)="handleOk()" (nzOnCancel)="handleCancel()">
+                <ng-container *nzModalContent>
+                    <nz-form-label nzRequired for="inputName5" class="form-label">Tên kệ hàng</nz-form-label>
+                    <input type="text" class="form-control" id="inputName" [(ngModel)]="activeSubstanceName">
+                    <div *ngIf="checkError == true">
+                        <small style="color: red;">Vui lòng nhập tên kệ hàng</small>
+                    </div>
+                </ng-container>
+            </nz-modal>
+        </div>
+    </div>
+
+    <div id="search">
+        <nz-input-group nzSearch nzSize="large" [nzAddOnAfter]="">
+            <input type="text" nz-input placeholder="Nhập tên kệ hàng ..." [(ngModel)]="searchData"
+                (ngModelChange)="getListSearch()" />
+        </nz-input-group>
+        <!-- <ng-template #suffixButton>
+            <button nz-button nzType="primary" nzSize="large" nzSearch>
+                <nz-select [(ngModel)]="selectedProvince" nzSize="large" (ngModelChange)="SearchOption($event)">
+                    <nz-option nzValue="searchID" nzLabel="Mã kệ hàng"></nz-option>
+                    <nz-option nzValue="SearchName" nzLabel="Tên kệ hàng"></nz-option>
+                </nz-select>
+            </button>
+        </ng-template> -->
+    </div>
+    <section class="section">
+        <!-- [nzScroll]="{ x: '1150px', y: '600px' }" -->
+        <nz-table [nzLoading]="loading" [nzData]="listsearch" #basicTable [nzPageSize]="5"
+            [nzPageSizeOptions]="[5,10,15,20,25,30]" nzShowSizeChanger>
+            <thead>
+                <tr>
+                    <!-- <th style="text-align: center">Mã kệ hàng</th> -->
+                    <th style="text-align: center">Tên kệ hàng</th>
+                    <th style="text-align: center">Ngày tạo</th>
+                    <th [nzFilters]="nameList"
+                    [nzFilterMultiple]="true"
+                    [nzFilterFn]="nameFilterFn" style="text-align: center">Hoạt động</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr style="cursor: pointer;" *ngFor="let data of basicTable.data" style="text-align: center">
+                    <!-- <td (click)="detail(data.id)">{{ data.id}}</td> -->
+                    <td (click)="detail(data.id)">{{ data.name}}</td>
+                    <td (click)="detail(data.id)">{{ data.createdAt |date:'dd-MM-yyyy' }}</td>
+                    <td>
+                        <div *ngIf="data.isActive == true; else isActive">
+                            <nz-tag [nzColor]="'green'" (click)="deleteCategory(data.id)">Hoạt động</nz-tag>
+                        </div>
+                        <ng-template #isActive>
+                            <div>
+                                <nz-tag [nzColor]="'red'" (click)="OpenCategory(data.id)">Ngừng hoạt động</nz-tag>
+                            </div>
+                        </ng-template>
+                    </td>
+                </tr>
+            </tbody>
+        </nz-table>
+    </section>
+</main>
+<!-- <script src="components/angular-query-params/dist/angular-query-params.js">
+
+</script> -->

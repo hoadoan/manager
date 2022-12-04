@@ -1,0 +1,63 @@
+<main id="main" class="main">
+  <div class="pagetitle d-flex justify-content-between">
+    <div>
+      <h1>Quản lý xuất</h1>
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a routerLink="/dashboard">Trang chủ</a>
+          </li>
+          <li class="breadcrumb-item active">Quản lý xuất</li>
+        </ol>
+      </nav>
+    </div>
+  </div>
+
+  <div class="section">
+    <div id="search">
+      <nz-input-group nzSearch nzSize="large" [nzAddOnAfter]="suffixButton">
+          <input type="text" nz-input placeholder="Nhập mã hoá đơn, tên ..." [(ngModel)]="searchData"
+              (ngModelChange)="getListSearch()" />
+      </nz-input-group>
+      <ng-template #suffixButton>
+          <button nz-button nzType="primary" nzSize="large" nzSearch>
+              <nz-select [(ngModel)]="selectedProvince" nzSize="large" (ngModelChange)="SearchOption($event)" style="width: 210px">
+                <nz-option nzValue="SearchBarcode" nzLabel="Mã hoá đơn"></nz-option>
+                <nz-option nzValue="SearchCustomerName" nzLabel="Tên khách hàng"></nz-option>
+                <nz-option nzValue="SearchStaffName" nzLabel="Tên nhân viên"></nz-option>
+              </nz-select>
+          </button>
+      </ng-template>
+  </div>
+    <div class="col-xl-12">
+      <div class="card">
+        <div class="card-body pt-3">
+
+          <nz-table #basicData [nzData]="listsearch" [nzPageSize]="5"  [nzPageSizeOptions]="[5,10,15,20,25,30]" nzShowSizeChanger
+          >
+            <thead style="text-align: center">
+              <tr>
+                <th scope="col" style="text-align: center;">Mã hoá đơn</th>
+                <th scope="col" style="text-align: center;">Tên khách hàng</th>
+                <th scope="col" style="text-align: center;">Tên nhân viên</th>
+                <th scope="col" style="text-align: center;">Ngày tạo</th>
+                <th scope="col" style="text-align: center;">Tổng tiền</th>
+              </tr>
+            </thead>
+            <tbody  *ngFor="let invoices of basicData.data" style="text-align: center;">
+              <tr >
+                <td (click)="detailInvoice(invoices.id)">{{invoices.barcode}}</td>
+                <td (click)="detailInvoice(invoices.id)">{{invoices.customer.fullName}}</td>
+                <td (click)="detailInvoice(invoices.id)">{{invoices.createdBy.name}}</td>
+                <td (click)="detailInvoice(invoices.id)">{{invoices.createdAt|date:'dd-MM-yyyy'}}</td>
+                <td (click)="detailInvoice(invoices.id)">{{invoices.totalPrice| number}} đ</td>
+              </tr>
+            </tbody>
+
+          </nz-table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</main>

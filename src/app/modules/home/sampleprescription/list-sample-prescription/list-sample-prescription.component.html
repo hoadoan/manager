@@ -1,0 +1,78 @@
+<main id="main" class="main">
+  <div class="pagetitle d-flex justify-content-between">
+      <div>
+          <h1>Danh sách đơn mẫu</h1>
+          <nav>
+              <ol class="breadcrumb">
+                  <li class="breadcrumb-item"><a routerLink="/dashboard">Trang chủ</a></li>
+                  <li class="breadcrumb-item active">Đơn mẫu</li>
+              </ol>
+          </nav>
+      </div>
+  </div>
+
+  <div>
+    <div style="background: white;padding:5px;text-align: center; border-radius: 5px;">
+      <div nz-row [nzGutter]="4">
+        <div nz-col [nzSpan]="4" id="sick" class="card">
+          <nz-card nzTitle="Bệnh" style="height: 450px;">
+            <nz-table [nzData]="listSick"
+            [nzFrontPagination]="false"
+            [nzShowPagination]="false"
+            >
+              <tbody>
+                <tr *ngFor="let listSicks of listSick">
+                  <td (click)="detailSick(listSicks.id)">{{listSicks.name}}</td>
+                </tr>
+              </tbody>
+            </nz-table>
+            <button style="position: absolute; left: 23%; top: 90%; border-radius: 10px; color: aliceblue;
+            background-color: rgba(56, 187, 248, 0.603); border-color: rgba(56, 187, 248, 0.603); font-size: 18px">
+              Thêm bệnh
+            </button>
+          </nz-card>
+        </div>
+        <div nz-col [nzSpan]="4" id="sample" class="card">
+          <nz-card nzTitle="Đơn mẫu" style="height: 450px;">
+            <nz-table [nzData]="listSample"
+            [nzFrontPagination]="false"
+            [nzShowPagination]="false"
+            >
+              <tbody>
+                <tr *ngFor="let listSamples of listSample">
+                  <td (click)="detailMedicine(listSamples.id)">{{listSamples.name}}</td>
+                </tr>
+              </tbody>
+            </nz-table>
+            <button style="position: absolute; left: 15%; top: 90%; border-radius: 10px; color: aliceblue;
+                           background-color: rgba(56, 187, 248, 0.603); border-color: rgba(56, 187, 248, 0.603); font-size: 18px">
+              Thêm đơn mẫu
+            </button>
+          </nz-card>
+        </div>
+        <div nz-col [nzSpan]="16" id="medicine" class="card">
+          <nz-card nzTitle="Thuốc" style="height: 450px;">
+            <nz-table [nzData]="listMedicine"
+            [nzFrontPagination]="false"
+            [nzShowPagination]="false"
+            >
+              <tbody *ngFor="let listMedicines of listMedicine">
+                <tr>
+                  <div class="row" style="font-size: 16px">
+                    <td class="col-4">Tên thuốc: {{listMedicines.name}}</td>
+                    <td class="col-4">Số lượng: {{listMedicines.quantity}}-{{listMedicines.unit}}</td>
+                  </div>
+                </tr>
+              </tbody>
+            </nz-table>
+            <button style="position: absolute; left: 36%; top: 90%; border-radius: 10px; color: aliceblue;
+                           background-color: rgba(56, 187, 248, 0.603); border-color: rgba(56, 187, 248, 0.603); font-size: 18px">
+              Thêm thuốc vào đơn mẫu
+            </button>
+          </nz-card>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</main>

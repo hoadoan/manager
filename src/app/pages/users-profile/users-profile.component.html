@@ -1,0 +1,117 @@
+<main id="main" class="main">
+    <div class="pagetitle">
+       <h1>Thông tin người dùng</h1>
+       <nav>
+          <ol class="breadcrumb">
+             <li class="breadcrumb-item"><a routerLink="/dashboard">Trang chủ</a></li>
+             <li class="breadcrumb-item active">Thông tin người dùng</li>
+          </ol>
+       </nav>
+    </div>
+    <section class="section profile">
+       <div class="row">
+          <div class="col-xl-4">
+             <div class="card">
+                <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
+                   <img src="./../../../assets/img/avatar.png" alt="Profile" class="rounded-circle">
+                   <!-- <img src="{{avatar}}" alt="Profile" class="rounded-circle"> -->
+                   <h2>{{fullname}}</h2>
+                   <h3>Quản lý</h3>
+                   <div class="social-links mt-2"> <a href="#" class="twitter"><i class="bi bi-twitter"></i></a> <a href="#" class="facebook"><i class="bi bi-facebook"></i></a> <a href="#" class="instagram"><i class="bi bi-instagram"></i></a> <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a></div>
+                </div>
+             </div>
+          </div>
+          <div class="col-xl-8">
+             <div class="card">
+                <div class="card-body pt-3">
+                   <ul class="nav nav-tabs nav-tabs-bordered">
+                      <li class="nav-item"> <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#profile-overview">Thông tin</button></li>
+                      <li class="nav-item"> <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-change-password">Đổi mật khẩu</button></li>
+                   </ul>
+                   <div class="tab-content pt-2">
+                        <div class="tab-pane fade show active profile-overview" id="profile-overview">
+                      <form (ngSubmit)="onSubmitforChangeInformation()" [formGroup]="changeProfile">
+                        <h5 class="card-title">Thông tin chi tiết</h5>
+                        <div class="row">
+                           <div class="col-lg-3 col-md-4 label ">Họ và tên</div>
+                           <input class="col-lg-9 col-md-8" type="email" placeholder="{{fullname}}" id = "fullname" formControlName="fullname" value="{{fullname}}">
+                        </div>
+                        <div class="row">
+                           <div class="col-lg-3 col-md-4 label">Nhà thuốc</div>
+                           <div class="col-lg-9 col-md-8">Út Nhàn</div>
+                        </div>
+                        <div class="row">
+                           <div class="col-lg-3 col-md-4 label">Địa chỉ</div>
+                           <div class="col-lg-9 col-md-8">{{"40 đường 225a, phường Tân Phú, thành phố Thủ Đức"}}</div>
+                        </div>
+                        <div class="row">
+                           <div class="col-lg-3 col-md-4 label">Số điện thoại</div>
+                           <div class="col-lg-9 col-md-8">{{phone || '093-897-0968'}}</div>
+                        </div>
+                        <div class="row">
+                           <div class="col-lg-3 col-md-4 label">Email</div>
+                           <input class="col-lg-9 col-md-8" type="email" placeholder="{{email}}" formControlName="email" id = "email" value="{{email}}">
+                        </div>
+                        <div class="row">
+                         <div class="col-lg-3 col-md-4 label">Ngày tạo tài khoản</div>
+                         <div class="col-lg-9 col-md-8">{{createdAt | date: 'dd-MM-yyyy'}}</div>
+                      </div>
+                        <div class="text-center">
+                           <button type="submit" class="btn btn-primary" style="border-radius: 10px">Cập nhật thông tin</button>
+                        </div>
+                     </form></div>
+                      <div class="tab-pane fade pt-3" id="profile-change-password">
+                         <form (ngSubmit)="onSubmit()" [formGroup]="newPasswordData">
+                            <div class="row mb-3">
+                               <label for="currentPassword" class="col-md-4 col-lg-3 col-form-label">Mật khẩu hiện tại</label>
+                               <div class="col-md-8 col-lg-9"> <input name="password" type="password" class="form-control" id="currentPassword" formControlName="currentPassword"></div>
+                               <div
+                               *ngIf="statusError.currentPassword.invalid && (statusError.currentPassword.dirty || statusError.currentPassword.touched) ">
+                               <div *ngIf="statusError.currentPassword.errors">
+                                  <div *ngIf="statusError.newPassword.errors!['required']">
+                                     <small style="color: red;">Vui lòng nhập mật khẩu</small>
+                                  </div>
+                               </div>
+                            </div>
+                              </div>
+                            <div class="row mb-3">
+                               <label for="newPassword" class="col-md-4 col-lg-3 col-form-label">Mật khẩu mới</label>
+                               <div class="col-md-8 col-lg-9"> <input name="newPassword" type="password" class="form-control" id="newPassword" formControlName="newPassword"></div>
+                               <div
+                     *ngIf="statusError.newPassword.invalid && (statusError.newPassword.dirty || statusError.newPassword.touched) ">
+                     <div *ngIf="statusError.newPassword.errors">
+                        <div *ngIf="statusError.newPassword.errors!['required']">
+                           <small style="color: red;">Vui lòng nhập mật khẩu</small>
+                        </div>
+                        <div *ngIf="statusError.newPassword.errors!['minlength']">
+                           <small style="color: red;">Vui lòng nhập mật khẩu có ít nhất 6 kí tự</small>
+                        </div>
+                     </div>
+                  </div>
+                            </div>
+                            <div class="row mb-3">
+                               <label for="confirmPassword" class="col-md-4 col-lg-3 col-form-label">Nhập lại mật khẩu mới</label>
+                               <div class="col-md-8 col-lg-9"> <input name="confirmPassword" type="password" class="form-control" id="confirmPassword" formControlName="confirmPassword"></div>
+                               <div
+                               *ngIf="statusError.confirmPassword.invalid && (statusError.confirmPassword.dirty || statusError.confirmPassword.touched) ">
+                               <div *ngIf="statusError.confirmPassword.errors">
+                                  <div *ngIf="statusError.confirmPassword.errors!['required']">
+                                     <small style="color: red;">Vui lòng nhập mật khẩu</small>
+                                  </div>
+                               </div>
+                            </div>
+                            </div>
+                           <div #submitButton class="text-center">
+                            <button nz-button nzType="primary" nzSize="large" style="border-radius: 10px;">
+                              Thay đổi mật khẩu
+                            </button>
+                          </div>
+                         </form>
+                      </div>
+                   </div>
+                </div>
+             </div>
+          </div>
+       </div>
+    </section>
+ </main>

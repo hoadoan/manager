@@ -1,0 +1,66 @@
+<main id="main" class="main">
+  <div class="pagetitle d-flex justify-content-between">
+    <div>
+      <h1>Quản lý nhập</h1>
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a routerLink="/dashboard">Trang chủ</a>
+          </li>
+          <li class="breadcrumb-item active">Quản lý nhập</li>
+        </ol>
+      </nav>
+    </div>
+  </div>
+  <div class="section">
+    <div id="search">
+      <nz-input-group nzSearch nzSize="large" [nzAddOnAfter]="suffixButton">
+          <input type="text" nz-input placeholder="Nhập mã lô hàng, dạng hoá đơn ..." [(ngModel)]="searchData"
+              (ngModelChange)="getListSearch()" />
+      </nz-input-group>
+      <ng-template #suffixButton>
+          <button nz-button nzType="primary" nzSize="large" nzSearch>
+              <nz-select [(ngModel)]="selectedProvince" nzSize="large" (ngModelChange)="SearchOption($event)" style="width: 210px">
+                <nz-option nzValue="SearchBatchName" nzLabel="Tên lô hàng"></nz-option>
+                <nz-option nzValue="SearchReceiptType" nzLabel="Dạng hoá đơn"></nz-option>
+              </nz-select>
+          </button>
+      </ng-template>
+  </div>
+    <div class="col-xl-12">
+      <div class="card">
+        <div class="card-body pt-3">
+          <nz-table #basicData [nzData]="listsearch" [nzPageSize]="5"  [nzPageSizeOptions]="[5,10,15,20,25,30]" nzShowSizeChanger
+          >
+            <thead style="text-align: center">
+              <tr>
+                <th scope="col" style="text-align: center;">Mã lô hàng</th>
+                <th scope="col" style="text-align: center;">Dạng hoá đơn</th>
+                <th scope="col" style="text-align: center;">Ngày nhập</th>
+                <!-- <th scope="col" style="text-align: center;">Tên sản phẩm</th> -->
+                <th scope="col" style="text-align: center;">Số lượng</th>
+                <th scope="col" style="text-align: center;">Đơn vị</th>
+                <th scope="col" style="text-align: center;">Giá bán</th>
+                <th scope="col" style="text-align: center;">Thành tiền</th>
+              </tr>
+            </thead>
+            <tbody  *ngFor="let receiptnote of basicData.data" style="text-align: center;">
+              <tr >
+                <td (click)="detailReceiptNote(receiptnote.id)">{{receiptnote.batch.barcode}}</td>
+                <td (click)="detailReceiptNote(receiptnote.id)">{{receiptnote.goodsReceiptNoteType.name}}</td>
+                <td (click)="detailReceiptNote(receiptnote.id)">{{receiptnote.createdAt|date:'dd-MM-yyyy'}}</td>
+                <!-- <td >{{getNameProductByIdBatch(receiptnote.batch.id)}}</td> -->
+                <td (click)="detailReceiptNote(receiptnote.id)">{{receiptnote.quantity}}</td>
+                <td (click)="detailReceiptNote(receiptnote.id)">{{receiptnote.unit}}</td>
+                <td (click)="detailReceiptNote(receiptnote.id)">{{receiptnote.baseUnitPrice| number}} đ</td>
+                <td (click)="detailReceiptNote(receiptnote.id)">{{receiptnote.totalPrice| number}} đ</td>
+              </tr>
+            </tbody>
+
+          </nz-table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</main>
