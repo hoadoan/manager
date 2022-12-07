@@ -15,6 +15,11 @@ export class ReceiptNoteComponent implements OnInit {
   searchData: string = ''
   listsearch: any
   selectedProvince = 'SearchBatchName'
+  nameList = [
+    { text: 'Nhập hàng từ nhà cung cấp', value: 'Nhập hàng từ nhà cung cấp' },
+    { text: 'Nhập hàng trả hóa đơn', value: 'Nhập hàng trả hóa đơn'}
+  ];
+  nameFilterFn = (list: string[], item: any): boolean => list.some(name => item.goodsReceiptNoteType.name.indexOf(name) !== -1);
   constructor(
     private receiptnotes: GoodsreceiptnoteService,
     private product: ProductService,

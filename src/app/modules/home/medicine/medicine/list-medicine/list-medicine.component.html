@@ -69,13 +69,13 @@
                       <td (click)="detail(data.id)">{{ data.name}}</td>
                       <td (click)="detail(data.id)">{{ data.productUnits[0].price| number }} đ/ {{data.productUnits[0].unit}}</td>
                       <td>
-                        <div *ngIf="data.isActive == true; else isActive" >
+                        <a *ngIf="data.isActive == true; else isActive" >
                           <nz-tag [nzColor]="'green'" (click)="isInActiveProduct(data.id)">Còn bán</nz-tag>
-                      </div>
+                        </a>
                       <ng-template #isActive>
-                          <div>
+                          <a>
                               <nz-tag [nzColor]="'red'" (click)="isActiveProduct(data.id)">Ngừng bán</nz-tag>
-                          </div>
+                          </a>
                       </ng-template>
                       </td>
                   </tr>

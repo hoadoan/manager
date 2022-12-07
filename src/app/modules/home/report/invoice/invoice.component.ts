@@ -39,10 +39,10 @@ export class InvoiceComponent implements OnInit {
   getListSearch() {
     console.log(this.searchData);
     if (this.selectedProvince == "SearchBarcode") {
-      this.listsearch = this.invoices.filter(data => data.barcode.toString().toLocaleLowerCase().includes(this.searchData.toLocaleLowerCase()))
+      this.listsearch = this.invoices.filter(data => data.barcode.toLocaleLowerCase().includes(this.searchData.toLocaleLowerCase()))
     }
     else if (this.selectedProvince == "SearchCustomerName") {
-      this.listsearch = this.invoices.filter(data => data.customer.fullName.toString().toLocaleLowerCase().includes(this.searchData.toLocaleLowerCase()))
+      this.listsearch = this.invoices.filter(data => data.customer.fullName.toLocaleLowerCase().includes(this.searchData.toLocaleLowerCase()))
     } else if (this.selectedProvince == "SearchStaffName") {
       this.listsearch = this.invoices.filter(data => data.createdBy.name.toLocaleLowerCase().includes(this.searchData.toLocaleLowerCase()))
     }

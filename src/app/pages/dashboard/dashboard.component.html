@@ -29,21 +29,11 @@
                         <div class="d-flex align-items-center">
                            <div class="card-icon rounded-circle d-flex align-items-center justify-content-center"> <i
                                  class="bi bi-cart"></i></div>
-                           <div class="ps-3" *ngIf="percentQuantityOrder > 0">
+                           <div class="ps-3" >
+                            <span class="text-muted small pt-2 ps-1"></span>
                               <h6>{{quantityOrder}}</h6>
-                              <span class="text-muted small pt-2 ps-1">Tăng</span>
-                              <span class="text-success small pt-1 fw-bold"> {{percentQuantityOrderStr}}%</span>
+                              <span class="text-muted small pt-2 ps-1"></span>
                            </div>
-                           <div class="ps-3" *ngIf="percentQuantityOrder == 0">
-                            <h6>{{quantityOrder}}</h6>
-                            <!-- <span class="text-muted small pt-2 ps-1">Tăng</span> -->
-                            <span class="text-success small pt-1 fw-bold"> {{percentQuantityOrderStr}}%</span>
-                         </div>
-                           <div class="ps-3" *ngIf="percentQuantityOrder < 0">
-                            <h6>{{quantityOrder}}</h6>
-                            <span class="text-muted small pt-2 ps-1">Giảm</span>
-                            <span class="text-danger small pt-1 fw-bold"> {{percentQuantityOrderStr}}%</span>
-                         </div>
                         </div>
                      </div>
                   </div>
@@ -67,21 +57,12 @@
                            <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
                               <i class="bi bi-currency-dollar"></i>
                            </div>
-                           <div class="ps-3" *ngIf="percentCost > 0">
+                           <div class="ps-3">
+                            <span class="text-muted small pt-2 ps-1"></span>
                               <h6>{{costStr}}</h6>
-                              <span class="text-muted small pt-2 ps-1">Tăng</span>
-                              <span class="text-success small pt-1 fw-bold"> {{percentCostStr}}%</span>
+                              <span class="text-muted small pt-2 ps-1"></span>
                            </div>
-                           <div class="ps-3" *ngIf="percentCost == 0">
-                            <h6>{{costStr}}</h6>
-                            <!-- <span class="text-muted small pt-2 ps-1">Tăng</span> -->
-                            <span class="text-success small pt-1 fw-bold"> {{percentCostStr}}%</span>
-                         </div>
-                           <div class="ps-3" *ngIf="percentCost < 0">
-                            <h6>{{costStr}}</h6>
-                            <span class="text-muted small pt-2 ps-1">Giảm</span>
-                            <span class="text-danger small pt-1 fw-bold"> {{percentCostStr}}%</span>
-                         </div>
+
                         </div>
                      </div>
                   </div>
@@ -105,21 +86,12 @@
                            <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
                               <i class="bi bi-currency-dollar"></i>
                            </div>
-                           <div class="ps-3" *ngIf="percentTurnover > 0">
+                           <div class="ps-3">
+                            <span class="text-muted small pt-2 ps-1"></span>
                               <h6>{{turnoverStr}}</h6>
-                              <span class="text-muted small pt-2 ps-1 ">Tăng</span>
-                              <span class="text-success small pt-1 fw-bold"> {{percentTurnoverStr}}%</span>
+                              <span class="text-muted small pt-2 ps-1 "></span>
                            </div>
-                           <div class="ps-3" *ngIf="percentTurnover == 0">
-                            <h6>{{turnoverStr}}</h6>
-                            <!-- <span class="text-muted small pt-2 ps-1">Tăng</span> -->
-                            <span class="text-success small pt-1 fw-bold"> {{percentTurnoverStr}}%</span>
-                         </div>
-                           <div class="ps-3" *ngIf="percentTurnover < 0">
-                            <h6>{{turnoverStr}}</h6>
-                            <span class="text-muted small pt-2 ps-1 ">Giảm</span>
-                            <span class="text-danger small pt-1 fw-bold"> {{percentTurnoverStr}}%</span>
-                         </div>
+
                         </div>
                      </div>
                   </div>
@@ -143,21 +115,12 @@
                            <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
                               <i class="bi bi-currency-dollar"></i>
                            </div>
-                           <div class="ps-3" *ngIf="percentProfit > 0">
+                           <div class="ps-3">
+                              <span class="text-muted small pt-2 ps-1"></span>
                               <h6>{{profitStr}}</h6>
-                              <span class="text-muted small pt-2 ps-1">Tăng</span>
-                              <span class="text-success small pt-1 fw-bold"> {{percentProfitStr}}%</span>
+                              <span class="text-muted small pt-2 ps-1"></span>
                            </div>
-                           <div class="ps-3" *ngIf="percentProfit == 0">
-                            <h6>{{profitStr}}</h6>
-                            <!-- <span class="text-muted small pt-2 ps-1">Tăng</span> -->
-                            <span class="text-success small pt-1 fw-bold"> {{percentProfitStr}}%</span>
-                         </div>
-                           <div class="ps-3" *ngIf="percentProfit < 0">
-                            <h6>{{profitStr}}</h6>
-                            <span class="text-muted small pt-2 ps-1">Giảm</span>
-                            <span class="text-danger small pt-1 fw-bold"> {{percentProfitStr}}%</span>
-                         </div>
+
                         </div>
                      </div>
                   </div>

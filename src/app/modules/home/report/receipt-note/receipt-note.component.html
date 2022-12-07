@@ -14,18 +14,17 @@
   </div>
   <div class="section">
     <div id="search">
-      <nz-input-group nzSearch nzSize="large" [nzAddOnAfter]="suffixButton">
-          <input type="text" nz-input placeholder="Nhập mã lô hàng, dạng hoá đơn ..." [(ngModel)]="searchData"
+      <nz-input-group nzSearch nzSize="large" nzAddOnBefore="Mã lô hàng" >
+          <input type="text" nz-input placeholder="Nhập mã lô hàng ..." [(ngModel)]="searchData"
               (ngModelChange)="getListSearch()" />
       </nz-input-group>
-      <ng-template #suffixButton>
+      <!-- <ng-template #suffixButton>
           <button nz-button nzType="primary" nzSize="large" nzSearch>
               <nz-select [(ngModel)]="selectedProvince" nzSize="large" (ngModelChange)="SearchOption($event)" style="width: 210px">
                 <nz-option nzValue="SearchBatchName" nzLabel="Tên lô hàng"></nz-option>
-                <nz-option nzValue="SearchReceiptType" nzLabel="Dạng hoá đơn"></nz-option>
               </nz-select>
           </button>
-      </ng-template>
+      </ng-template> -->
   </div>
     <div class="col-xl-12">
       <div class="card">
@@ -35,7 +34,11 @@
             <thead style="text-align: center">
               <tr>
                 <th scope="col" style="text-align: center;">Mã lô hàng</th>
-                <th scope="col" style="text-align: center;">Dạng hoá đơn</th>
+                <th scope="col" style="text-align: center;"
+                  [nzFilters]="nameList"
+                  [nzFilterMultiple]="true"
+                  [nzFilterFn]="nameFilterFn"
+                  >Dạng nhập</th>
                 <th scope="col" style="text-align: center;">Ngày nhập</th>
                 <!-- <th scope="col" style="text-align: center;">Tên sản phẩm</th> -->
                 <th scope="col" style="text-align: center;">Số lượng</th>

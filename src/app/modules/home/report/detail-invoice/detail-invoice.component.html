@@ -26,12 +26,12 @@
               <a class="col-lg-9 col-md-8" nz-button nzType="text" style="text-align: left;font-size: 13.9px;padding-left: 10px;" (click)="detailStaff(staffId)">{{ staffName }}</a>
             </div>
             <br>
-            <div class="row">
+            <div class="row" *ngIf="customerName!=null">
               <b class="col-lg-3 col-md-4 label">Tên khách hàng</b>
               <div class="col-lg-9 col-md-8">{{ customerName }}</div>
             </div>
             <br>
-            <div class="row">
+            <div class="row" *ngIf="customerPhone!=null">
               <b class="col-lg-3 col-md-4 label">Số điện thoại khách hàng</b>
               <div class="col-lg-9 col-md-8">{{ customerPhone }}</div>
             </div>

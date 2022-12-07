@@ -1,0 +1,36 @@
+<a class="dropdown-item d-flex align-items-center" (click)="showModalChangeInfo()"><i class="fas fa-gift"></i>Quy đổi điểm thưởng</a>
+<nz-modal [(nzVisible)]="isVisibleChangeInfo" nzTitle="Thông tin quy đổi điểm thưởng"
+  nzOkText="Thay đổi" nzCancelText="Hủy" (nzOnOk)="handleChangeInfoOk()"
+  (nzOnCancel)="handleChangeInfoCancel()" [nzBodyStyle]="{height: '200px',width: '520px'}" >
+  <ng-container *nzModalContent>
+    <div class="row">
+      <div class="col-6">
+        <nz-form-label for="inputSpend" class="form-label">Chi tiêu(VNĐ)</nz-form-label>
+        <input type="currency" class="form-control" id="inputSpend"
+        [(ngModel)]="updatePoint.toPoint" (ngModelChange)="changeInfo()" minlength="1" [min]="0">
+      </div>
+      <div class="col-1">
+       <i class="fa fa-arrow-right" aria-hidden="true" id="ten"></i>
+      </div>
+      <div class="col-5">
+        <nz-form-label for="inputPoint" class="form-label">Điểm tích được</nz-form-label>
+        <div>1 điểm</div>
+      </div>
+    </div>
+    <br>
+    <div class="row">
+      <div class="col-6">
+        <nz-form-label for="inputSpend" class="form-label">Điểm thưởng</nz-form-label>
+        <div>1 điểm</div>
+      </div>
+      <div class="col-1">
+       <i class="fa fa-arrow-right" aria-hidden="true" id="ten"></i>
+      </div>
+      <div class="col-5">
+        <nz-form-label for="inputPoint" class="form-label">Tiền(VNĐ)</nz-form-label>
+        <input type="number" class="form-control" id="inputSpend"
+        [(ngModel)]="updatePoint.toMoney" (ngModelChange)="changeInfo()" minlength="1" [min]="0">
+      </div>
+    </div>
+    </ng-container>
+</nz-modal>

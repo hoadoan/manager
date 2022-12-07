@@ -47,7 +47,10 @@
             <tbody  *ngFor="let invoices of basicData.data" style="text-align: center;">
               <tr >
                 <td (click)="detailInvoice(invoices.id)">{{invoices.barcode}}</td>
-                <td (click)="detailInvoice(invoices.id)">{{invoices.customer.fullName}}</td>
+
+                <td (click)="detailInvoice(invoices.id)" *ngIf="invoices.customer.fullName==null">Không có tên</td>
+                <td (click)="detailInvoice(invoices.id)" *ngIf="invoices.customer.fullName!=null">{{invoices.customer.fullName}}</td>
+
                 <td (click)="detailInvoice(invoices.id)">{{invoices.createdBy.name}}</td>
                 <td (click)="detailInvoice(invoices.id)">{{invoices.createdAt|date:'dd-MM-yyyy'}}</td>
                 <td (click)="detailInvoice(invoices.id)">{{invoices.totalPrice| number}} đ</td>

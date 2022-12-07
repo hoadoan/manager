@@ -90,7 +90,7 @@
           <div class="col-2">
             <nz-form-label nzRequired for="inputName5" class="form-label">Mức tồn kho tối thiểu
             </nz-form-label>
-            <input type="number" class="form-control" id="mininumInventory" formControlName="mininumInventory" />
+            <input type="number" class="form-control" id="mininumInventory" formControlName="mininumInventory" [min]="0" minlength="1"/>
             <div *ngIf="
                 statusError.mininumInventory.invalid &&
                 (statusError.mininumInventory.dirty ||
@@ -161,7 +161,7 @@
           </div>
           <div class="col-6">
             <nz-form-label nzRequired for="price" class="form-label">Giá bán</nz-form-label>
-            <input type="number" class="form-control" id="price" formControlName="price" />
+            <input type="number" class="form-control" id="price" formControlName="price"  [min]="0" minlength="1"/>
             <div *ngIf="
                 statusError.price.invalid &&
                 (statusError.price.dirty || statusError.price.touched)
@@ -194,7 +194,7 @@
                 <div class="col-6">
                   <div class="form-group">
                     <label for="">Đơn vị quy đổi</label>
-                    <input type="number" class="form-control" name="conversionValue" id="conversionValue" aria-describedby="emailHelpId"  (change)="changeDoseUnit($event)">
+                    <input type="number" class="form-control" name="conversionValue" id="conversionValue" aria-describedby="emailHelpId"  [min]="0" minlength="1"  (change)="changeDoseUnit($event)">
                   </div>
                 </div>
               </div>
@@ -223,7 +223,7 @@
                         <div class="col-4">
                           <nz-form-label nzRequired for="price" class="form-label">Giá trị quy đổi</nz-form-label>
                           <input class="form-control" type="number" id="conversionValue"
-                            name="conversionValue" min="1" style="margin-right: 5px" (change)="changeModel($event, i)">
+                            name="conversionValue" min="1"  style="margin-right: 5px" (change)="changeModel($event, i)">
                         </div>
                         <div class="col-4">
                           <nz-form-label nzRequired for="price" class="form-label">Giá bán</nz-form-label>
