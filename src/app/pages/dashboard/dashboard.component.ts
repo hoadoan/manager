@@ -37,9 +37,11 @@ export class DashboardComponent implements OnInit {
   profit: number = 0;
   profitStr: string = '';
 
-  chartData: any[] = []
-
   chartDay: any[] = []
+
+  chartMonth: any[] = []
+
+  chartYear: any[] = []
 
   constructor(
     private elementRef: ElementRef,
@@ -100,7 +102,6 @@ export class DashboardComponent implements OnInit {
         },
       ],
 
-    console.log(this.chartData)
 
     this.dashboard
       .getRecentSales(this.day, this.month, this.year, this.size)
