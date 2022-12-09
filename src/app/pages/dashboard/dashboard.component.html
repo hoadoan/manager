@@ -1,9 +1,9 @@
-<main id="main" class="main">
+<main id="main" class="main" on>
    <div class="pagetitle">
       <h1>Trang chủ</h1>
       <nav>
          <ol class="breadcrumb">
-            <li class="breadcrumb-item active">Trang chủ</li>
+            <li class="breadcrumb-item active" >Trang chủ</li>
          </ol>
       </nav>
    </div>
@@ -131,19 +131,20 @@
                         <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
                         <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
                            <li class="dropdown-header text-start">
-                              <h6>Filter</h6>
+                              <h6>Xem biểu đồ</h6>
                            </li>
-                           <li><a class="dropdown-item" href="#">Hôm nay</a></li>
-                           <li><a class="dropdown-item" href="#">Tháng này</a></li>
-                           <li><a class="dropdown-item" href="#">Năm nay</a></li>
+                           <li><a class="dropdown-item" (click)="changeListChart('Week')">Tuần này</a></li>
+                           <li><a class="dropdown-item" (click)="changeListChart('Month')">Tháng này</a></li>
+                           <li><a class="dropdown-item" (click)="changeListChart('Year')">Năm nay</a></li>
                         </ul>
                      </div>
                      <!-- chart -->
                      <div class="card-body">
-                        <h5 class="card-title">Báo cáo <span>/tuần này</span></h5>
+                        <h5 class="card-title">Báo cáo <span>/{{getTypeChart}}</span></h5>
                         <!-- <div id="reportChart" style="width: 300px; height: 300px;"></div> -->
-                        <div echarts [options]="option" id="reportsChart"></div>
-
+                        <div echarts [options]="option" id="reportsChart" *ngIf="getTypeChart=='Tuần này'"></div>
+                        <div echarts [options]="option_Month" id="reportsChart_2" *ngIf="getTypeChart=='Tháng này'"></div>
+                        <div echarts [options]="option_Year" id="reportsChart_3" *ngIf="getTypeChart=='Năm nay'"></div>
                      </div>
                   </div>
                </div>

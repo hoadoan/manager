@@ -18,6 +18,8 @@ export class DetailSupplierComponent implements OnInit {
   supplierName: string = ''
   checkError: boolean = false
   nameOld: string = ''
+  checkErrorPhone: boolean = false;
+  supplierPhone: string = '';
   supplierDetail : BatchInfo[] = []
   subParam!: Subscription;
   confirmModal?: NzModalRef;
@@ -38,6 +40,7 @@ export class DetailSupplierComponent implements OnInit {
         this.supplierName = result.data.name
         this.nameOld = result.data.name
         this.id = result.data.id
+        this.supplierPhone = result.data.phoneNumber
       })
     })
   }
@@ -52,13 +55,16 @@ export class DetailSupplierComponent implements OnInit {
   handleOk(): void {
     if (this.supplierName == '') {
       this.checkError = true
+    }else if(this.supplierPhone == ''){
+      this.checkErrorPhone = true;
     } else {
       var formdata = new FormData()
       formdata.append('name', this.supplierName);
+      formdata.append('phoneNumber', this.supplierPhone);
       this.isVisible = false;
       this.confirmModal = this.modal.confirm({
-        nzTitle: 'Thay đổi tên nhà cung cấp',
-        nzContent: 'Bạn có muốn thay đổi tên nhà cung cấp không ?',
+        nzTitle: 'Thay đổi thông tin nhà cung cấp',
+        nzContent: 'Bạn có muốn thay đổi thông tin nhà cung cấp không ?',
         nzOkText: 'Có',
         nzOnOk: () => {
           this.supplier.updateSupplier(this.id,formdata).subscribe((result) => {

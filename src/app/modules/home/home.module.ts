@@ -8,7 +8,7 @@ import { ListStaffComponent } from './staff/list-staff/list-staff.component';
 import { AntdModule } from 'src/app/_core/share/antd/antd.module';
 import { Routes, RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { DashboardComponent } from 'src/app/pages/dashboard/dashboard.component';
 import { HeaderComponent } from 'src/app/layouts/header/header.component';
 import { FooterComponent } from 'src/app/layouts/footer/footer.component';
@@ -143,7 +143,8 @@ const homeRoutes: Routes = [
 
   ],
   providers: [
-    isSubmitGuard
+    isSubmitGuard,
+    DatePipe
   ]
 })
 export class HomeModule { }

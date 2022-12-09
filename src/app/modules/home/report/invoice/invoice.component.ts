@@ -1,3 +1,4 @@
+import { Customer } from 'src/app/_core/utils/interface';
 import { Router } from '@angular/router';
 import { GoodsreceiptnoteService } from './../../../../_core/services/goodsreceiptnote/goodsreceiptnote.service';
 import { InvoiceById } from './../../../../_core/utils/interface';
@@ -37,12 +38,14 @@ export class InvoiceComponent implements OnInit {
   }
 
   getListSearch() {
-    console.log(this.searchData);
+    // console.log(this.searchData);
+
     if (this.selectedProvince == "SearchBarcode") {
       this.listsearch = this.invoices.filter(data => data.barcode.toLocaleLowerCase().includes(this.searchData.toLocaleLowerCase()))
     }
     else if (this.selectedProvince == "SearchCustomerName") {
-      this.listsearch = this.invoices.filter(data => data.customer.fullName.toLocaleLowerCase().includes(this.searchData.toLocaleLowerCase()))
+      this.listsearch = this.invoices.filter(data => data.customer.fullName != null ? data.customer.fullName.toLocaleLowerCase().includes(this.searchData.toLocaleLowerCase())
+      : this.searchData == "" ? this.invoice : null)
     } else if (this.selectedProvince == "SearchStaffName") {
       this.listsearch = this.invoices.filter(data => data.createdBy.name.toLocaleLowerCase().includes(this.searchData.toLocaleLowerCase()))
     }

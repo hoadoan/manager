@@ -20,7 +20,7 @@
                   <hr class="dropdown-divider">
                </li>
               <div *ngFor="let item of listNoti">
-                  <li class="notification-item">
+                  <li class="notification-item" (click)="DetailNotification(item.notiDate)">
                     <i class="bi bi-exclamation-circle text-warning"></i>
                     <div>
                        <h4>Ngày {{item.notiDate|date:'dd-MM-yyyy'}}</h4>

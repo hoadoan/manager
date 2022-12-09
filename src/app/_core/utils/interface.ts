@@ -227,6 +227,7 @@ export interface CreateMedicine {
 export interface Supplier {
   id: string;
   name: string;
+  phoneNumber: string;
   isActive: boolean;
   createdAt: string;
   createBy: {
@@ -412,3 +413,20 @@ export interface Noti{
     listNotification: [listNoti]
   }
 }
+
+// export interface listLine{
+//   name: string,
+//   type: string,
+//   data:[
+//     string
+//   ]
+// }
+
+// export interface listDate{
+//   data: string
+// }
+
+// export interface dataChart{
+//   listLine: listLine[],
+//   listDate: listDate[]
+// }

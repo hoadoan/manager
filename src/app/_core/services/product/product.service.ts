@@ -37,7 +37,7 @@ export class ProductService {
     return this.httpClient.get(DOMAIN + `product-management/products/${id}`, { headers: this.headers })
   }
   ActiveProduct(id : number):Observable<any> {
-    return this.httpClient.patch(DOMAIN + `product-management/products/${id}`, { headers: this.headers })
+    return this.httpClient.patch(DOMAIN + `product-management/products/${id}`,{}, { headers: this.headers })
   }
 
   updateInfoProduct(id : number,data: FormData):Observable<any> {

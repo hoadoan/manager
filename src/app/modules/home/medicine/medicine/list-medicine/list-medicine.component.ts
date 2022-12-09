@@ -238,12 +238,14 @@ export class ListMedicineComponent implements OnInit {
   }
 
   isInActiveProduct(id: number) {
+    console.log(id);
+
     this.confirmModal = this.modal.confirm({
       nzTitle: 'Ngừng hoạt động',
       nzContent: 'Bạn có muốn cho sản phẩm này ngừng hoạt động không?',
       nzOkText: 'Có',
       nzOnOk: () => {
-        this.product.ActiveProduct(id).subscribe(() => {
+        this.product.ActiveProduct(id).subscribe((result) => {
           this.notification.create(
             'success',
             'Ngừng hoạt động thành công', ''
@@ -269,7 +271,7 @@ export class ListMedicineComponent implements OnInit {
       nzContent: 'Bạn có muốn cho sản phẩm này hoạt động lại không?',
       nzOkText: 'Có',
       nzOnOk: () => {
-        this.product.ActiveProduct(id).subscribe(() => {
+        this.product.ActiveProduct(id).subscribe((result) => {
           this.notification.create(
             'success',
             'Mở lại hoạt động thành công', ''

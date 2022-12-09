@@ -42,6 +42,7 @@ export class PagesLoginComponent implements OnInit {
     formData.append(
       'password', this.password
     )
+    formData.append('fCMToken' , 'abc')
     console.log(this.username + "-" + this.password)
 
     this.auth.login(formData).subscribe((result: any) => {

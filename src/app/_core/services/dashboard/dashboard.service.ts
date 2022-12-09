@@ -1,4 +1,3 @@
-import { Noti } from './../../utils/interface';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
@@ -89,7 +88,7 @@ export class DashboardService {
     );
   }
 
-  getChartByDay():Observable<any> {
+  getChartByWeek():Observable<any> {
     return this.httpClient.get(
       DOMAIN +
         `dashboard/chart?byWeek=true`,

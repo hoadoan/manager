@@ -20,23 +20,28 @@
                 <div *ngIf="checkError == true">
                     <small style="color: red;">Vui lòng nhập tên nhà cung cấp</small>
                 </div>
+                <nz-form-label nzRequired for="inputName5" class="form-label">Số điện thoại nhà cung cấp</nz-form-label>
+                <input type="number" class="form-control" id="inputName" [(ngModel)]="supplierPhone" min="0" minlength="1">
+                <div *ngIf="checkErrorPhone == true">
+                    <small style="color: red;">Vui lòng nhập số điện thoại nhà cung cấp</small>
+                </div>
             </ng-container>
         </nz-modal>
     </div>
   </div>
   <div id="search">
-    <nz-input-group nzSearch nzSize="large" ><!--[nzAddOnAfter]="suffixButton"-->
-        <input type="text" nz-input placeholder="Nhập tên nhà cung cấp ..." [(ngModel)]="searchData"
+    <nz-input-group nzSearch nzSize="large" [nzAddOnAfter]="suffixButton">
+        <input type="text" nz-input placeholder="Nhập ..." [(ngModel)]="searchData"
             (ngModelChange)="getListSearch()" />
     </nz-input-group>
-    <!-- <ng-template #suffixButton>
+    <ng-template #suffixButton>
         <button nz-button nzType="primary" nzSize="large" nzSearch>
             <nz-select [(ngModel)]="selectedProvince" nzSize="large" (ngModelChange)="SearchOption($event)">
-                <nz-option nzValue="searchID" nzLabel="Mã nhà cung cấp"></nz-option>
-                <nz-option nzValue="SearchName" nzLabel="Tên nhà cung cấp"></nz-option>
+                <nz-option nzValue="searchName" nzLabel="Tên nhà cung cấp"></nz-option>
+                <nz-option nzValue="searchPhone" nzLabel="Số điện thoại nhà cung cấp"></nz-option>
             </nz-select>
         </button>
-    </ng-template> -->
+    </ng-template>
 </div>
   <section class="section" >
       <!-- [nzScroll]="{ x: '1150px', y: '600px' }" -->
@@ -46,6 +51,7 @@
               <tr>
                   <!-- <th style="text-align: center;">ID</th> -->
                   <th style="text-align: center;">Tên nhà cung cấp</th>
+                  <th style="text-align: center;">Số điện thoại nhà cung cấp</th>
                   <th style="text-align: center;">Ngày tạo</th>
                   <th [nzFilters]="nameList"
                   [nzFilterMultiple]="true"
@@ -56,7 +62,8 @@
           <tbody>
               <tr style="cursor: pointer;" *ngFor="let data of basicTable.data" style="text-align: center;">
                   <!-- <td (click)="Detail(data.id)">{{ data.id}}</td> -->
-                  <td (click)="Detail(data.id)">{{ data.name || null }}</td>
+                  <td (click)="Detail(data.id)">{{ data.name }}</td>
+                  <td (click)="Detail(data.id)">{{ data.phoneNumber }}</td>
                   <td (click)="Detail(data.id)">{{ data.createdAt | date: 'dd-MM-yyyy'}}</td>
                   <td>
                     <div *ngIf="data.isActive == true; else isActive">

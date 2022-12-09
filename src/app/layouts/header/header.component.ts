@@ -42,6 +42,10 @@ export class HeaderComponent implements OnInit {
     this.document.body.classList.toggle('toggle-sidebar');
   }
 
+  DetailNotification(date: string){
+    this.router.navigate(['dashboard/detail-notification/' + date]);
+  }
+
   logout() {
     this.auth.logout();
   }
