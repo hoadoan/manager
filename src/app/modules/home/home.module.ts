@@ -47,6 +47,7 @@ import { DiscountComponent } from './discount/discount.component';
 import { CreateDiseaseComponent } from './disease/create-disease/create-disease.component';
 import { NotificationComponent } from './notification/notification.component';
 import { DetailNotificationComponent } from './detail-notification/detail-notification.component';
+import { ListMedicineInactiveComponent } from './medicine/medicine/list-medicine-inactive/list-medicine-inactive.component';
 
 const homeRoutes: Routes = [
   {
@@ -126,7 +127,8 @@ const homeRoutes: Routes = [
     DiscountComponent,
     CreateDiseaseComponent,
     NotificationComponent,
-    DetailNotificationComponent
+    DetailNotificationComponent,
+    ListMedicineInactiveComponent
   ],
   imports: [
     CommonModule,
