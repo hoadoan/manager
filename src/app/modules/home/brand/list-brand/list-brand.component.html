@@ -53,7 +53,7 @@
             <thead>
                 <tr>
                     <!-- <th style="text-align: center;">Mã</th> -->
-                    <th style="text-align: center;">Tên nhà sản xuất</th>
+                    <th >Tên nhà sản xuất</th>
                     <th style="text-align: center;">Ngày tạo</th>
                     <th
                     [nzFilters]="nameList"
@@ -63,11 +63,11 @@
                 </tr>
             </thead>
             <tbody>
-                <tr style="cursor: pointer;" *ngFor="let data of basicTable.data" style="text-align: center;">
+                <tr style="cursor: pointer;" *ngFor="let data of basicTable.data" >
                     <!-- <td>{{ data.id}}</td> -->
                     <td (click)="DetailBrand(data.id)">{{ data.name }}</td>
-                    <td (click)="DetailBrand(data.id)">{{ data.createdAt | date:'dd-MM-yyyy' }}</td>
-                    <td>
+                    <td style="text-align: center;" (click)="DetailBrand(data.id)">{{ data.createdAt | date:'dd-MM-yyyy' }}</td>
+                    <td style="text-align: center;">
                         <div *ngIf="data.isActive == true; else isActive">
                             <nz-tag [nzColor]="'green'" (click)="isBrand(data.id)">Hoạt động</nz-tag>
                         </div>

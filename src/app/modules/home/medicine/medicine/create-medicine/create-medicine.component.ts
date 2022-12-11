@@ -39,7 +39,7 @@ export class CreateMedicineComponent implements OnInit {
     routeOfAdministrationId: ['', Validators.required], // đường dùng
     // bán theo liều
     isManagedInBatches: [false], // quản lý theo lô, hạn sử dụng
-    activeSubstances: [[], Validators.required], // hoạt chất
+    activeSubstances: [[], ], // hoạt chất
     unit: ['', Validators.required], // đơn vị cơ sở
     price: ['', Validators.required], // giá bán
     productUnits: [this.listProductUnit],
@@ -181,8 +181,6 @@ export class CreateMedicineComponent implements OnInit {
 
     console.log(this.listProductUnit);
     console.log(this.productData.value);
-
-
 
   }
 

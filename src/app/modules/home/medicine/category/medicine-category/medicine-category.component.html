@@ -46,7 +46,7 @@
             <thead>
                 <tr>
                     <!-- <th style="text-align: center">Mã kệ hàng</th> -->
-                    <th style="text-align: center">Tên kệ hàng</th>
+                    <th >Tên kệ hàng</th>
                     <th style="text-align: center">Ngày tạo</th>
                     <th [nzFilters]="nameList"
                     [nzFilterMultiple]="true"
@@ -54,11 +54,11 @@
                 </tr>
             </thead>
             <tbody>
-                <tr style="cursor: pointer;" *ngFor="let data of basicTable.data" style="text-align: center">
+                <tr style="cursor: pointer;" *ngFor="let data of basicTable.data">
                     <!-- <td (click)="detail(data.id)">{{ data.id}}</td> -->
                     <td (click)="detail(data.id)">{{ data.name}}</td>
-                    <td (click)="detail(data.id)">{{ data.createdAt |date:'dd-MM-yyyy' }}</td>
-                    <td>
+                    <td style="text-align: center"(click)="detail(data.id)">{{ data.createdAt |date:'dd-MM-yyyy' }}</td>
+                    <td style="text-align: center">
                         <div *ngIf="data.isActive == true; else isActive">
                             <nz-tag [nzColor]="'green'" (click)="deleteCategory(data.id)">Hoạt động</nz-tag>
                         </div>

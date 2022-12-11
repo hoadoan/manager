@@ -46,16 +46,16 @@
             <thead>
                 <tr>
                     <!-- <th style="text-align: center">Mã hoạt chất</th> -->
-                    <th style="text-align: center">Tên hoạt chất</th>
+                    <th>Tên hoạt chất</th>
                     <th style="text-align: center">Ngày tạo</th>
                     <th [nzFilters]="nameList" [nzFilterMultiple]="true" [nzFilterFn]="nameFilterFn" style="text-align: center">Hoạt động</th>
             </thead>
             <tbody>
-                <tr style="cursor: pointer;" *ngFor="let data of basicTable.data" style="text-align: center">
+                <tr style="cursor: pointer;" *ngFor="let data of basicTable.data" >
                   <!-- <td (click)="detail(data.id)">{{ data.id }}</td> -->
                   <td (click)="detail(data.id)">{{ data.name || null }}</td>
-                  <td (click)="detail(data.id)">{{ data.createdAt |date:'dd-MM-yyyy' }}</td>
-                  <td>
+                  <td style="text-align: center" (click)="detail(data.id)">{{ data.createdAt |date:'dd-MM-yyyy' }}</td>
+                  <td style="text-align: center">
                       <div *ngIf="data.isActive == true; else isActive">
                           <nz-tag [nzColor]="'green'" (click)="deleteActiveSubstance(data.id)">Hoạt động</nz-tag>
                       </div>

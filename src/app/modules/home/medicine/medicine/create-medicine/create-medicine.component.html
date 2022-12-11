@@ -51,12 +51,16 @@
           </div>
           <div class="col-4">
             <nz-form-label nzRequired for="inputName5" class="form-label">Nhà sản xuất</nz-form-label>
-            <select class="form-select" aria-label="Default select example" formControlName="brandId">
-              <!-- <option selected>Open this select menu</option> -->
+            <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Nhập nhà sản xuất" formControlName="brandId">
+              <nz-option *ngFor="let listBrands of listBrand" nzValue="{{listBrands.id}}" nzLabel="{{ listBrands.name }}">
+              </nz-option>
+            </nz-select>
+            <!-- <select class="form-select" aria-label="Default select example" formControlName="brandId">
+              <option selected>Open this select menu</option>
               <option *ngFor="let listBrands of listBrand" value="{{ listBrands.id }}">
                 {{ listBrands.name }}
               </option>
-            </select>
+            </select> -->
             <div *ngIf="
                 statusError.brandId.invalid &&
                 (statusError.brandId.dirty || statusError.brandId.touched)
@@ -70,12 +74,16 @@
           </div>
           <div class="col-2">
             <nz-form-label nzRequired for="inputName5" class="form-label">Kệ hàng</nz-form-label>
-            <select class="form-select" aria-label="Default select example" formControlName="shelfId">
-              <!-- <option selected>Open this select menu</option> -->
+            <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Nhập kệ hàng" formControlName="shelfId">
+              <nz-option *ngFor="let listShelfs of listShelf" nzValue="{{listShelfs.id}}" nzLabel="{{ listShelfs.name }}">
+              </nz-option>
+            </nz-select>
+            <!-- <select class="form-select" aria-label="Default select example" formControlName="shelfId">
+              <option selected>Open this select menu</option>
               <option *ngFor="let listShelfs of listShelf" value="{{ listShelfs.id }}">
                 {{ listShelfs.name }}
               </option>
-            </select>
+            </select> -->
             <div *ngIf="
                 statusError.shelfId.invalid &&
                 (statusError.shelfId.dirty || statusError.shelfId.touched)
@@ -106,12 +114,16 @@
 
           <div class="col-2">
             <nz-form-label nzRequired for="inputName5" class="form-label">Đường dùng</nz-form-label>
-            <select class="form-select" formControlName="routeOfAdministrationId">
-              <!-- <option selected>Open this select menu</option> -->
+            <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Nhập đường dùng" formControlName="routeOfAdministrationId">
+              <nz-option *ngFor="let listROAs of listROA" nzValue="{{listROAs.id}}" nzLabel="{{ listROAs.name }}">
+              </nz-option>
+            </nz-select>
+            <!-- <select class="form-select" formControlName="routeOfAdministrationId">
+              <option selected>Open this select menu</option>
               <option *ngFor="let listROAs of listROA" value="{{ listROAs.id }}">
                 {{ listROAs.name }}
               </option>
-            </select>
+            </select> -->
             <div *ngIf="
                 statusError.routeOfAdministrationId.invalid &&
                 (statusError.routeOfAdministrationId.dirty ||
@@ -121,29 +133,18 @@
                 <div *ngIf="
                     statusError.routeOfAdministrationId.errors!['required']
                   ">
-                  <small style="color: red">Vui lòng chọn cách dùng</small>
+                  <small style="color: red">Vui lòng chọn đường dùng</small>
                 </div>
               </div>
             </div>
           </div>
 
           <div class="col-6">
-            <nz-form-label nzRequired for="activeSubstances" class="form-label">Hoạt chất</nz-form-label>
+            <nz-form-label for="activeSubstances" class="form-label">Hoạt chất</nz-form-label>
             <nz-select nzAllowClear nzPlaceHolder="Hoạt chất" nzMode="multiple" formControlName="activeSubstances">
               <nz-option *ngFor="let listActiveSubstance of listActiveSubstance"
                 nzLabel="{{ listActiveSubstance.name }}" nzValue="{{ listActiveSubstance.id }}"></nz-option>
             </nz-select>
-            <div *ngIf="
-                statusError.activeSubstances.invalid &&
-                (statusError.activeSubstances.dirty ||
-                  statusError.activeSubstances.touched)
-              ">
-              <div *ngIf="statusError.activeSubstances.errors">
-                <div *ngIf="statusError.activeSubstances.errors!['required']">
-                  <small style="color: red">Vui lòng chọn hoạt chất</small>
-                </div>
-              </div>
-            </div>
           </div>
           <div class="col-6">
             <nz-form-label class="form-label" nzRequired for="unit">Đơn vị cơ sở</nz-form-label>
@@ -226,9 +227,9 @@
                             name="conversionValue" min="1"  style="margin-right: 5px" (change)="changeModel($event, i)">
                         </div>
                         <div class="col-4">
-                          <nz-form-label nzRequired for="price" class="form-label">Giá bán</nz-form-label>
+                          <nz-form-label nzRequired for="price" class="form-label" >Giá bán</nz-form-label>
                           <input class="form-control" type="number" id="price" name="price" min="1"
-                            style="margin-right: 5px" (change)="changeModel($event, i)" value="{{Numbers(productData.value.price)*listProductUnit[i].conversionValue}}">
+                            style="margin-right: 5px" (change)="changeModel($event, i)" [value]="Numbers(productData.value.price)*listProductUnit[i].conversionValue">
                         </div>
                       </div>
                     </div>

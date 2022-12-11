@@ -64,10 +64,10 @@
                   <div *ngFor="let productUnits of productUnits">
                     <div class="row" *ngIf="productUnits.isBaseUnit" >
                       <b class="col-lg-5 col-md-6 label">Giá bán đơn vị cơ bản</b>
-                      <div class="col-lg-7 col-md-6">  {{productUnits.price | currency : 'VND' }} / {{productUnits.conversionValue}} {{productUnits.unit}}</div>
+                      <div class="col-lg-7 col-md-6">  {{productUnits.price | number }} đ / {{productUnits.conversionValue}} {{productUnits.unit}}</div>
                     </div>
                   </div>
-                  <br>
+                  <!-- <br> -->
                   <div class="row" *ngIf="isUseDose">
                     <b class="col-lg-5 col-md-6 label">Có bán theo liều</b>
                   </div>
@@ -92,7 +92,6 @@
                       <app-update-active-substance [productId]="id" [listActiveSubstance]="activeSubstances"></app-update-active-substance>
                     </div>
                   </div>
-                  <br>
                   <br>
                   <div class="col-12" >
                   <nz-table #basicTable [nzData]="activeSubstances" style="text-align: center; font-size: 18px;" [nzFrontPagination]="false"
@@ -141,7 +140,6 @@
                     <app-add-product-unit [productId]="id"></app-add-product-unit>
                   </div>
                 </div>
-                  <br>
                   <br>
                   <div class="col-12" >
                   <nz-table #basicTable [nzData]="productUnits" style="text-align: center; font-size: 18px;" [nzFrontPagination]="false"

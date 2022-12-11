@@ -50,7 +50,7 @@
           <thead>
               <tr>
                   <!-- <th style="text-align: center;">ID</th> -->
-                  <th style="text-align: center;">Tên nhà cung cấp</th>
+                  <th>Tên nhà cung cấp</th>
                   <th style="text-align: center;">Số điện thoại nhà cung cấp</th>
                   <th style="text-align: center;">Ngày tạo</th>
                   <th [nzFilters]="nameList"
@@ -60,12 +60,12 @@
               </tr>
           </thead>
           <tbody>
-              <tr style="cursor: pointer;" *ngFor="let data of basicTable.data" style="text-align: center;">
+              <tr style="cursor: pointer;" *ngFor="let data of basicTable.data" >
                   <!-- <td (click)="Detail(data.id)">{{ data.id}}</td> -->
                   <td (click)="Detail(data.id)">{{ data.name }}</td>
-                  <td (click)="Detail(data.id)">{{ data.phoneNumber }}</td>
-                  <td (click)="Detail(data.id)">{{ data.createdAt | date: 'dd-MM-yyyy'}}</td>
-                  <td>
+                  <td style="text-align: center;" (click)="Detail(data.id)">{{ data.phoneNumber }}</td>
+                  <td style="text-align: center;" (click)="Detail(data.id)">{{ data.createdAt | date: 'dd-MM-yyyy'}}</td>
+                  <td style="text-align: center;">
                     <div *ngIf="data.isActive == true; else isActive">
                         <nz-tag [nzColor]="'green'" (click)="clickBan(data.id)">Hoạt động</nz-tag>
                     </div>
