@@ -32,8 +32,9 @@
     <div class="col-xl-12">
       <div class="card">
         <div class="card-body pt-3">
-
-          <nz-table #basicData [nzData]="listsearch" [nzPageSize]="5"  [nzPageSizeOptions]="[5,10,15,20,25,30]" nzShowSizeChanger
+          <nz-table  [nzLoading]="loading" [nzData]="listsearch" #basicData
+          [nzPageSize]="5"  [nzPageSizeOptions]="[5,10,15,20,25,30]"
+           nzShowSizeChanger
           >
             <thead style="text-align: center">
               <tr>

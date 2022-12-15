@@ -74,15 +74,27 @@
 
                     <div class="row" style="text-align: center;">
                       <div class="col-lg-4 col-md-4 label">
-                        <button (click)="onSubmit()" nz-button nzType="primary">Đặt lại mật khẩu</button>
+                        <button (click)="showModalChangePass()" nz-button nzType="primary">Đặt lại mật khẩu</button>
                       </div>
-                      <div class="col-lg-2 col-md-4 label">
+                      <div class="col-lg-6 col-md-4 label">
                         <app-update-staff [staffID]="id"></app-update-staff>
                       </div>
                     </div>
                   </div>
                 </div>
-
+                <nz-modal [(nzVisible)]="isVisibleChangePass" nzTitle="Nhập xác nhận để đặt lại mật khẩu" nzOkText="Xác nhận"
+                nzCancelText="Hủy" (nzOnOk)="handleChangePassOk()" (nzOnCancel)="handleChangePassCancel()">
+                <ng-container *nzModalContent>
+                <nz-form-label nzRequired for="confirmText" class="form-label">Nhập "XAC NHAN DAT LAI MAT KHAU"</nz-form-label>
+                <input type="text" class="form-control" id="confirmText" [(ngModel)]="confirmText">
+                <div *ngIf="checkEmpty == true">
+                  <small style="color: red;">Vui lòng nhập xác nhận</small>
+                </div>
+                <div *ngIf="checkError == true">
+                  <small style="color: red;">Mã xác nhận không đúng. Vui lòng nhập lại</small>
+                </div>
+                </ng-container>
+              </nz-modal>
               </nz-tab>
               <nz-tab nzTitle="Đơn hàng đã bán">
                 <b *ngIf="invoices.length <= 0">

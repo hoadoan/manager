@@ -16,7 +16,9 @@ import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { HttpClientModule } from '@angular/common/http';
 import { NZ_I18N } from 'ng-zorro-antd/i18n';
 import { vi_VN } from 'ng-zorro-antd/i18n';
-import { DatePipe } from '@angular/common';
+import { FormsModule , ReactiveFormsModule} from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { AntdModule } from './_core/share/antd/antd.module';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -29,7 +31,9 @@ export function HttpLoaderFactory(http: HttpClient) {
     PagesError404Component,
   ],
   imports: [
-
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
     HttpClientModule,
     BrowserModule,
     AppRoutingModule,
@@ -38,6 +42,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     BrowserAnimationsModule,
     HomeModule,
     RouterModule,
+    AntdModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,

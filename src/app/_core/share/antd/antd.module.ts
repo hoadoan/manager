@@ -16,6 +16,7 @@ import { NzSwitchModule } from 'ng-zorro-antd/switch';
 import { NzCollapseModule } from 'ng-zorro-antd/collapse';
 import { NzStatisticModule } from 'ng-zorro-antd/statistic';
 import { NzCardModule } from 'ng-zorro-antd/card';
+import { NzStepsModule } from 'ng-zorro-antd/steps';
 
 
 @NgModule({
@@ -40,7 +41,8 @@ import { NzCardModule } from 'ng-zorro-antd/card';
     NzSwitchModule,
     NzCollapseModule,
     NzStatisticModule,
-    NzCardModule
+    NzCardModule,
+    NzStepsModule
   ]
 })
 export class AntdModule { }

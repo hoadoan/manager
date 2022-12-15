@@ -175,6 +175,7 @@ export class CreateMedicineComponent implements OnInit {
       this.listProductUnit[index].unit = value
     } else if (name == "conversionValue") {
       this.listProductUnit[index].conversionValue = value
+      this.listProductUnit[index].price = value * Number(this.productData.value.price)
     } else if (name == 'price') {
       this.listProductUnit[index].price = value
     }

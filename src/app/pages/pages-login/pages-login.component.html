@@ -1,43 +1,147 @@
-<main>
-   <div class="container">
-      <section class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">
-         <div class="container">
-            <div class="row justify-content-center">
-               <div class="col-lg-4 col-md-6 d-flex flex-column align-items-center justify-content-center">
-                  <div class="d-flex justify-content-center py-4"> <a routerLink="/"
-                        class="logo d-flex align-items-center w-auto"> <img src="assets/img/logo.png" alt="">
-                        <span class="d-none d-lg-block">Web quản lí nhà thuốc Út Nhàn</span> </a>
-                     </div>
-                  <div class="card mb-3">
-                     <div class="card-body">
-                        <div class="pt-4 pb-2">
-                           <h5 class="card-title text-center pb-0 fs-4">Đăng nhập</h5>
-                           <p class="text-center small">Nhập tên người dùng và mật khẩu của bạn để đăng nhập</p>
-                        </div>
-                        <form class="row g-3 needs-validation" novalidate>
-                           <div class="col-12">
-                              <label for="yourUsername" class="form-label">Tài khoản</label>
-                              <div class="input-group has-validation">
-                                 <input type="text" name="username" class="form-control" id="yourUsername" required
-                                    [(ngModel)]="username">
-                                 <div class="invalid-feedback">Vui lòng nhập tên đăng nhập</div>
-                              </div>
-                           </div>
-                           <div class="col-12">
-                              <label for="yourPassword" class="form-label">Mật khẩu</label>
-                              <input type="password" name="password" class="form-control" id="yourPassword" required
-                                 [(ngModel)]="password">
-                              <div class="invalid-feedback">Vui lòng nhập mật khẩu</div>
-                           </div>
-                           <div class="col-12 mt-4 mb-3">
-                              <button (click)="login()" class="btn btn-primary w-100" type="submit">Đăng nhập</button>
-                           </div>
-                        </form>
-                     </div>
+<div class="main">
+
+  <div>
+      <div>
+          <h4 class="text-center">
+              <img src="./../../../assets/img/logo.png" alt="logo" width="20px">
+              Web nhân viên nhà thuốc Út Nhàn
+          </h4>
+      </div>
+      <div class="form ">
+          <div class="text-center">
+              <h4>Đăng nhập</h4>
+              <p class="small">Nhập tên người dùng và mật khẩu của bạn để đăng nhập</p>
+          </div>
+          <div class="form-group">
+              <h6 for="">Tài khoản</h6>
+              <input type="text" class="form-control" placeholder="" [(ngModel)]="username">
+              <div *ngIf="check == false">
+                  <div *ngIf="username == ''">
+                      <p style="color: red;" class="small">Vui lòng nhập tài khoản</p>
                   </div>
-               </div>
-            </div>
-         </div>
-      </section>
-   </div>
-</main>
+              </div>
+          </div>
+          <div class="form-group">
+              <label for="">Mật khẩu</label>
+              <input type="password" class="form-control" placeholder="" [(ngModel)]="password">
+              <div *ngIf="check == false">
+                  <div *ngIf="password == ''">
+                      <p style="color: red;" class="small">Vui lòng nhập mật khẩu</p>
+                  </div>
+              </div>
+          </div>
+          <div class="form-group">
+              <div class="text-end" role="button" (click)="showModal()"> Quên mật khẩu?</div>
+
+              <nz-modal [(nzVisible)]="isVisibleForgotPassword" [nzTitle]="modalTitle" [nzContent]="modalContent"
+                  [nzFooter]="modalFooter" (nzOnCancel)="closeForgotPasswordModal()">
+                  <ng-template #modalTitle>Quên mật khẩu</ng-template>
+
+                  <ng-template #modalContent>
+                      <nz-steps [nzCurrent]="currentStep">
+                          <nz-step nzTitle="Tài khoản"></nz-step>
+                          <nz-step nzTitle="Đặt lại mật khẩu"></nz-step>
+                      </nz-steps>
+                      <nz-divider></nz-divider>
+                      <div style="height: 25vh;">
+                          <div class="steps-content" *ngIf="currentStep == 0">
+                              <div class="p-3">
+                                  <h6>Nhập tên tài khoản:</h6>
+                                  <input type="text" class="form-control" placeholder="" [(ngModel)]="username">
+                              </div>
+                          </div>
+                          <div class="steps-content" *ngIf="currentStep == 1" >
+                              <form (ngSubmit)="chagePassword()" [formGroup]="chagePasswordata">
+                                  <div class="row mb-3">
+                                      <div class="col-12">
+                                          <h6>Mật khẩu mới:</h6>
+                                      </div>
+                                      <div class="col-12">
+                                          <input type="password" class="form-control" placeholder="Mật khẩu mới"
+                                              nzSize="default" formControlName="newPassword" />
+                                          <div *ngIf="statusError.newPassword.invalid && (statusError.newPassword.dirty ||
+                                              statusError.newPassword.touched) ">
+                                              <div *ngIf=" statusError.newPassword.errors">
+                                                  <div *ngIf="statusError.newPassword.errors!['required']">
+                                                      <small style="color: red;">Vui lòng nhập Mật khẩu mới</small>
+                                                  </div>
+                                              </div>
+                                          </div>
+                                      </div>
+                                  </div>
+                                  <div class="row mb-3">
+                                      <div class="col-12">
+                                          <h6>Nhập lại mật khẩu mới:</h6>
+                                      </div>
+                                      <div class="col-12">
+                                          <input class="form-control" type="password"
+                                              placeholder="Nhập lại mật khẩu mới" nzSize="default"
+                                              formControlName="confirmPassword" />
+                                          <div
+                                              *ngIf=" statusError.confirmPassword.touched && (chagePasswordata.value.newPassword !== chagePasswordata.value.confirmPassword)">
+                                              <small style="color: red;">Xác nhận không khớp với mật khẩu</small>
+                                          </div>
+                                      </div>
+                                  </div>
+                                  <div class="row mb-3">
+                                      <div class="col-12">
+                                          <h6>Mã xác thực:</h6>
+                                      </div>
+                                      <div class="col-12">
+                                          <input class="form-control" type="text" placeholder="Mã xác thực"
+                                              nzSize="default" formControlName="tokeRecovery" />
+                                          <div *ngIf="statusError.tokeRecovery.invalid && (statusError.tokeRecovery.dirty ||
+                                              statusError.tokeRecovery.touched) ">
+                                              <div *ngIf=" statusError.tokeRecovery.errors">
+                                                  <div *ngIf="statusError.tokeRecovery.errors!['required']">
+                                                      <small style="color: red;">Vui lòng nhập mã xác thực</small>
+                                                  </div>
+                                              </div>
+                                              <div
+                                                  *ngIf="chagePasswordata.value.tokeRecovery !== forgotPasswordInfo.token">
+                                                  <small style="color: red;">Mã xác thực không chính xác</small>
+                                              </div>
+                                          </div>
+                                      </div>
+                                  </div>
+                              </form>
+                          </div>
+                      </div>
+                      <nz-divider></nz-divider>
+
+                      <div class="d-flex justify-content-end">
+                          <div *ngIf="currentStep == 1">
+                              <div
+                                  *ngIf="chagePasswordata.value.newPassword != '' && chagePasswordata.value.confirmPassword!= '' && chagePasswordata.value.tokeRecovery!= '' ; else ResetPassword">
+                                  <button nz-button nzType="primary" type="submit" (click)="previousButton()">Đổi mật
+                                      khẩu</button>
+                              </div>
+                              <ng-template #ResetPassword>
+                                  <button nz-button nzType="primary" disabled>Đổi mật
+                                      khẩu</button>
+                              </ng-template>
+
+                          </div>
+                          <div *ngIf="currentStep == 0">
+                              <button nz-button nzType="primary" (click)="nextButton()"
+                                  *ngIf="username !=''; else inputUsername">Tiếp theo</button>
+                              <ng-template #inputUsername>
+                                  <button nz-button nzType="primary" (click)="nextButton()" disabled>Tiếp
+                                      theo</button>
+                              </ng-template>
+                          </div>
+                      </div>
+
+                  </ng-template>
+
+                  <ng-template #modalFooter>
+                  </ng-template>
+              </nz-modal>
+
+          </div>
+          <div class="form-group login__button">
+              <button class="btn btn-primary w-100" (click)="login()">Đăng nhập</button>
+          </div>
+      </div>
+  </div>
+</div>
