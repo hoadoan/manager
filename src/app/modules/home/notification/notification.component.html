@@ -19,18 +19,16 @@
               <tr>
                   <!-- <th style="text-align: center">Mã kệ hàng</th> -->
                   <th >Ngày thông báo</th>
-                  <th >Nội dung lô hàng</th>
-                  <th >Nội dung sản phẩm</th>
+                  <th >Nội dung</th>
                   <th style="text-align: center">Xem chi tiết</th>
               </tr>
           </thead>
           <tbody>
               <tr style="cursor: pointer;" *ngFor="let data of basicTable.data" >
                   <td >{{ data.notiDate |date:'dd-MM-yyyy'}}</td>
-                  <td *ngIf="data.titleBatch!=null">{{ data.titleBatch }}</td>
-                  <td *ngIf="data.titleBatch==null">Không có thông báo về tình trạng lô</td>
-                  <td *ngIf="data.titleQuantity!=null">{{ data.titleQuantity }}</td>
-                  <td *ngIf="data.titleQuantity==null">Không có thông báo về tình trạng sản phẩm</td>
+                  <td *ngIf="data.titleBatch!=null && data.titleQuantity!=null">{{ data.titleBatch}} và {{data.titleQuantity}}</td>
+                  <td *ngIf="data.titleBatch==null && data.titleQuantity!=null">{{ data.titleQuantity }}</td>
+                  <td *ngIf="data.titleBatch!=null && data.titleQuantity==null">{{ data.titleBatch }}</td>
                   <td style="text-align: center">
                     <a (click)="DetailNotification(data.notiDate)">
                       <span nz-icon nzType="zoom-in" nzTheme="outline" style="color: rgb(119, 219, 250);font-size: 20px;"></span>

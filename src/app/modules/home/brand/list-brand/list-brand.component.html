@@ -59,17 +59,18 @@
                     [nzFilters]="nameList"
                     [nzFilterMultiple]="true"
                     [nzFilterFn]="nameFilterFn" style="text-align: center;"
-                    >Hoạt động</th>
+                    >Tình trạng</th>
+                    <th style="text-align: center;">Xem chi tiết</th>
                 </tr>
             </thead>
             <tbody>
                 <tr style="cursor: pointer;" *ngFor="let data of basicTable.data" >
                     <!-- <td>{{ data.id}}</td> -->
-                    <td (click)="DetailBrand(data.id)">{{ data.name }}</td>
-                    <td style="text-align: center;" (click)="DetailBrand(data.id)">{{ data.createdAt | date:'dd-MM-yyyy' }}</td>
+                    <td >{{ data.name }}</td>
+                    <td style="text-align: center;" >{{ data.createdAt | date:'dd-MM-yyyy' }}</td>
                     <td style="text-align: center;">
                         <div *ngIf="data.isActive == true; else isActive">
-                            <nz-tag [nzColor]="'green'" (click)="isBrand(data.id)">Hoạt động</nz-tag>
+                            <nz-tag [nzColor]="'green'" (click)="isBrand(data.id)">Còn hoạt động</nz-tag>
                         </div>
                         <ng-template #isActive>
                             <div>
@@ -77,7 +78,11 @@
                             </div>
                         </ng-template>
                     </td>
-
+                    <td style="text-align: center;">
+                      <a (click)="DetailBrand(data.id)">
+                        <span nz-icon nzType="zoom-in" nzTheme="outline" style="color: rgb(119, 219, 250);font-size: 20px;"></span>
+                      </a>
+                    </td>
                 </tr>
             </tbody>
         </nz-table>

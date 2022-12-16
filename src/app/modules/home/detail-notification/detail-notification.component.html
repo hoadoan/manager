@@ -19,7 +19,7 @@
   <nz-tabset>
     <nz-tab nzTitle="Lô hàng">
       <h6 style>{{titleNotiBatch}}</h6>
-      <nz-table class="col-10" nzLoading="false" [nzData]="listNotiBatch" #basicTable [nzPageSize]="5"
+      <nz-table *ngIf="listNotiBatch!=null" [nzData]="listNotiBatch" #basicTable [nzPageSize]="5"
           [nzPageSizeOptions]="[5,10,15,20,25,30]" nzShowSizeChanger >
           <thead>
               <tr>
@@ -44,7 +44,7 @@
     </nz-tab>
     <nz-tab nzTitle="Sản phẩm">
       <h6 style>{{titleNotiQuantity}}</h6>
-      <nz-table class="col-10" nzLoading="false" [nzData]="listNotiQuantity" #basicTableProduct [nzPageSize]="5"
+      <nz-table *ngIf="listNotiQuantity!=null" class="col-10" nzLoading="false" [nzData]="listNotiQuantity" #basicTableProduct [nzPageSize]="5"
           [nzPageSizeOptions]="[5,10,15,20,25,30]" nzShowSizeChanger >
           <thead>
               <tr>

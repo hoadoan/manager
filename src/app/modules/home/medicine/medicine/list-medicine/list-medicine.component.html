@@ -55,19 +55,20 @@
                       [nzFilterFn]="nameFilterFn"
                       style="text-align: center">Trạng thái hoạt động</th> -->
                       <th style="text-align: center">Trạng thái hoạt động</th>
+                      <th style="text-align: center;">Xem chi tiết</th>
                   </tr>
               </thead>
               <tbody>
                   <tr style="cursor: pointer;" *ngFor="let data of basicTable.data" style="text-align: center">
-                      <td (click)="detail(data.id)">
+                      <td >
                           {{data.drugRegistrationNumber}}
                       </td>
-                      <td (click)="detail(data.id)">
+                      <td >
                           <ngx-barcode bc-value={{data.barcode}} [bc-display-value]="true" [bc-width]="width"
                               [bc-height]="height"></ngx-barcode>
                       </td>
-                      <td (click)="detail(data.id)">{{ data.name}}</td>
-                      <td (click)="detail(data.id)">{{ data.productUnits[0].price| number }} đ/ {{data.productUnits[0].unit}}</td>
+                      <td >{{ data.name}}</td>
+                      <td >{{ data.productUnits[0].price| number }} đ/ {{data.productUnits[0].unit}}</td>
                       <td>
                         <a *ngIf="data.isActive == true; else isActive" >
                           <nz-tag [nzColor]="'green'" (click)="isInActiveProduct(data.id)">Còn bán</nz-tag>
@@ -77,6 +78,11 @@
                               <nz-tag [nzColor]="'red'" (click)="isActiveProduct(data.id)">Ngừng bán</nz-tag>
                           </a>
                       </ng-template>
+                      </td>
+                      <td style="text-align: center;">
+                        <a (click)="detail(data.id)">
+                          <span nz-icon nzType="zoom-in" nzTheme="outline" style="color: rgb(119, 219, 250);font-size: 20px;"></span>
+                        </a>
                       </td>
                   </tr>
               </tbody>

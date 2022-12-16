@@ -31,14 +31,20 @@
                   <th style="text-align: center;">Số điện thoại</th>
                     <th style="text-align: center;">Họ và tên</th>
                     <th style="text-align: center;">Ngày tạo tài khoản</th>
+                    <th style="text-align: center;">Xem chi tiết</th>
                     <!-- <th>Action</th> -->
                 </tr>
             </thead>
             <tbody>
                 <tr *ngFor="let data of basicTable.data" style="text-align: center;">
-                  <td (click)="detail(data.id)">{{ data.phoneNumber }}</td>
-                    <td (click)="detail(data.id)">{{ data.fullName }}</td>
-                    <td (click)="detail(data.id)">{{ data.createdAt|date:'dd-MM-yyyy'}}</td>
+                  <td >{{ data.phoneNumber }}</td>
+                    <td >{{ data.fullName }}</td>
+                    <td >{{ data.createdAt|date:'dd-MM-yyyy'}}</td>
+                    <td style="text-align: center;">
+                      <a (click)="detail(data.id)">
+                        <span nz-icon nzType="zoom-in" nzTheme="outline" style="color: rgb(119, 219, 250);font-size: 20px;"></span>
+                      </a>
+                    </td>
                 </tr>
             </tbody>
         </nz-table>

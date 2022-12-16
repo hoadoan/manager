@@ -29,11 +29,11 @@ export class DetailNotificationComponent implements OnInit {
     this.subParam = this.atvRoute.params.subscribe((params) => {
       this.noti.getNotification(params['date']).subscribe((result)=>{
         console.log(result.data);
-        this.date = result.data[0].notiDate
-        this.titleNotiBatch = result.data[0].listNotiBatch.title
-        this.listNotiBatch = result.data[0].listNotiBatch.listNotification
-        this.titleNotiQuantity = result.data[0].listNotiQuantity.title
-        this.listNotiQuantity = result.data[0].listNotiQuantity.listNotification
+        this.date = result.data.notiDate
+        this.titleNotiBatch = result.data.listNotiBatch.title
+        this.listNotiBatch = result.data.listNotiBatch.listNotification
+        this.titleNotiQuantity = result.data.listNotiQuantity.title
+        this.listNotiQuantity = result.data.listNotiQuantity.listNotification
       })
     })
   }

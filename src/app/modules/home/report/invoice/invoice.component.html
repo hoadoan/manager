@@ -43,18 +43,24 @@
                 <th scope="col" style="text-align: center;">Tên nhân viên</th>
                 <th scope="col" style="text-align: center;">Ngày tạo</th>
                 <th scope="col" style="text-align: center;">Tổng tiền</th>
+                <th scope="col" style="text-align: center;">Xem chi tiết</th>
               </tr>
             </thead>
             <tbody  *ngFor="let invoices of basicData.data" style="text-align: center;">
               <tr >
-                <td (click)="detailInvoice(invoices.id)">{{invoices.barcode}}</td>
+                <td >{{invoices.barcode}}</td>
 
-                <td (click)="detailInvoice(invoices.id)" *ngIf="invoices.customer.fullName==null">Không có tên</td>
-                <td (click)="detailInvoice(invoices.id)" *ngIf="invoices.customer.fullName!=null">{{invoices.customer.fullName}}</td>
+                <td  *ngIf="invoices.customer.fullName==null">Không có tên</td>
+                <td  *ngIf="invoices.customer.fullName!=null">{{invoices.customer.fullName}}</td>
 
-                <td (click)="detailInvoice(invoices.id)">{{invoices.createdBy.name}}</td>
-                <td (click)="detailInvoice(invoices.id)">{{invoices.createdAt|date:'dd-MM-yyyy'}}</td>
-                <td (click)="detailInvoice(invoices.id)">{{invoices.totalPrice| number}} đ</td>
+                <td >{{invoices.createdBy.name}}</td>
+                <td >{{invoices.createdAt|date:'dd-MM-yyyy'}}</td>
+                <td >{{invoices.totalPrice| number}} đ</td>
+                <td style="text-align: center;">
+                  <a (click)="detailInvoice(invoices.id)">
+                    <span nz-icon nzType="zoom-in" nzTheme="outline" style="color: rgb(119, 219, 250);font-size: 20px;"></span>
+                  </a>
+                </td>
               </tr>
             </tbody>
 

@@ -22,7 +22,7 @@
         <form class="row g-3" (ngSubmit)="onSubmit()" [formGroup]="productData">
           <div class="col-md-4">
             <nz-form-label nzRequired for="inputName5" class="form-label">Mã số đăng kí</nz-form-label>
-            <input type="text" class="form-control" id="inputName" formControlName="drugRegistrationNumber" />
+            <input nz-input type="text" class="form-control" id="inputName" formControlName="drugRegistrationNumber" placeholder="Nhập mã đăng kí"/>
             <div *ngIf="
                 statusError.drugRegistrationNumber.invalid &&
                 (statusError.drugRegistrationNumber.dirty ||
@@ -37,7 +37,7 @@
           </div>
           <div class="col-md-4">
             <nz-form-label nzRequired for="inputName5" class="form-label">Tên sản phẩm</nz-form-label>
-            <input type="text" class="form-control" id="inputName" formControlName="name" />
+            <input nz-input type="text" class="form-control" id="inputName" formControlName="name" placeholder="Nhập tên sản phẩm"/>
             <div *ngIf="
                 statusError.name.invalid &&
                 (statusError.name.dirty || statusError.name.touched)
@@ -98,7 +98,7 @@
           <div class="col-2">
             <nz-form-label nzRequired for="inputName5" class="form-label">Mức tồn kho tối thiểu
             </nz-form-label>
-            <input type="number" class="form-control" id="mininumInventory" formControlName="mininumInventory" [min]="0" minlength="1"/>
+            <input nz-input placeholder="Nhập mức tồn kho" type="number" class="form-control" id="mininumInventory" formControlName="mininumInventory" [min]="0" minlength="1"/>
             <div *ngIf="
                 statusError.mininumInventory.invalid &&
                 (statusError.mininumInventory.dirty ||
@@ -111,7 +111,6 @@
               </div>
             </div>
           </div>
-
           <div class="col-2">
             <nz-form-label nzRequired for="inputName5" class="form-label">Đường dùng</nz-form-label>
             <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Nhập đường dùng" formControlName="routeOfAdministrationId">
@@ -141,14 +140,14 @@
 
           <div class="col-6">
             <nz-form-label for="activeSubstances" class="form-label">Hoạt chất</nz-form-label>
-            <nz-select nzAllowClear nzPlaceHolder="Hoạt chất" nzMode="multiple" formControlName="activeSubstances">
+            <nz-select nzAllowClear nzPlaceHolder="Nhập hoạt chất" nzMode="multiple" formControlName="activeSubstances">
               <nz-option *ngFor="let listActiveSubstance of listActiveSubstance"
                 nzLabel="{{ listActiveSubstance.name }}" nzValue="{{ listActiveSubstance.id }}"></nz-option>
             </nz-select>
           </div>
           <div class="col-6">
             <nz-form-label class="form-label" nzRequired for="unit">Đơn vị cơ sở</nz-form-label>
-            <input type="text" class="form-control" id="unit" formControlName="unit" style="margin-bottom: 15px" />
+            <input nz-input placeholder="Nhập đơn vị cơ bản" type="text" class="form-control" id="unit" formControlName="unit" style="margin-bottom: 15px" />
             <div *ngIf="
                 statusError.unit.invalid &&
                 (statusError.unit.dirty || statusError.unit.touched)
@@ -162,7 +161,7 @@
           </div>
           <div class="col-6">
             <nz-form-label nzRequired for="price" class="form-label">Giá bán</nz-form-label>
-            <input type="number" class="form-control" id="price" formControlName="price"  [min]="0" minlength="1"/>
+            <input nz-input placeholder="Nhập giá bán" type="number" class="form-control" id="price" formControlName="price"  [min]="0" minlength="1"/>
             <div *ngIf="
                 statusError.price.invalid &&
                 (statusError.price.dirty || statusError.price.touched)
@@ -175,8 +174,7 @@
             </div>
           </div>
           <div class="row mt-3">
-
-            <div class="col-6">
+            <!-- <div class="col-6">
               <nz-form-label [nzSpan]="6">Bán theo liều</nz-form-label>
               <nz-switch (click)="clickIsUseDose()" id="isUseDose" formControlName="isUseDose"></nz-switch>
             </div>
@@ -199,7 +197,7 @@
                   </div>
                 </div>
               </div>
-            </div>
+            </div> -->
             <div class="col-12">
               <nz-form-label [nzSpan]="6">Quản lý theo lô, Hạn sử dụng</nz-form-label>
               <nz-switch (click)="clickIsManagedInBatches()" id="isManagedInBatches"
@@ -207,7 +205,7 @@
               </nz-switch>
             </div>
           </div>
-          <nz-collapse style="border-radius: 15px;" id="productUnits" formControlName="productUnits" nzRequired
+          <nz-collapse style="border-radius: 8px;" id="productUnits" formControlName="productUnits" nzRequired
             for="productUnits" class="mt-3">
             <nz-collapse-panel [nzHeader]="header">
               <ng-container formArrayName="contacts" *ngFor="let contact of listProductUnit; index as i"
@@ -218,17 +216,17 @@
                       <div class="row">
                         <div class="col-4">
                           <nz-form-label nzRequired for="price" class="form-label">Tên đơn vị</nz-form-label>
-                          <input type="text" class="form-control" id="unit" name="unit" style="margin-right: 5px"
+                          <input nz-input type="text" class="form-control" id="unit" name="unit" style="margin-right: 5px"
                             (change)="changeModel($event, i)">
                         </div>
                         <div class="col-4">
                           <nz-form-label nzRequired for="price" class="form-label">Giá trị quy đổi</nz-form-label>
-                          <input class="form-control" type="number" id="conversionValue" minlength="1"
+                          <input nz-input class="form-control" type="number" id="conversionValue" minlength="1"
                             name="conversionValue" min="1"  style="margin-right: 5px" (change)="changeModel($event, i)">
                         </div>
                         <div class="col-4">
                           <nz-form-label nzRequired for="price" class="form-label" >Giá bán</nz-form-label>
-                          <input class="form-control" type="number" id="price" name="price" [min]="1" minlength="1"
+                          <input nz-input class="form-control" type="number" id="price" name="price" [min]="1" minlength="1"
                             style="margin-right: 5px" (change)="changeModel($event, i)" [value]="Numbers(productData.value.price)*listProductUnit[i].conversionValue">
                         </div>
                       </div>

@@ -21,8 +21,8 @@ export class CreateStaffComponent implements OnInit {
 
   StaffData = this.fb.group({
     loginName: ['', [Validators.required, Validators.pattern('^(?=[a-zA-Z0-9._]{6,20}$)(?!.*[_.]{2})[^_.].*[^_.]$'),],],
-    password: ['', [Validators.required, Validators.minLength(6)]],
-    passwordConfirm: ['', [Validators.required, Validators.minLength(6)],],
+    // password: ['', [Validators.required, Validators.minLength(6)]],
+    // passwordConfirm: ['', [Validators.required, Validators.minLength(6)],],
     fullname: ['', [Validators.required]],
     email: ['',[Validators.required, Validators.email]],
     phoneNumber: ['', [Validators.required, Validators.pattern('^0[0-9]{9}$')]],
@@ -53,8 +53,8 @@ export class CreateStaffComponent implements OnInit {
     this.StaffData.value.avatar = this.imageURL;
     var date = this.StaffData.value.dob;
     formData.append('loginName', this.StaffData.value.loginName);
-    formData.append('password', this.StaffData.value.password);
-    formData.append('passwordConfirm', this.StaffData.value.passwordConfirm);
+    // formData.append('password', this.StaffData.value.password);
+    // formData.append('passwordConfirm', this.StaffData.value.passwordConfirm);
     formData.append('fullname', this.StaffData.value.fullname);
     formData.append('email', this.StaffData.value.email)
     formData.append('phoneNumber', this.StaffData.value.phoneNumber);

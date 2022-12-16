@@ -45,18 +45,25 @@
                 <th scope="col" style="text-align: center;">Đơn vị</th>
                 <th scope="col" style="text-align: center;">Giá bán</th>
                 <th scope="col" style="text-align: center;">Thành tiền</th>
+                <th scope="col" style="text-align: center;">Xem chi tiết</th>
+
               </tr>
             </thead>
             <tbody  *ngFor="let receiptnote of basicData.data" style="text-align: center;">
               <tr >
-                <td (click)="detailReceiptNote(receiptnote.id)">{{receiptnote.batch.barcode}}</td>
-                <td (click)="detailReceiptNote(receiptnote.id)">{{receiptnote.goodsReceiptNoteType.name}}</td>
-                <td (click)="detailReceiptNote(receiptnote.id)">{{receiptnote.createdAt|date:'dd-MM-yyyy'}}</td>
+                <td >{{receiptnote.batch.barcode}}</td>
+                <td >{{receiptnote.goodsReceiptNoteType.name}}</td>
+                <td >{{receiptnote.createdAt|date:'dd-MM-yyyy'}}</td>
                 <!-- <td >{{getNameProductByIdBatch(receiptnote.batch.id)}}</td> -->
-                <td (click)="detailReceiptNote(receiptnote.id)">{{receiptnote.quantity}}</td>
-                <td (click)="detailReceiptNote(receiptnote.id)">{{receiptnote.unit}}</td>
-                <td (click)="detailReceiptNote(receiptnote.id)">{{receiptnote.baseUnitPrice| number}} đ</td>
-                <td (click)="detailReceiptNote(receiptnote.id)">{{receiptnote.totalPrice| number}} đ</td>
+                <td >{{receiptnote.quantity}}</td>
+                <td >{{receiptnote.unit}}</td>
+                <td >{{receiptnote.baseUnitPrice| number}} đ</td>
+                <td >{{receiptnote.totalPrice| number}} đ</td>
+                <td style="text-align: center;">
+                  <a (click)="detailReceiptNote(receiptnote.id)">
+                    <span nz-icon nzType="zoom-in" nzTheme="outline" style="color: rgb(119, 219, 250);font-size: 20px;"></span>
+                  </a>
+                </td>
               </tr>
             </tbody>
 

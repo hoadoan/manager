@@ -58,7 +58,13 @@ export class PagesLoginComponent implements OnInit {
   }
 
   login() {
-    if (this.username != '' && this.password != '') {
+    if (this.username == '') {
+      this.check = false
+    }
+    if (this.password == '') {
+      this.check = false
+    }
+    if (this.check) {
       var formData: any = new FormData();
       formData.append('username', this.username);
       formData.append('password', this.password);
@@ -66,31 +72,33 @@ export class PagesLoginComponent implements OnInit {
       console.log(this.username + '-' + this.password + '-' + this.fcmToken);
 
       this.auth.login(formData).subscribe((result: any) => {
-        console.log(result);
-
         if (result.accessToken) {
-          this.token = `Bearer ${result.accessToken}`;
-          localStorage.setItem(ACCESS_TOKEN, this.token);
-          if (localStorage.getItem(ACCESS_TOKEN)) {
-            if (result.isAdmin == true) {
-              this.route.navigate(['dashboard']);
-              this.noti.create('success', 'Đăng nhập thành công', '');
-            } else {
+          if (result.isAdmin == true) {
+            this.token = `Bearer ${result.accessToken}`
+            localStorage.setItem(ACCESS_TOKEN, this.token)
+            if (localStorage.getItem(ACCESS_TOKEN)) {
               this.noti.create(
-                'error',
-                'Không hợp lệ',
-                'Vui lòng sử dụng tài khoản quản lý để đăng nhập'
+                'success',
+                'Đăng nhập thành công',
+                ''
               );
+              this.route.navigate(['dashboard'])
             }
+          } else {
+            this.noti.create(
+              'error',
+              'Đăng nhập thất bại',
+              'Vui lòng sử dụng tài khoản quản lí để đăng nhập vào ứng dụng'
+            );
           }
-        } else {
+        }
+      }, err => {
           this.noti.create(
             'error',
-            'Không hợp lệ',
-            'Vui lòng kiểm tra lại thông tin tài khoản và mật khẩu'
+            'Đăng nhập thất bại',
+            'Vui lòng kiểm tra thông tin tài khoản và mật khẩu'
           );
-        }
-      });
+        })
     }
   }
   showModal() {
