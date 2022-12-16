@@ -30,17 +30,17 @@
               <b class="col-lg-3 col-md-4 label">Tên khách hàng</b>
               <div class="col-lg-9 col-md-8">{{ customerName }}</div>
             </div>
-            <br>
+            <br *ngIf="customerName!=null">
             <div class="row" *ngIf="customerPhone!=null">
               <b class="col-lg-3 col-md-4 label">Số điện thoại khách hàng</b>
               <div class="col-lg-9 col-md-8">{{ customerPhone }}</div>
             </div>
-            <br>
-            <div class="row">
+            <br *ngIf="customerPhone!=null">
+            <div class="row" *ngIf="customerName!=null">
               <b class="col-lg-3 col-md-4 label">Khuyến mãi</b>
               <div class="col-lg-9 col-md-8">{{ discount }}</div>
             </div>
-            <br>
+            <br *ngIf="customerName!=null">
             <div class="row">
               <b class="col-lg-3 col-md-4 label">Ngày tạo hoá đơn</b>
               <div class="col-lg-9 col-md-8">{{ createdAt| date: 'dd-MM-yyyy' }}</div>
