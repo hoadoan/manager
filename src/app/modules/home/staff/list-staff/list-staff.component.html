@@ -9,12 +9,10 @@
                 </ol>
             </nav>
         </div>
-        <div>
-            <button id="create-button" nz-button nzType="primary" nzSize="large" style="border-radius: 10px">
-                <a routerLink="/dashboard/create-staff">
-                    <i class="bi bi-plus"></i>
-                    <span>Tạo nhân viên</span>
-                </a>
+        <div >
+            <button type="button" class="btn btn-outline-primary action__button" routerLink="/dashboard/create-staff" style="width: 150px">
+              <i class="bi bi-plus"></i>
+                Tạo nhân viên
             </button>
         </div>
     </div>
@@ -24,7 +22,7 @@
                 (ngModelChange)="getListSearch()" />
         </nz-input-group>
         <ng-template #suffixButton>
-            <button nz-button nzType="primary" nzSize="large" nzSearch>
+            <button nz-button nzType="primary" nzSize="large" nzSearch nzOverlayStyle="color='white'">
                 <nz-select [(ngModel)]="selectedProvince" nzSize="large" (ngModelChange)="SearchOption($event)">
                     <nz-option nzValue="searchID" nzLabel="Mã nhân viên"></nz-option>
                     <nz-option nzValue="SearchName" nzLabel="Tên nhân viên"></nz-option>
@@ -46,16 +44,29 @@
                     <th [nzFilters]="nameList"
                     [nzFilterMultiple]="true"
                     [nzFilterFn]="nameFilterFn" style="text-align: center;">Hoạt động</th>
+                    <th style="text-align: center;">Điều chỉnh trạng thái</th>
+                    <th style="text-align: center;">Xem chi tiết</th>
+
                 </tr>
             </thead>
             <tbody>
                 <tr style="cursor: pointer;" *ngFor="let data of basicTable.data" style="text-align: center;">
-                    <td (click)="detail(data.userId)">
+                    <td >
                         <img src={{data.avatar}} alt="avatar" width="50" height="50">
                     </td>
-                    <td (click)="detail(data.userId)">{{ data.userId}}</td>
-                    <td (click)="detail(data.userId)">{{ data.fullname}}</td>
-                    <td (click)="detail(data.userId)">{{ data.phoneNumber }}</td>
+                    <td >{{ data.userId}}</td>
+                    <td>{{ data.fullname}}</td>
+                    <td >{{ data.phoneNumber }}</td>
+                    <td style="text-align: center;">
+                      <div *ngIf="data.isActive == true; else isActive">
+                          <nz-tag [nzColor]="'green'" >Còn hoạt động</nz-tag>
+                      </div>
+                      <ng-template #isActive>
+                          <div>
+                              <nz-tag [nzColor]="'red'" >Ngừng hoạt động</nz-tag>
+                          </div>
+                      </ng-template>
+                  </td>
                     <td>
                         <!-- <a><button type="button" class="btn btn-outline-secondary">Cập nhật</button></a> -->
                         <!-- <nz-divider nzType="vertical"></nz-divider> -->
@@ -68,6 +79,11 @@
                         <button type="button" class="btn btn-outline-danger action__button"
                             (click)="clickBan(data.userId)">Chặn</button>
                     </ng-template>
+                    <td style="text-align: center;">
+                      <a (click)="detail(data.userId)">
+                        <span nz-icon nzType="zoom-in" nzTheme="outline" style="color: rgb(119, 219, 250);font-size: 20px;"></span>
+                      </a>
+                    </td>
                 </tr>
             </tbody>
         </nz-table>

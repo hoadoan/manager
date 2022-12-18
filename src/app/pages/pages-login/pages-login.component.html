@@ -14,7 +14,7 @@
           </div>
           <div class="form-group">
               <label for="">Tài khoản</label>
-              <input type="text" class="form-control" placeholder="" [(ngModel)]="username">
+              <input type="text" class="form-control" placeholder="" [(ngModel)]="username" minlength="6" maxlength="20">
               <div *ngIf="check == false">
                   <div *ngIf="username == ''">
                       <p style="color: red;" class="small">Vui lòng nhập tài khoản</p>
@@ -23,7 +23,7 @@
           </div>
           <div class="form-group">
               <label for="">Mật khẩu</label>
-              <input type="password" class="form-control" placeholder="" [(ngModel)]="password">
+              <input type="password" class="form-control" placeholder="" [(ngModel)]="password" minlength="6" maxlength="20">
               <div *ngIf="check == false">
                   <div *ngIf="password == ''">
                       <p style="color: red;" class="small">Vui lòng nhập mật khẩu</p>

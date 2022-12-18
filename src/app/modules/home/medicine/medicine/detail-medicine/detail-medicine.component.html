@@ -1,7 +1,7 @@
 <main id="main" class="main">
   <div class="pagetitle d-flex justify-content-between">
     <div>
-      <h1>Chi tiết sản phẩm {{name}}</h1>
+      <h1>Chi tiết sản phẩm - {{name}}</h1>
       <nav>
         <ol class="breadcrumb">
           <li class="breadcrumb-item">
@@ -23,61 +23,67 @@
             <div class="card">
               <div class="card-body pt-3">
                 <div class="row">
-                  <b class="col-10" style="font-size: 20px;">Thông tin chi tiết sản phẩm {{name}}</b>
+
+                  <div class="col-10" style="font-size: 16px;">
+                    <div class="tab-pane fade show active profile-overview" id="profile-overview" style="margin-right: 20px">
+                      <div class="row">
+                        <b class="col-lg-5 col-md-6 label">Tên sản phẩm</b>
+                        <div class="col-lg-7 col-md-6" nz-button nzType="text" style="text-align: left;font-size: 13.9px;padding-left: 10px;">{{name}}</div>
+                      </div>
+                      <br>
+                      <div class="row" style="margin-bottom: -10px ">
+                        <b class="col-lg-5 col-md-6 label">Nhà sản xuất</b>
+                        <a class="col-lg-7 col-md-6" nz-button nzType="text" style="text-align: left;font-size: 13.9px;padding-left: 10px;" (click)="detailBrand(brandId)">{{ brand }}</a>
+                      </div>
+                      <br>
+                      <div class="row" style="margin-bottom: -10px ">
+                        <b class="col-lg-5 col-md-6 label">Kệ hàng</b>
+                        <a class="col-lg-7 col-md-6" nz-button nzType="text" style="text-align: left;font-size: 13.9px;padding-left: 10px;" (click)="detailShelf(shelfId)">{{ shelf }}</a>
+                      </div>
+                      <br>
+                      <div class="row">
+                        <b class="col-lg-5 col-md-6 label">Ngày tạo</b>
+                        <div class="col-lg-7 col-md-6">  {{ createdAt | date:"dd-MM-yyyy" }}</div>
+                      </div>
+                      <br>
+                      <div class="row">
+                        <b class="col-lg-5 col-md-6 label">Người tạo</b>
+                        <div class="col-lg-7 col-md-6">  {{ createdBy }}</div>
+                      </div>
+                      <br>
+                      <div class="row">
+                        <b class="col-lg-5 col-md-6 label">Đường dùng</b>
+                        <div class="col-lg-7 col-md-6">{{ routeOfAdministration }}</div>
+                      </div>
+                      <br>
+                      <div class="row" *ngFor="let productUnits of productUnits">
+                        <b class="col-lg-5 col-md-6 label" *ngIf="productUnits.isBaseUnit">Mức tồn kho tối thiểu</b>
+                        <div class="col-lg-7 col-md-6" *ngIf="productUnits.isBaseUnit">  {{ mininumInventory }} {{productUnits.unit}}</div>
+                      </div>
+                      <br>
+                      <div *ngFor="let productUnits of productUnits">
+                        <div class="row" *ngIf="productUnits.isBaseUnit" >
+                          <b class="col-lg-5 col-md-6 label">Giá bán đơn vị cơ bản</b>
+                          <div class="col-lg-7 col-md-6">  {{productUnits.price | number }} đ / {{productUnits.conversionValue}} {{productUnits.unit}}</div>
+                        </div>
+                      </div>
+                      <!-- <br> -->
+                      <!-- <div class="row" *ngIf="isUseDose">
+                        <b class="col-lg-5 col-md-6 label">Có bán theo liều</b>
+                      </div> -->
+                      <br>
+                      <div class="row" *ngIf="isManagedInBatches">
+                        <b class="col-lg-12 col-md-12 label">Có quản lý theo lô - hạn sử dụng</b>
+                        <br>
+                      </div>
+                      <br>
+                    </div>
+                  </div>
                   <div class="col-2" style="text-align: right">
                     <app-update-info-medicine [productId]="id"></app-update-info-medicine>
                   </div>
                 </div>
 
-                <div class="tab-pane fade show active profile-overview" id="profile-overview" style="margin-right: 20px">
-                  <br>
-                  <div class="row" style="margin-bottom: -10px ">
-                    <b class="col-lg-5 col-md-6 label">Nhà sản xuất</b>
-                    <a class="col-lg-7 col-md-6" nz-button nzType="text" style="text-align: left;font-size: 13.9px;padding-left: 10px;" (click)="detailBrand(brandId)">{{ brand }}</a>
-                  </div>
-                  <br>
-                  <div class="row" style="margin-bottom: -10px ">
-                    <b class="col-lg-5 col-md-6 label">Kệ hàng</b>
-                    <a class="col-lg-7 col-md-6" nz-button nzType="text" style="text-align: left;font-size: 13.9px;padding-left: 10px;" (click)="detailShelf(shelfId)">{{ shelf }}</a>
-                  </div>
-                  <br>
-                  <div class="row">
-                    <b class="col-lg-5 col-md-6 label">Ngày tạo</b>
-                    <div class="col-lg-7 col-md-6">  {{ createdAt | date:"dd-MM-yyyy" }}</div>
-                  </div>
-                  <br>
-                  <div class="row">
-                    <b class="col-lg-5 col-md-6 label">Người tạo</b>
-                    <div class="col-lg-7 col-md-6">  {{ createdBy }}</div>
-                  </div>
-                  <br>
-                  <div class="row">
-                    <b class="col-lg-5 col-md-6 label">Đường dùng</b>
-                    <div class="col-lg-7 col-md-6">{{ routeOfAdministration }}</div>
-                  </div>
-                  <br>
-                  <div class="row" *ngFor="let productUnits of productUnits">
-                    <b class="col-lg-5 col-md-6 label" *ngIf="productUnits.isBaseUnit">Mức tồn kho tối thiểu</b>
-                    <div class="col-lg-7 col-md-6" *ngIf="productUnits.isBaseUnit">  {{ mininumInventory }} {{productUnits.unit}}</div>
-                  </div>
-                  <br>
-                  <div *ngFor="let productUnits of productUnits">
-                    <div class="row" *ngIf="productUnits.isBaseUnit" >
-                      <b class="col-lg-5 col-md-6 label">Giá bán đơn vị cơ bản</b>
-                      <div class="col-lg-7 col-md-6">  {{productUnits.price | number }} đ / {{productUnits.conversionValue}} {{productUnits.unit}}</div>
-                    </div>
-                  </div>
-                  <!-- <br> -->
-                  <!-- <div class="row" *ngIf="isUseDose">
-                    <b class="col-lg-5 col-md-6 label">Có bán theo liều</b>
-                  </div> -->
-                  <br>
-                  <div class="row" *ngIf="isManagedInBatches">
-                    <b class="col-lg-12 col-md-12 label">Có quản lý theo lô - hạn sử dụng</b>
-                    <br>
-                  </div>
-                  <br>
-                </div>
               </div>
             </div>
           </div>
@@ -87,7 +93,7 @@
                 <div *ngIf="activeSubstances.length <= 0">Sản phẩm chưa có thông tin hoạt chất</div>
                 <div *ngIf="activeSubstances.length > 0">
                   <div class="row">
-                    <b class="col-10" style="font-size: 20px">Hoạt chất của sản phẩm {{name}}</b>
+                    <b class="col-10" style="font-size: 20px">Hoạt chất của sản phẩm</b>
                     <div class="col-2" style="text-align: right">
                       <app-update-active-substance [productId]="id" [listActiveSubstance]="activeSubstances"></app-update-active-substance>
                     </div>
@@ -103,11 +109,11 @@
                         <td>
                           <a (click)="detailActiveSubstence(activeSubstances.id)" style="color: rgb(55, 158, 248)">Xem sản phẩm có cùng hoạt chất</a>
                         </td>
-                        <td>
-                          <button nz-button nzType="primary" [nzSize]="'default'" style="border-radius: 10px" nzDanger
+                        <td >
+                            <button class="btn btn-outline-danger action__button" style="padding-bottom: 10px; border-radius: 10px;"
                           (click)="deleteActiveSubstance(activeSubstances.id)"
                           >
-                            <span nz-icon nzType="delete" nzTheme="outline"></span>
+                          <span nz-icon nzType="delete" nzTheme="outline"></span>
                           </button>
                         </td>
                       </tr>
@@ -117,13 +123,13 @@
                         <td>
                           <a (click)="detailActiveSubstence(activeSubstances.id)" style="color: rgb(55, 158, 248)">Xem sản phẩm có cùng hoạt chất</a>
                         </td>
-                        <td>
-                          <button nz-button nzType="primary" [nzSize]="'default'" style="border-radius: 10px" nzDanger
-                          (click)="deleteActiveSubstance(activeSubstances.id)"
-                          >
-                            <span nz-icon nzType="delete" nzTheme="outline"></span>
-                          </button>
-                        </td>
+                        <td >
+                          <button class="btn btn-outline-danger action__button" style="padding-bottom: 10px; border-radius: 10px;"
+                        (click)="deleteActiveSubstance(activeSubstances.id)"
+                        >
+                        <span nz-icon nzType="delete" nzTheme="outline"></span>
+                        </button>
+                      </td>
                       </tr>
                     </tbody>
                     </nz-table>
@@ -135,7 +141,7 @@
             <div class="card">
               <div class="card-body pt-3" *ngIf="productUnits.length != 1">
                 <div class="row">
-                  <b class="col-10" style="font-size: 20px">Đơn vị bán khác của {{name}}</b>
+                  <b class="col-10" style="font-size: 20px">Đơn vị bán khác</b>
                   <div class="col-2" style="text-align: right">
                     <app-add-product-unit [productId]="id"></app-add-product-unit>
                   </div>
@@ -154,13 +160,14 @@
                         <td>{{productUnits.unit}}</td>
                         <td>{{productUnits.conversionValue}}</td>
                         <td>{{productUnits.price|number}} đ</td>
-                        <td>
-                          <button nz-button nzType="primary" [nzSize]="'default'" style="border-radius: 10px" nzDanger
+                        <td >
+                          <button class="btn btn-outline-danger action__button" style="padding-bottom: 10px; border-radius: 10px;"
                           (click)="deleteProductUnit(productUnits.id)"
-                          >
-                            <span nz-icon nzType="delete" nzTheme="outline"></span>
-                          </button>
-                        </td>
+                        >
+                        <span nz-icon nzType="delete" nzTheme="outline"></span>
+                        </button>
+                      </td>
+
                       </tr>
                     </tbody>
                     </nz-table>
@@ -168,7 +175,7 @@
                 </div>
                 <div class="card-body pt-3" *ngIf="productUnits.length == 1">
                   <div class="row">
-                    <b class="col-10" style="font-size: 20px">Chưa có đơn vị bán khác cho {{name}}</b>
+                    <b class="col-10" style="font-size: 20px">Chưa có đơn vị bán khác</b>
                     <div class="col-2" style="text-align: right">
                       <app-add-product-unit [productId]="id"></app-add-product-unit>
                     </div>
@@ -186,7 +193,7 @@
 
     <nz-tab nzTitle="Lô - Hạn sử dụng">
 
-      <b style="font-size: 20px">Danh sách lô hàng chứa sản phẩm {{name}}</b>
+      <b style="font-size: 20px">Danh sách lô hàng chứa sản phẩm</b>
       <br>
       <br>
 
@@ -197,22 +204,28 @@
             <th scope="col" style="text-align: center;">Barcode lô hàng</th>
             <th scope="col" style="text-align: center;">Người tạo</th>
             <th scope="col" style="text-align: center;">Ngày tạo</th>
-            <th scope="col" style="text-align: center;">Ngày sản xuất</th>
-            <th scope="col" style="text-align: center;">Hạn sử dụng</th>
+            <th scope="col" style="text-align: center;" *ngIf="isManagedInBatches">Ngày sản xuất</th>
+            <th scope="col" style="text-align: center;" *ngIf="isManagedInBatches">Hạn sử dụng</th>
             <th scope="col" style="text-align: center;">Số lượng hàng tồn kho</th>
             <th scope="col" style="text-align: center;">Đơn vị</th>
+            <th scope="col" style="text-align: center;">Xem chi tiết</th>
           </tr>
         </thead>
         <tbody  *ngFor="let batches of batches" style="text-align: center;">
           <tr>
             <!-- <td scope="row" (click)="detailGoodsReceiptNote(batches.id)">{{batches.id}}</td> -->
-            <td (click)="detailGoodsReceiptNote(batches.id)"><ngx-barcode bc-value={{batches.batchBarcode}} [bc-display-value]="true" [bc-width]="1" [bc-height]="35"></ngx-barcode></td>
-            <td (click)="detailGoodsReceiptNote(batches.id)">{{batches.createdBy.name}}</td>
-            <td (click)="detailGoodsReceiptNote(batches.id)">{{batches.createdAt | date:'dd-MM-yyyy'}}</td>
-            <td (click)="detailGoodsReceiptNote(batches.id)">{{batches.manufacturingDate | date:'dd-MM-yyyy'}}</td>
-            <td (click)="detailGoodsReceiptNote(batches.id)">{{batches.expiryDate | date:'dd-MM-yyyy'}}</td>
-            <td (click)="detailGoodsReceiptNote(batches.id)">{{batches.currentQuantity[0].currentQuantity}}</td>
-            <td (click)="detailGoodsReceiptNote(batches.id)">{{batches.currentQuantity[0].unit}}</td>
+            <td ><ngx-barcode bc-value={{batches.batchBarcode}} [bc-display-value]="true" [bc-width]="1" [bc-height]="35"></ngx-barcode></td>
+            <td >{{batches.createdBy.name}}</td>
+            <td >{{batches.createdAt | date:'dd-MM-yyyy'}}</td>
+            <td  *ngIf="isManagedInBatches">{{batches.manufacturingDate | date:'dd-MM-yyyy'}}</td>
+            <td  *ngIf="isManagedInBatches">{{batches.expiryDate | date:'dd-MM-yyyy'}}</td>
+            <td >{{batches.currentQuantity[0].currentQuantity}}</td>
+            <td >{{batches.currentQuantity[0].unit}}</td>
+            <td style="text-align: center;">
+              <a (click)="detailGoodsReceiptNote(batches.id)">
+                <span nz-icon nzType="zoom-in" nzTheme="outline" style="color: rgb(119, 219, 250);font-size: 20px;"></span>
+              </a>
+            </td>
           </tr>
         </tbody>
       </nz-table>

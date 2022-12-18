@@ -39,6 +39,7 @@
             <thead style="text-align: center">
               <tr>
                 <th scope="col" style="text-align: center;">Mã hoá đơn</th>
+                <th scope="col" style="text-align: center;">Dạng xuất hàng</th>
                 <th scope="col" style="text-align: center;">Tên khách hàng</th>
                 <th scope="col" style="text-align: center;">Tên nhân viên</th>
                 <th scope="col" style="text-align: center;">Ngày tạo</th>
@@ -49,7 +50,9 @@
             <tbody  *ngFor="let invoices of basicData.data" style="text-align: center;">
               <tr >
                 <td >{{invoices.barcode}}</td>
-
+                <td>
+                  {{exportType(invoices.barcode)}}
+                </td>
                 <td  *ngIf="invoices.customer.fullName==null">Không có tên</td>
                 <td  *ngIf="invoices.customer.fullName!=null">{{invoices.customer.fullName}}</td>
 

@@ -68,24 +68,35 @@
             <th *ngFor="let column of goodReceiptNoteTitle" [nzSortFn]="column.compare" [nzSortPriority]="column.priority" style="text-align: center">
               {{ column.title }}
             </th>
+            <th scope="col" style="text-align: center;">Xem chi tiết</th>
           </tr>
         </thead>
         <tbody  *ngFor="let goodReceiptNotes of sortTable.data" style="text-align: center;">
           <tr *ngIf="goodReceiptNotes.supplier.isActive" >
             <td scope="row">{{goodReceiptNotes.id}}</td>
-            <td (click)="detailReceiptNote(goodReceiptNotes.id)">{{goodReceiptNotes.goodsReceiptNoteType.name}}</td>
+            <td >{{goodReceiptNotes.goodsReceiptNoteType.name}}</td>
             <td ><a (click)="detailSupplier(goodReceiptNotes.supplier.id)">{{goodReceiptNotes.supplier.name}}</a></td>
-            <td (click)="detailReceiptNote(goodReceiptNotes.id)">{{goodReceiptNotes.createdAt|date:'dd-MM-yyyy'}}</td>
-            <td (click)="detailReceiptNote(goodReceiptNotes.id)">{{goodReceiptNotes.quantity}}</td>
-            <td (click)="detailReceiptNote(goodReceiptNotes.id)">{{goodReceiptNotes.totalPrice|number }} đ</td>
+            <td >{{goodReceiptNotes.createdAt|date:'dd-MM-yyyy'}}</td>
+            <td >{{goodReceiptNotes.quantity}}</td>
+            <td >{{goodReceiptNotes.totalPrice|number }} đ</td>
+            <td style="text-align: center;">
+              <a (click)="detailReceiptNote(goodReceiptNotes.id)">
+                <span nz-icon nzType="zoom-in" nzTheme="outline" style="color: rgb(119, 219, 250);font-size: 20px;"></span>
+              </a>
+            </td>
           </tr>
           <tr *ngIf="goodReceiptNotes.supplier.isActive == false" style="background-color: rgba(255, 0, 0, 0.253)">
             <td scope="row">{{goodReceiptNotes.id}}</td>
-            <td (click)="detailReceiptNote(goodReceiptNotes.id)">{{goodReceiptNotes.goodsReceiptNoteType.name}}</td>
+            <td >{{goodReceiptNotes.goodsReceiptNoteType.name}}</td>
             <td ><a (click)="detailSupplier(goodReceiptNotes.supplier.id)">{{goodReceiptNotes.supplier.name}}</a></td>
-            <td (click)="detailReceiptNote(goodReceiptNotes.id)">{{goodReceiptNotes.createdAt|date:'dd-MM-yyyy'}}</td>
-            <td (click)="detailReceiptNote(goodReceiptNotes.id)">{{goodReceiptNotes.quantity}}</td>
-            <td (click)="detailReceiptNote(goodReceiptNotes.id)">{{goodReceiptNotes.totalPrice|number }} đ</td>
+            <td >{{goodReceiptNotes.createdAt|date:'dd-MM-yyyy'}}</td>
+            <td >{{goodReceiptNotes.quantity}}</td>
+            <td >{{goodReceiptNotes.totalPrice|number }} đ</td>
+            <td style="text-align: center;">
+              <a (click)="detailReceiptNote(goodReceiptNotes.id)">
+                <span nz-icon nzType="zoom-in" nzTheme="outline" style="color: rgb(119, 219, 250);font-size: 20px;"></span>
+              </a>
+            </td>
           </tr>
         </tbody>
       </nz-table>

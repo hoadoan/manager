@@ -65,4 +65,13 @@ export class InvoiceComponent implements OnInit {
       );
     }
   }
+  exportType(barcode: string) {
+    let a = barcode.slice(0, 3)
+
+    if (a == 'GIN') {
+      return "Xuất hỏng"
+    }
+    return "Xuất hàng bán"
+
+  }
 }

@@ -13,12 +13,10 @@
         </div>
         <div>
             <div>
-                <button id="create-button" nz-button nzType="primary" nzSize="large" style="border-radius: 10px">
-                    <a routerLink="/dashboard/create-medicine">
-                        <i class="bi bi-plus"></i>
-                        <span>Tạo sản phẩm</span>
-                    </a>
-                </button>
+              <button type="button" class="btn btn-outline-primary action__button" routerLink="/dashboard/create-medicine" style="width: 150px">
+                <i class="bi bi-plus"></i>
+                  Tạo sản phẩm
+              </button>
             </div>
         </div>
     </div>
@@ -54,7 +52,8 @@
                       [nzFilterMultiple]="true"
                       [nzFilterFn]="nameFilterFn"
                       style="text-align: center">Trạng thái hoạt động</th> -->
-                      <th style="text-align: center">Trạng thái hoạt động</th>
+                      <th style="text-align: center">Tình trạng</th>
+                      <th style="text-align: center">Điều chỉnh trạng thái</th>
                       <th style="text-align: center;">Xem chi tiết</th>
                   </tr>
               </thead>
@@ -71,14 +70,25 @@
                       <td >{{ data.productUnits[0].price| number }} đ/ {{data.productUnits[0].unit}}</td>
                       <td>
                         <a *ngIf="data.isActive == true; else isActive" >
-                          <nz-tag [nzColor]="'green'" (click)="isInActiveProduct(data.id)">Còn bán</nz-tag>
+                          <nz-tag [nzColor]="'green'">Còn bán</nz-tag>
                         </a>
                       <ng-template #isActive>
                           <a>
-                              <nz-tag [nzColor]="'red'" (click)="isActiveProduct(data.id)">Ngừng bán</nz-tag>
+                              <nz-tag [nzColor]="'red'">Ngừng bán</nz-tag>
                           </a>
                       </ng-template>
-                      </td>
+                      <td>
+                        <!-- <a><button type="button" class="btn btn-outline-secondary">Cập nhật</button></a> -->
+                        <!-- <nz-divider nzType="vertical"></nz-divider> -->
+                        <span *ngIf="data.isActive == false; else ElseBan ">
+                            <button type="button" class="btn btn-outline-success action__button"
+                                (click)="isActiveProduct(data.id)">Bỏ chặn</button>
+                        </span>
+                    </td>
+                    <ng-template #ElseBan>
+                        <button type="button" class="btn btn-outline-danger action__button"
+                            (click)="isInActiveProduct(data.id)">Chặn</button>
+                    </ng-template>
                       <td style="text-align: center;">
                         <a (click)="detail(data.id)">
                           <span nz-icon nzType="zoom-in" nzTheme="outline" style="color: rgb(119, 219, 250);font-size: 20px;"></span>
