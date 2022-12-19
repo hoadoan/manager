@@ -18,7 +18,7 @@
             <form class="row g-3" (ngSubmit)="onSubmit()" [formGroup]="StaffData">
                <div class="col-md-12">
                   <nz-form-label nzRequired for="inputName5" class="form-label">Tài khoản</nz-form-label>
-                  <input type="text" class="form-control" id="inputName" formControlName="loginName">
+                  <input type="text" class="form-control" id="inputName" formControlName="loginName" placeholder="Nhập tên tài khoản">
                   <div
                      *ngIf="statusError.loginName.invalid && (statusError.loginName.dirty || statusError.loginName.touched) ">
                      <div *ngIf="statusError.loginName.errors">

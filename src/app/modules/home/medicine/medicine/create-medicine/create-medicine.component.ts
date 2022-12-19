@@ -31,17 +31,17 @@ export class CreateMedicineComponent implements OnInit {
   listProductUnit: productUnitsInterface[] = [];
 
   productData = this.fb.group({
-    drugRegistrationNumber: ['', [Validators.required], [Validators.maxLength(100)]], //mã số đăng kí
-    name: ['', [Validators.required],[Validators.maxLength(250)]], // tên thuốc
+    drugRegistrationNumber: ['', [Validators.required, Validators.maxLength(100)]], //mã số đăng kí
+    name: ['', [Validators.required,Validators.maxLength(250)]], // tên thuốc
     brandId: ['', Validators.required], // mã nhà sản xuất
     shelfId: ['', Validators.required], // mã kệ thuốc
-    mininumInventory: ['', [Validators.required],[Validators.min(1)],[Validators.max(100000)]], //mức tồn kho tối thiểu
+    mininumInventory: ['', [Validators.required,Validators.min(1),Validators.max(100000)]], //mức tồn kho tối thiểu
     routeOfAdministrationId: ['', Validators.required], // đường dùng
     // bán theo liều
     isManagedInBatches: [false], // quản lý theo lô, hạn sử dụng
     activeSubstances: [[]], // hoạt chất
-    unit: ['', Validators.required], // đơn vị cơ sở
-    price: ['', Validators.required], // giá bán
+    unit: ['',[Validators.required],[Validators.maxLength(100)]], // đơn vị cơ sở
+    price: ['', Validators.required,[Validators.max(1000000000)]], // giá bán
     productUnits: [this.listProductUnit],
     isUseDose: [false],
     doseUnitPrice: {

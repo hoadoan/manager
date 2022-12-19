@@ -32,6 +32,9 @@
                 <div *ngIf="statusError.drugRegistrationNumber.errors!['required']">
                   <small style="color: red">Vui lòng nhập mã số đăng kí</small>
                 </div>
+                <div *ngIf="statusError.drugRegistrationNumber.errors!['maxlength']">
+                  <small style="color: red">Mã đăng kí không quá 100 kí tự</small>
+                </div>
               </div>
             </div>
           </div>
@@ -45,6 +48,9 @@
               <div *ngIf="statusError.name.errors">
                 <div *ngIf="statusError.name.errors!['required']">
                   <small style="color: red">Vui lòng nhập tên sản phẩm</small>
+                </div>
+                <div *ngIf="statusError.name.errors!['maxlength']">
+                  <small style="color: red">Tên sản phẩm không quá 250 kí tự</small>
                 </div>
               </div>
             </div>
@@ -98,6 +104,7 @@
           <div class="col-2">
             <nz-form-label nzRequired for="inputName5" class="form-label">Mức tồn kho tối thiểu
             </nz-form-label>
+            <!-- <nz-input-number [nzMin]="1" [nzMax]="100000" class="w-100" formControlName="mininumInventory"></nz-input-number> -->
             <input nz-input placeholder="Nhập mức tồn kho" type="number" class="form-control" id="mininumInventory" formControlName="mininumInventory" min="1" minlength="1" max="100000"/>
             <div *ngIf="
                 statusError.mininumInventory.invalid &&
@@ -107,6 +114,12 @@
               <div *ngIf="statusError.mininumInventory.errors">
                 <div *ngIf="statusError.mininumInventory.errors!['required']">
                   <small style="color: red">Vui lòng nhập số lượng tối thiểu trong kho</small>
+                </div>
+                <div *ngIf="statusError.mininumInventory.errors!['min']">
+                  <small style="color: red">Số lượng tối thiểu trong kho không thấp hơn 1</small>
+                </div>
+                <div *ngIf="statusError.mininumInventory.errors!['max']">
+                  <small style="color: red">Số lượng tối thiểu trong kho không vượt quá 100000</small>
                 </div>
               </div>
             </div>
@@ -156,6 +169,9 @@
                 <div *ngIf="statusError.unit.errors!['required']">
                   <small style="color: red">Vui lòng nhập đơn vị cơ sở</small>
                 </div>
+                <div *ngIf="statusError.unit.errors!['maxlength']">
+                  <small style="color: red">Đơn vị cơ sở không quá 100 kí tự</small>
+                </div>
               </div>
             </div>
           </div>
@@ -169,6 +185,9 @@
               <div *ngIf="statusError.price.errors">
                 <div *ngIf="statusError.price.errors!['required']">
                   <small style="color: red">Vui lòng nhập giá sản phẩm</small>
+                </div>
+                <div *ngIf="statusError.price.errors!['max']">
+                  <small style="color: red">Giá sản phẩm không vượt quá 1,000,000,000 đ</small>
                 </div>
               </div>
             </div>
@@ -246,7 +265,7 @@
           <div class="d-flex justify-content-end">
             <div class="col-3 mt-4">
               <button class="w-100" nz-button nzType="primary" nzSize="large" style="border-radius: 10px">
-                Tạo thuốc
+                Tạo sản phẩm
               </button>
             </div>
           </div>

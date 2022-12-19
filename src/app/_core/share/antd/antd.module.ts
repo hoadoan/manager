@@ -17,6 +17,8 @@ import { NzCollapseModule } from 'ng-zorro-antd/collapse';
 import { NzStatisticModule } from 'ng-zorro-antd/statistic';
 import { NzCardModule } from 'ng-zorro-antd/card';
 import { NzStepsModule } from 'ng-zorro-antd/steps';
+import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
+
 
 
 @NgModule({
@@ -42,7 +44,8 @@ import { NzStepsModule } from 'ng-zorro-antd/steps';
     NzCollapseModule,
     NzStatisticModule,
     NzCardModule,
-    NzStepsModule
+    NzStepsModule,
+    NzInputNumberModule
   ]
 })
 export class AntdModule { }
