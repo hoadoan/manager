@@ -73,6 +73,14 @@ export class DashboardService {
       { headers: this.headers }
     );
   }
+  PatchNotification(id: number): Observable<any> {
+    return this.httpClient.patch(
+      DOMAIN +
+        `notification/${id}`,
+        {},
+      { headers: this.headers }
+    );
+  }
   getAllNotification(): Observable<any> {
     return this.httpClient.get(
       DOMAIN +

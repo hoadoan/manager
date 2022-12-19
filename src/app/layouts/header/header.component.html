@@ -12,7 +12,8 @@
                   class="bi bi-search"></i> </a></li>
          <li class="nav-item dropdown">
             <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown"> <i class="bi bi-bell"></i> <span
-                  class="badge bg-primary badge-number">5</span> </a>
+
+                  class="badge bg-primary badge-number">{{count}}</span> </a>
             <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
                <li class="dropdown-header">Những thông báo gần đây<a href="/dashboard/notification"><span
                         class="badge rounded-pill bg-primary p-2 ms-2">Xem danh sách thông báo</span></a></li>
@@ -20,13 +21,14 @@
                   <hr class="dropdown-divider">
                </li>
               <div *ngFor="let item of listNoti">
-                  <li class="notification-item" (click)="DetailNotification(item.notiDate)" role="button">
+                  <li class="notification-item" (click)="DetailNotification(item.data.notiDate)" role="button">
                     <i class="bi bi-exclamation-circle text-warning"></i>
-                    <div>
-                       <h4>Ngày {{item.notiDate|date:'dd-MM-yyyy'}}</h4>
-                       <p *ngIf="item.titleBatch!=null">{{item.titleBatch}}</p>
-                       <p *ngIf="item.titleQuantity!=null">{{item.titleQuantity}}</p>
-                    </div>
+                  <nz-ribbon nzText="{{item.count}}">
+                      <nz-card nzTitle="Ngày {{item.data.notiDate|date:'dd-MM-yyyy'}}" nzSize="small">
+                        <p *ngIf="item.data.titleBatch!=null">{{item.data.titleBatch}}</p>
+                        <p *ngIf="item.data.titleQuantity!=null">{{item.data.titleQuantity}}</p>
+                      </nz-card>
+                    </nz-ribbon>
                  </li>
                  <li>
                     <hr class="dropdown-divider">

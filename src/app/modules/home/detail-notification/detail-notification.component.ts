@@ -38,6 +38,12 @@ export class DetailNotificationComponent implements OnInit {
     })
   }
 
+  changeStatusNoti(id: number){
+    this.noti.PatchNotification(id).subscribe((result)=>{
+      console.log(result);
+    })
+  }
+
   detailProduct(id: number){
     this.router.navigate(['dashboard/detail-medicine/' + id]);
   }

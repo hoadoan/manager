@@ -34,7 +34,7 @@
                   <td >{{ data.content }}</td>
                   <td >{{ data.title }}</td>
                   <td style="text-align: center">
-                    <a (click)="detailBatch(data.batchId)">
+                    <a (click)="detailBatch(data.batchId)" (click)="changeStatusNoti(data.id)">
                       <span nz-icon nzType="zoom-in" nzTheme="outline" style="color: rgb(119, 219, 250);font-size: 20px;"></span>
                     </a>
                   </td>
@@ -59,7 +59,7 @@
                   <td >{{ data.content }}</td>
                   <td >{{ data.title }}</td>
                   <td style="text-align: center">
-                    <a (click)="detailProduct(data.productId)">
+                    <a (click)="detailProduct(data.productId)" (click)="changeStatusNoti(data.id)">
                       <span nz-icon nzType="zoom-in" nzTheme="outline" style="color: rgb(119, 219, 250);font-size: 20px;"></span>
                     </a>
                   </td>
