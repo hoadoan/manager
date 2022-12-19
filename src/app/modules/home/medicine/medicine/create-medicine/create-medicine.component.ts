@@ -40,8 +40,8 @@ export class CreateMedicineComponent implements OnInit {
     // bán theo liều
     isManagedInBatches: [false], // quản lý theo lô, hạn sử dụng
     activeSubstances: [[]], // hoạt chất
-    unit: ['',[Validators.required],[Validators.maxLength(100)]], // đơn vị cơ sở
-    price: ['', Validators.required,[Validators.max(1000000000)]], // giá bán
+    unit: ['',[Validators.required,Validators.maxLength(100)]], // đơn vị cơ sở
+    price: ['', [Validators.required,Validators.max(1000000000)]], // giá bán
     productUnits: [this.listProductUnit],
     isUseDose: [false],
     doseUnitPrice: {

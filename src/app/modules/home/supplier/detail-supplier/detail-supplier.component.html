@@ -64,7 +64,8 @@
     <div class="col-xl-12">
       <div class="card">
         <div class="card-body pt-3">
-          <nz-table #basicTable [nzData]="supplierDetail" style="font-size: 18px;">
+          <nz-table #basicTable [nzData]="supplierDetail" style="font-size: 18px;" [nzPageSize]="5"
+          [nzPageSizeOptions]="[5,10,15,20,25,30]" nzShowSizeChanger >
             <thead style="text-align: center">
               <tr>
                 <th scope="col" style="text-align: center;">Mã lô hàng</th>
@@ -75,7 +76,7 @@
                 <th scope="col" style="text-align: center;">Hạn sử dụng</th>
               </tr>
             </thead>
-            <tbody  *ngFor="let batches of supplierDetail" style="text-align: center;">
+            <tbody  *ngFor="let batches of basicTable.data" style="text-align: center;">
               <tr>
                 <td scope="row" (click)="detailGoodsReceiptNote(batches.id)">{{batches.id}}</td>
                 <td (click)="detailGoodsReceiptNote(batches.id)"><ngx-barcode bc-value={{batches.batchBarcode}} [bc-display-value]="true" [bc-width]="1" [bc-height]="35"></ngx-barcode></td>

@@ -23,7 +23,7 @@ export class CreateStaffComponent implements OnInit {
     loginName: ['', [Validators.required, Validators.pattern('^(?=[a-zA-Z0-9._]{6,20}$)(?!.*[_.]{2})[^_.].*[^_.]$'),],],
     // password: ['', [Validators.required, Validators.minLength(6)]],
     // passwordConfirm: ['', [Validators.required, Validators.minLength(6)],],
-    fullname: ['', [Validators.required]],
+    fullname: ['', [Validators.required,Validators.maxLength(100)]],
     email: ['',[Validators.required, Validators.email]],
     phoneNumber: ['', [Validators.required, Validators.pattern('^0[0-9]{9}$')]],
     dob: ['', [Validators.required]],

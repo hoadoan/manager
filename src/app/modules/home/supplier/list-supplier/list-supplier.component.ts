@@ -20,6 +20,8 @@ export class ListSupplierComponent implements OnInit {
   supplierPhone: string = '';
   checkError: boolean = false;
   checkErrorPhone: boolean = false;
+  checkError_2: boolean = false;
+  checkErrorPhone_2: boolean = false;
   loading: boolean = true;
   confirmModal?: NzModalRef;
   nameList = [
@@ -125,6 +127,14 @@ export class ListSupplierComponent implements OnInit {
       this.checkError = true;
     }else if(this.supplierPhone == ''){
       this.checkErrorPhone = true;
+    }
+    else if(this.supplierPhone.length != 10){
+      this.checkErrorPhone_2 = true;
+    }else if(this.supplierName.length > 150){
+      this.checkError_2 = true;
+    }
+    else if(this.supplierPhone.length > 150){
+      this.checkError_2 = true;
     }
     else {
       var formdata = new FormData();

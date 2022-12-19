@@ -75,6 +75,9 @@
                         <div *ngIf="statusError.fullname.errors!['required']">
                            <small style="color: red;">Vui lòng nhập tên nhân viên</small>
                         </div>
+                        <div *ngIf="statusError.fullname.errors!['maxlength']">
+                          <small style="color: red;">Tên nhân viên không quá 100 kí tự</small>
+                       </div>
                      </div>
                   </div>
                </div>

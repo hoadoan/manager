@@ -218,11 +218,15 @@
               </div>
             </div> -->
             <div class="col-12">
-              <nz-form-label [nzSpan]="6">Quản lý theo lô, Hạn sử dụng</nz-form-label>
+              <nz-form-label [nzSpan]="10">Quản lý theo lô, Hạn sử dụng</nz-form-label>
               <nz-switch (click)="clickIsManagedInBatches()" id="isManagedInBatches"
                 formControlName="isManagedInBatches">
               </nz-switch>
             </div>
+            <div class="row">
+              <small class="col-12">* Thuộc tính này không thể thay đổi sau khi tạo sản phẩm</small>
+            </div>
+
           </div>
           <nz-collapse style="border-radius: 8px;" id="productUnits" formControlName="productUnits" nzRequired
             for="productUnits" class="mt-3">
