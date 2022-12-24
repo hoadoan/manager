@@ -21,16 +21,16 @@
                     <small style="color: red;">Vui lòng nhập tên nhà cung cấp</small>
                 </div>
                 <div *ngIf="checkError_2 == true">
-                  <small style="color: red;">Tên nhà cung cấp không quá 150 kí tự</small>
+                  <small style="color: red;">Tên nhà cung cấp từ 6 - 150 kí tự</small>
               </div>
                 <nz-form-label nzRequired for="inputName5" class="form-label">Số điện thoại nhà cung cấp</nz-form-label>
-                <input type="number" class="form-control" id="inputName" [(ngModel)]="supplierPhone" min="0" minlength="1">
+                <input type="text" class="form-control" id="inputName" [(ngModel)]="supplierPhone" min="0" minlength="1">
                 <div *ngIf="checkErrorPhone == true">
                     <small style="color: red;">Vui lòng nhập số điên thoại nhà cung cấp</small>
                 </div>
                 <div *ngIf="checkErrorPhone_2 == true">
-                  <small style="color: red;">Không đúng định dạng số điện thoại</small>
-              </div>
+                  <small style="color: red;">Không đúng định dạng số điện thoại (0xx xxxx xxx)</small>
+                </div>
             </ng-container>
         </nz-modal>
     </div>

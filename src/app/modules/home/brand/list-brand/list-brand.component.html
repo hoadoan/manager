@@ -28,6 +28,9 @@
                         <div *ngIf="checkError == true">
                             <small style="color: red;">Vui lòng nhập tên nhà sản xuất</small>
                         </div>
+                        <div *ngIf="checkError_2 == true">
+                          <small style="color: red;">Tên nhà sản xuất từ 6 - 150 kí tự</small>
+                      </div>
                     </ng-container>
                 </nz-modal>
             </div>

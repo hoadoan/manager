@@ -7,55 +7,61 @@ import { BrandsService } from 'src/app/_core/services/brands/brands.service';
 @Component({
   selector: 'app-list-brand',
   templateUrl: './list-brand.component.html',
-  styleUrls: ['./list-brand.component.css']
+  styleUrls: ['./list-brand.component.css'],
 })
 export class ListBrandComponent implements OnInit {
-
-  loading: boolean = true
-  listsearch: any[] = []
-  listData: any[] = []
-  searchValue: string = ''
-  selectedProvince: string = 'SearchName'
+  loading: boolean = true;
+  listsearch: any[] = [];
+  listData: any[] = [];
+  searchValue: string = '';
+  selectedProvince: string = 'SearchName';
   isVisible = false;
-  factoryName: string = ''
-  checkError: boolean = false
+  factoryName: string = '';
+  checkError: boolean = false;
+  checkError_2: boolean = false;
   confirmModal?: NzModalRef;
   nameList = [
     { text: 'Hoạt động', value: true },
-    { text: 'Ngừng hoạt động', value: false }
+    { text: 'Ngừng hoạt động', value: false },
   ];
-  nameFilterFn = (list: string[], item: any): boolean => list.some(value => item.isActive == value)
+  nameFilterFn = (list: string[], item: any): boolean =>
+    list.some((value) => item.isActive == value);
 
   constructor(
     private brand: BrandsService,
     private router: Router,
     private notification: NzNotificationService,
     private modal: NzModalService
-  ) { }
+  ) {}
 
-    DetailBrand(id: number){
-      this.router.navigate(['dashboard/detail-brand/' + id]);
-    }
+  DetailBrand(id: number) {
+    this.router.navigate(['dashboard/detail-brand/' + id]);
+  }
 
   ngOnInit(): void {
     this.brand.getAllBrand().subscribe((result) => {
       console.log(result);
 
-      this.listData = result.data,
-        this.listsearch = this.listData
-      this.loading = false
-    })
+      (this.listData = result.data), (this.listsearch = this.listData);
+      this.loading = false;
+    });
   }
 
   SearchOption(value: string) {
-    this.selectedProvince = value
+    this.selectedProvince = value;
   }
   getListSearch() {
     console.log(this.searchValue);
-    if (this.selectedProvince == "searchID") {
-      this.listsearch = this.listData.filter(data => data.id.toString().includes(this.searchValue.toLocaleLowerCase()))
-    } else if (this.selectedProvince == "SearchName") {
-      this.listsearch = this.listData.filter(data => data.name.toLocaleLowerCase().includes(this.searchValue.toLocaleLowerCase()))
+    if (this.selectedProvince == 'searchID') {
+      this.listsearch = this.listData.filter((data) =>
+        data.id.toString().includes(this.searchValue.toLocaleLowerCase())
+      );
+    } else if (this.selectedProvince == 'SearchName') {
+      this.listsearch = this.listData.filter((data) =>
+        data.name
+          .toLocaleLowerCase()
+          .includes(this.searchValue.toLocaleLowerCase())
+      );
     }
   }
   showModal(): void {
@@ -63,28 +69,46 @@ export class ListBrandComponent implements OnInit {
   }
   handleOk(): void {
     if (this.factoryName == '') {
-      this.checkError = true
+      this.checkError = true;
+      this.checkError_2 = false;
+    } else if (this.factoryName.length < 6 || this.factoryName.length > 150) {
+      this.checkError_2 = true;
+      this.checkError = false;
     } else {
-      var formdata = new FormData()
+      var formdata = new FormData();
       formdata.append('name', this.factoryName);
       this.isVisible = false;
 
-      this.brand.createBrand(formdata).subscribe((result: any) => {
-        this.notification.create(
-          'success',
-          'Tạo nhà sản xuất mới thành công', ''
-        )
-        let currentUrl = this.router.url;
-        this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
-          this.router.navigate([currentUrl]);
-          console.log(currentUrl);
-        });
-      }, (err: any) => {
-        this.notification.create(
-          'error',
-          'Tạo nhà sản xuất mới thất bại', ''
-        )
-      })
+      this.confirmModal = this.modal.confirm({
+        nzTitle: 'Tạo nhà sản xuất',
+        nzContent: 'Bạn có muốn tạo nhà sản xuất không?',
+        nzOkText: 'Có',
+        nzOnOk: () => {
+          this.brand.createBrand(formdata).subscribe(
+            (result: any) => {
+              this.notification.create(
+                'success',
+                'Tạo nhà sản xuất mới thành công',
+                ''
+              );
+              let currentUrl = this.router.url;
+              this.router
+                .navigateByUrl('/', { skipLocationChange: true })
+                .then(() => {
+                  this.router.navigate([currentUrl]);
+                  console.log(currentUrl);
+                });
+            },
+            (err: any) => {
+              this.notification.create(
+                'error',
+                'Tạo nhà sản xuất mới thất bại',
+                ''
+              );
+            }
+          );
+        },
+      });
     }
   }
   handleCancel(): void {
@@ -96,23 +120,26 @@ export class ListBrandComponent implements OnInit {
       nzContent: 'Bạn có muốn cho nhà sản xuất này ngừng hoạt động không?',
       nzOkText: 'Có',
       nzOnOk: () => {
-        this.brand.deleteBrand(id).subscribe(() => {
-          this.notification.create(
-            'success',
-            'Ngừng hoạt động thành công', ''
-          )
-          let currentUrl = this.router.url;
-          this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
-            this.router.navigate([currentUrl]);
-            console.log(currentUrl);
-          });
-        }, err => {
-          console.log(err)
-          this.notification.create(
-            'error',
-            'Ngừng hoạt động thất bại', ''
-          )
-        })
+        this.brand.deleteBrand(id).subscribe(
+          () => {
+            this.notification.create(
+              'success',
+              'Ngừng hoạt động thành công',
+              ''
+            );
+            let currentUrl = this.router.url;
+            this.router
+              .navigateByUrl('/', { skipLocationChange: true })
+              .then(() => {
+                this.router.navigate([currentUrl]);
+                console.log(currentUrl);
+              });
+          },
+          (err) => {
+            console.log(err);
+            this.notification.create('error', 'Ngừng hoạt động thất bại', '');
+          }
+        );
       },
     });
   }
@@ -122,25 +149,27 @@ export class ListBrandComponent implements OnInit {
       nzContent: 'Bạn có muốn cho nhà sản xuất này hoạt động lại không?',
       nzOkText: 'Có',
       nzOnOk: () => {
-        this.brand.deleteBrand(id).subscribe(() => {
-          this.notification.create(
-            'success',
-            'Mở lại hoạt động thành công', ''
-          )
-          let currentUrl = this.router.url;
-          this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
-            this.router.navigate([currentUrl]);
-            console.log(currentUrl);
-          });
-        }, err => {
-          console.log(err)
-          this.notification.create(
-            'error',
-            'Mở lại hoạt động thất bại',''
-          )
-        })
+        this.brand.deleteBrand(id).subscribe(
+          () => {
+            this.notification.create(
+              'success',
+              'Mở lại hoạt động thành công',
+              ''
+            );
+            let currentUrl = this.router.url;
+            this.router
+              .navigateByUrl('/', { skipLocationChange: true })
+              .then(() => {
+                this.router.navigate([currentUrl]);
+                console.log(currentUrl);
+              });
+          },
+          (err) => {
+            console.log(err);
+            this.notification.create('error', 'Mở lại hoạt động thất bại', '');
+          }
+        );
       },
     });
   }
-
 }

@@ -16,10 +16,13 @@
                 nzCancelText="Hủy" (nzOnOk)="handleOk()" (nzOnCancel)="handleCancel()">
                 <ng-container *nzModalContent>
                     <nz-form-label nzRequired for="inputName5" class="form-label">Tên kệ hàng</nz-form-label>
-                    <input type="text" class="form-control" id="inputName" [(ngModel)]="activeSubstanceName">
+                    <input type="text" class="form-control" id="inputName" [(ngModel)]="shelfName">
                     <div *ngIf="checkError == true">
                         <small style="color: red;">Vui lòng nhập tên kệ hàng</small>
                     </div>
+                    <div *ngIf="checkError_2 == true">
+                      <small style="color: red;">Tên kệ hàng từ 6 - 150 kí tự</small>
+                  </div>
                 </ng-container>
             </nz-modal>
         </div>

@@ -61,7 +61,9 @@ export class ListSupplierComponent implements OnInit {
 
     if (this.selectedProvince == 'searchPhone') {
       this.listsearch = this.suppliers.filter((data) =>
-        data.phoneNumber.toString().includes(this.searchData.toLocaleLowerCase())
+        data.phoneNumber
+          .toString()
+          .includes(this.searchData.toLocaleLowerCase())
       );
     } else if (this.selectedProvince == 'searchName') {
       this.listsearch = this.suppliers.filter((data) =>
@@ -123,48 +125,71 @@ export class ListSupplierComponent implements OnInit {
     this.isVisible = true;
   }
   handleOk(): void {
+    console.log();
+
     if (this.supplierName == '') {
       this.checkError = true;
-    }else if(this.supplierPhone == ''){
+      this.checkErrorPhone = false;
+      this.checkError_2 = false;
+      this.checkErrorPhone_2 = false;
+    } else if (this.supplierName.length > 150 || this.supplierName.length < 6) {
+      this.checkError = false;
+      this.checkErrorPhone = false;
+      this.checkError_2 = true;
+      this.checkErrorPhone_2 = false;
+    } else if (this.supplierPhone == '') {
+      this.checkError = false;
       this.checkErrorPhone = true;
-    }
-    else if(this.supplierPhone.length != 10){
+      this.checkError_2 = false;
+      this.checkErrorPhone_2 = false;
+    } else if (
+      this.supplierPhone.length != 10 ||
+      Number.parseInt(this.supplierPhone).toString().length != 9
+    ) {
+      this.checkError = false;
+      this.checkErrorPhone = false;
+      this.checkError_2 = false;
       this.checkErrorPhone_2 = true;
-    }else if(this.supplierName.length > 150){
-      this.checkError_2 = true;
-    }
-    else if(this.supplierPhone.length > 150){
-      this.checkError_2 = true;
-    }
-    else {
-      var formdata = new FormData();
-      formdata.append('name', this.supplierName);
-      formdata.append('phoneNumber','0' + this.supplierPhone);
-      this.isVisible = false;
-      this.supplier.createSupplier(formdata).subscribe(
-        (result: any) => {
-          console.log(result);
-          this.notification.create(
-            'success',
-            'Tạo nhà cung cấp mới thành công',
-            ''
-          );
-          let currentUrl = this.router.url;
-          this.router
-            .navigateByUrl('/', { skipLocationChange: true })
-            .then(() => {
-              this.router.navigate([currentUrl]);
-              console.log(currentUrl);
-            });
+    } else {
+      this.checkError = false;
+      this.checkErrorPhone = false;
+      this.checkError_2 = false;
+      this.checkErrorPhone_2 = false;
+      this.confirmModal = this.modal.confirm({
+        nzTitle: 'Tạo nhà cung cấp',
+        nzContent: 'Bạn có muốn tạo nhà cung cấp này',
+        nzOkText: 'Có',
+        nzOnOk: () => {
+            var formdata = new FormData();
+            formdata.append('name', this.supplierName);
+            formdata.append('phoneNumber', this.supplierPhone);
+            this.isVisible = false;
+            this.supplier.createSupplier(formdata).subscribe(
+              (result: any) => {
+                console.log(result);
+                this.notification.create(
+                  'success',
+                  'Tạo nhà cung cấp mới thành công',
+                  ''
+                );
+                let currentUrl = this.router.url;
+                this.router
+                  .navigateByUrl('/', { skipLocationChange: true })
+                  .then(() => {
+                    this.router.navigate([currentUrl]);
+                    console.log(currentUrl);
+                  });
+              },
+              (err: any) => {
+                this.notification.create(
+                  'error',
+                  'Tạo nhà cung cấp mới thất bại',
+                  ''
+                );
+              }
+            );
         },
-        (err: any) => {
-          this.notification.create(
-            'error',
-            'Tạo nhà cung cấp mới thất bại',
-            ''
-          );
-        }
-      );
+      });
     }
   }
   handleCancel(): void {

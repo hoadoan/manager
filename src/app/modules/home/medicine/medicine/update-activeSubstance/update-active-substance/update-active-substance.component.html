@@ -1,8 +1,8 @@
 <button (click)="showModalChangeInfo()" nz-button nzType="primary" [nzSize]="'default'" style="border-radius: 10px">
   <i class="fas fa-plus"></i>
 </button>
-<nz-modal [(nzVisible)]="isVisibleChangeInfo" nzTitle="Thay đổi thông tin sản phẩm"
-  nzOkText="Thay đổi thông tin sản phẩm" nzCancelText="Hủy" (nzOnOk)="handleChangeInfoOk()"
+<nz-modal [(nzVisible)]="isVisibleChangeInfo" nzTitle="Thêm hoạt chất vào sản phẩm"
+  nzOkText="Thêm" nzCancelText="Hủy" (nzOnOk)="handleChangeInfoOk()"
   (nzOnCancel)="handleChangeInfoCancel()">
   <ng-container *nzModalContent>
     <nz-select nzAllowClear nzPlaceHolder="Hoạt chất" nzMode="multiple" class="col-12" style="left: 10px" [(ngModel)]="listNew" (ngModelChange)="changeInfo()" >

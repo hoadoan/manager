@@ -18,8 +18,9 @@ export class MedicineCategoryComponent implements OnInit {
   selectedProvince = 'SearchName'
   loading: boolean = true;
   confirmModal?: NzModalRef;
-  activeSubstanceName: string = ''
+  shelfName: string = ''
   checkError: boolean = false
+  checkError_2: boolean = false
   isVisible: boolean = false
   nameList = [
     { text: 'Hoạt động', value: true },
@@ -68,29 +69,43 @@ export class MedicineCategoryComponent implements OnInit {
     this.isVisible = true;
   }
   handleOk(): void {
-    if (this.activeSubstanceName == '') {
+    if (this.shelfName == '') {
       this.checkError = true
-    } else {
+      this.checkError_2 = false
+    } else if(this.shelfName.length<6 || this.shelfName.length >150){
+      this.checkError_2 = true
+      this.checkError = false
+    }
+     else {
       var formdata = new FormData()
-      formdata.append('name', this.activeSubstanceName);
+      formdata.append('name', this.shelfName);
       this.isVisible = false;
 
-      this.product.createCategory(formdata).subscribe((result) => {
-        this.notification.create(
-          'success',
-          result.message, ''
-        )
-        let currentUrl = this.router.url;
-        this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
-          this.router.navigate([currentUrl]);
-          console.log(currentUrl);
-        });
-      }, (err) => {
-        this.notification.create(
-          'error',
-          err.error.message, ''
-        )
-      })
+      this.confirmModal = this.modal.confirm({
+        nzTitle: 'Tạo kệ hàng',
+        nzContent: 'Bạn có muốn tạo kệ hàng không ?',
+        nzOkText: 'Có',
+        nzOnOk: () => {
+          this.product.createCategory(formdata).subscribe((result) => {
+            this.notification.create(
+              'success',
+              result.message, ''
+            )
+            let currentUrl = this.router.url;
+            this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+              this.router.navigate([currentUrl]);
+              console.log(currentUrl);
+            });
+          }, (err) => {
+            this.notification.create(
+              'error',
+              err.error.message, ''
+            )
+          })
+        },
+      });
+
+
     }
   }
   handleCancel(): void {

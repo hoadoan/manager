@@ -104,7 +104,12 @@ export class DetailMedicineComponent implements OnInit {
       nzContent: 'Bạn có muốn xoá hoạt chất này ra khỏi sản phẩm này không ?',
       nzOkText: 'Có',
       nzOnOk: () => {
-        this.product.deleteActiveSubstanceInProduct(data).subscribe(() => {
+        this.product.deleteActiveSubstanceInProduct(data).subscribe((rs) => {
+          this.notification.create(
+            'success',
+            'Xoá hoạt chất thành công',
+            ''
+          );
           let currentUrl = this.router.url;
           this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
             this.router.navigate([currentUrl]);
@@ -112,7 +117,11 @@ export class DetailMedicineComponent implements OnInit {
           });
         }, (err: any) => {
           console.log(err)
-
+          this.notification.create(
+            'error',
+            'Xoá hoạt chất không thành công',
+            ''
+          );
         })
       },
     });
@@ -126,6 +135,11 @@ export class DetailMedicineComponent implements OnInit {
       nzOkText: 'Có',
       nzOnOk: () => {
         this.product.deleteProductUnit(productUnitId).subscribe(() => {
+          this.notification.create(
+            'success',
+            'Xoá đơn vị tính thành công',
+            ''
+          );
           let currentUrl = this.router.url;
           this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
             this.router.navigate([currentUrl]);
@@ -133,7 +147,11 @@ export class DetailMedicineComponent implements OnInit {
           });
         }, (err: any) => {
           console.log(err)
-
+          this.notification.create(
+            'success',
+            'Xoá đơn vị tính không thành công',
+            ''
+          );
         })
       },
     });

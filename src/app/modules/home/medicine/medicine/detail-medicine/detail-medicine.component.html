@@ -90,7 +90,12 @@
           <div class="col-xl-5">
             <div class="card">
               <div class="card-body pt-3">
-                <div *ngIf="activeSubstances.length <= 0">Sản phẩm chưa có thông tin hoạt chất</div>
+                <div class="row">
+                  <div class="col-10" *ngIf="activeSubstances.length <= 0">Sản phẩm chưa có thông tin hoạt chất</div>
+                <div class="col-2" style="text-align: right">
+                  <app-update-active-substance [productId]="id" [listActiveSubstance]="activeSubstances"></app-update-active-substance>
+                </div>
+                </div>
                 <div *ngIf="activeSubstances.length > 0">
                   <div class="row">
                     <b class="col-10" style="font-size: 20px">Hoạt chất của sản phẩm</b>
