@@ -38,18 +38,18 @@ export class DetailNotificationComponent implements OnInit {
     })
   }
 
-  changeStatusNoti(id: number){
+  detailProduct(productId:number ,id: number){
     this.noti.PatchNotification(id).subscribe((result)=>{
       console.log(result);
     })
+    this.router.navigate(['dashboard/detail-medicine/' + productId]);
   }
 
-  detailProduct(id: number){
-    this.router.navigate(['dashboard/detail-medicine/' + id]);
-  }
-
-  detailBatch(id: number){
-    this.router.navigate(['dashboard/goodsreceiptnote/' + id]);
+  detailBatch(batchId: number, id: number){
+    this.noti.PatchNotification(id).subscribe((result)=>{
+      console.log(result);
+    })
+    this.router.navigate(['dashboard/goodsreceiptnote/' + batchId]);
   }
 
 }
