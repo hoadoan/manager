@@ -38,9 +38,9 @@ export class ListMedicineInactiveComponent implements OnInit {
 
     // get inactive product because brand
     this.product.getAllProductIsBrandInactive().subscribe((result) => {
-      console.log(result);
+      console.log(result.data);
       this.listProductWithBrandInactive = result.data;
-      // this.listsearch = this.listData;
+      this.listSearchBrand = this.listProductWithBrandInactive;
       this.loadingAS = false;
     });
 
@@ -48,7 +48,7 @@ export class ListMedicineInactiveComponent implements OnInit {
     this.product.getAllProductIsSupplierInactive().subscribe((result) => {
       console.log(result);
       this.listProductWithSupplierInactive = result.data;
-      // this.listsearch = this.listData;
+      this.listSearchSupplier = this.listProductWithSupplierInactive;
       this.loadingSupplier = false;
     });
 
@@ -56,7 +56,7 @@ export class ListMedicineInactiveComponent implements OnInit {
     this.product.getAllProductIsActiveSubstanceInactive().subscribe((result) => {
       console.log(result);
       this.listProductWithASInactive = result.data;
-      // this.listsearch = this.listData;
+      this.listSearchAS = this.listProductWithASInactive;
       this.loadingBrand = false;
     });
   }
