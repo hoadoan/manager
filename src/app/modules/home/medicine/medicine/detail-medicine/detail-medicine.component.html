@@ -205,7 +205,6 @@
       <nz-table #basicTable [nzData]="batches" style="font-size: 18px;">
         <thead style="text-align: center">
           <tr>
-            <!-- <th scope="col" style="text-align: center;">Mã lô hàng</th> -->
             <th scope="col" style="text-align: center;">Barcode lô hàng</th>
             <th scope="col" style="text-align: center;">Người tạo</th>
             <th scope="col" style="text-align: center;">Ngày tạo</th>
@@ -218,7 +217,6 @@
         </thead>
         <tbody  *ngFor="let batches of batches" style="text-align: center;">
           <tr>
-            <!-- <td scope="row" (click)="detailGoodsReceiptNote(batches.id)">{{batches.id}}</td> -->
             <td ><ngx-barcode bc-value={{batches.batchBarcode}} [bc-display-value]="true" [bc-width]="1" [bc-height]="35"></ngx-barcode></td>
             <td >{{batches.createdBy.name}}</td>
             <td >{{batches.createdAt | date:'dd-MM-yyyy'}}</td>

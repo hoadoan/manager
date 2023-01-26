@@ -15,6 +15,11 @@ export class InvoiceComponent implements OnInit {
   listsearch: any;
   selectedProvince = 'SearchBarcode';
   loading: boolean = true;
+  // nameList = [
+  //   { text: 'Xuất hàng bán', value: 'Xuất hàng bán' },
+  //   { text: 'Xuất hỏng', value: 'Xuất hỏng'}
+  // ];
+  // nameFilterFn = (list: string[], item: any): boolean => list.some(barcode => item.barcode.indexOf(barcode.slice(0, 3)) !== 'GIN');
   constructor(
     private invoice: GoodsreceiptnoteService,
     private router: Router

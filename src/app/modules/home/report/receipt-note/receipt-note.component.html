@@ -33,23 +33,23 @@
           >
             <thead style="text-align: center">
               <tr>
-                <th scope="col" style="text-align: center;">Mã lô hàng</th>
-                <th scope="col" style="text-align: center;"
+                <th scope="col">Mã lô hàng</th>
+                <th scope="col"
                   [nzFilters]="nameList"
                   [nzFilterMultiple]="true"
                   [nzFilterFn]="nameFilterFn"
                   >Dạng nhập</th>
-                <th scope="col" style="text-align: center;">Ngày nhập</th>
+                <th scope="col" >Ngày nhập</th>
                 <!-- <th scope="col" style="text-align: center;">Tên sản phẩm</th> -->
-                <th scope="col" style="text-align: center;">Số lượng</th>
-                <th scope="col" style="text-align: center;">Đơn vị</th>
-                <th scope="col" style="text-align: center;">Giá bán</th>
-                <th scope="col" style="text-align: center;">Thành tiền</th>
+                <th scope="col" >Số lượng</th>
+                <th scope="col" >Đơn vị</th>
+                <th scope="col" >Giá bán</th>
+                <th scope="col" >Thành tiền</th>
                 <th scope="col" style="text-align: center;">Xem chi tiết</th>
 
               </tr>
             </thead>
-            <tbody  *ngFor="let receiptnote of basicData.data" style="text-align: center;">
+            <tbody  *ngFor="let receiptnote of basicData.data">
               <tr >
                 <td >{{receiptnote.batch.barcode}}</td>
                 <td >{{receiptnote.goodsReceiptNoteType.name}}</td>

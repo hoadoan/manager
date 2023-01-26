@@ -1,11 +1,10 @@
-import { UserService } from './../../../../../_core/services/user/user.service';
-import { routeOfAdministration } from './../../../../../_core/utils/interface';
 import { ProductService } from 'src/app/_core/services/product/product.service';
 import { Subscription } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { NzModalRef, NzModalService } from 'ng-zorro-antd/modal';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-detail-medicine',
@@ -34,13 +33,15 @@ export class DetailMedicineComponent implements OnInit {
   batches: any[] = [];
   subParam!: Subscription;
   confirmModal?: NzModalRef;
+  pipe = new DatePipe('en-US');
+  toDay = new Date();
 
   constructor(
     private atvRoute: ActivatedRoute,
     private product: ProductService,
     private router: Router,
     private modal: NzModalService,
-    private notification: NzNotificationService,
+    private notification: NzNotificationService
   ) {}
 
   ngOnInit(): void {
@@ -68,7 +69,6 @@ export class DetailMedicineComponent implements OnInit {
           this.shelfId = productDetails.data.shelf.id;
           this.activeSubstances = productDetails.data.activeSubstances;
           this.productUnits = productDetails.data.productUnits;
-          console.log(this.productUnits);
           this.batches = productDetails.data.batches;
         });
       },
@@ -94,65 +94,69 @@ export class DetailMedicineComponent implements OnInit {
     this.router.navigate(['dashboard/goodsreceiptnote/' + id]);
   }
 
-  deleteActiveSubstance(activeSubtanceId: number){
-
-    let data = new FormData()
-    data.append('productId', this.id+'')
-    data.append('activeSubstanceId',activeSubtanceId+'')
+  deleteActiveSubstance(activeSubtanceId: number) {
+    let data = new FormData();
+    data.append('productId', this.id + '');
+    data.append('activeSubstanceId', activeSubtanceId + '');
     this.confirmModal = this.modal.confirm({
       nzTitle: 'Xoá hoạt chất',
       nzContent: 'Bạn có muốn xoá hoạt chất này ra khỏi sản phẩm này không ?',
       nzOkText: 'Có',
       nzOnOk: () => {
-        this.product.deleteActiveSubstanceInProduct(data).subscribe((rs) => {
-          this.notification.create(
-            'success',
-            'Xoá hoạt chất thành công',
-            ''
-          );
-          let currentUrl = this.router.url;
-          this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
-            this.router.navigate([currentUrl]);
-            console.log(currentUrl);
-          });
-        }, (err: any) => {
-          console.log(err)
-          this.notification.create(
-            'error',
-            'Xoá hoạt chất không thành công',
-            ''
-          );
-        })
+        this.product.deleteActiveSubstanceInProduct(data).subscribe(
+          (rs) => {
+            this.notification.create('success', 'Xoá hoạt chất thành công', '');
+            let currentUrl = this.router.url;
+            this.router
+              .navigateByUrl('/', { skipLocationChange: true })
+              .then(() => {
+                this.router.navigate([currentUrl]);
+                console.log(currentUrl);
+              });
+          },
+          (err: any) => {
+            console.log(err);
+            this.notification.create(
+              'error',
+              'Xoá hoạt chất không thành công',
+              ''
+            );
+          }
+        );
       },
     });
   }
 
-  deleteProductUnit(productUnitId: number){
-
+  deleteProductUnit(productUnitId: number) {
     this.confirmModal = this.modal.confirm({
       nzTitle: 'Xoá đơn vị bán',
       nzContent: 'Bạn có muốn xoá đơn vị bán này ra khỏi sản phẩm này không ?',
       nzOkText: 'Có',
       nzOnOk: () => {
-        this.product.deleteProductUnit(productUnitId).subscribe(() => {
-          this.notification.create(
-            'success',
-            'Xoá đơn vị tính thành công',
-            ''
-          );
-          let currentUrl = this.router.url;
-          this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
-            this.router.navigate([currentUrl]);
-            console.log(currentUrl);
-          });
-        }, (err: any) => {
-          console.log(err)
-          this.notification.create(
-            'success',
-            'Xoá đơn vị tính không thành công',
-            ''
-          );
-        })
+        this.product.deleteProductUnit(productUnitId).subscribe(
+          () => {
+            this.notification.create(
+              'success',
+              'Xoá đơn vị tính thành công',
+              ''
+            );
+            let currentUrl = this.router.url;
+            this.router
+              .navigateByUrl('/', { skipLocationChange: true })
+              .then(() => {
+                this.router.navigate([currentUrl]);
+                console.log(currentUrl);
+              });
+          },
+          (err: any) => {
+            console.log(err);
+            this.notification.create(
+              'success',
+              'Xoá đơn vị tính không thành công',
+              ''
+            );
+          }
+        );
       },
     });
   }

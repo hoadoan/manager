@@ -97,8 +97,14 @@ export class CreateStaffComponent implements OnInit {
     ) {
       formData.append('dob', date);
       this.isCheckDate = false;
+
     } else {
       this.isCheckDate = true;
+      this.notification.create(
+        'error',
+        'Nhân viên phải trên 18 tuổi',
+        ''
+      );
     }
     formData.append('isMale', this.StaffData.value.isMale);
     formData.append('avatar', this.StaffData.value.avatar);

@@ -38,16 +38,16 @@
           >
             <thead style="text-align: center">
               <tr>
-                <th scope="col" style="text-align: center;">Mã hoá đơn</th>
-                <th scope="col" style="text-align: center;">Dạng xuất hàng</th>
-                <th scope="col" style="text-align: center;">Tên khách hàng</th>
-                <th scope="col" style="text-align: center;">Tên nhân viên</th>
-                <th scope="col" style="text-align: center;">Ngày tạo</th>
-                <th scope="col" style="text-align: center;">Tổng tiền</th>
+                <th scope="col">Mã hoá đơn</th>
+                <th scope="col">Dạng xuất hàng</th>
+                <th scope="col">Tên khách hàng</th>
+                <th scope="col">Tên nhân viên</th>
+                <th scope="col">Ngày tạo</th>
+                <th scope="col">Tổng tiền</th>
                 <th scope="col" style="text-align: center;">Xem chi tiết</th>
               </tr>
             </thead>
-            <tbody  *ngFor="let invoices of basicData.data" style="text-align: center;">
+            <tbody  *ngFor="let invoices of basicData.data" >
               <tr >
                 <td >{{invoices.barcode}}</td>
                 <td>

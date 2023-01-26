@@ -10,7 +10,9 @@
           <li class="breadcrumb-item">
             <a routerLink="/dashboard/notification">Quản lí thông báo</a>
           </li>
-          <li class="breadcrumb-item active">Chi tiết thông báo ngày {{date|date:'dd-MM-yyyy'}}</li>
+          <li class="breadcrumb-item active">
+            Chi tiết thông báo ngày {{ date | date : "dd-MM-yyyy" }}
+          </li>
         </ol>
       </nav>
     </div>
@@ -18,61 +20,88 @@
 
   <nz-tabset>
     <nz-tab nzTitle="Lô hàng">
-      <h6 style>{{titleNotiBatch}}</h6>
+      <h6 style>{{ titleNotiBatch }}</h6>
       <div class="row">
         <div class="col-1"></div>
-        <nz-table *ngIf="listNotiBatch!=null" class="col-10" [nzData]="listNotiBatch" #basicTable [nzPageSize]="5"
-          [nzPageSizeOptions]="[5,10,15,20,25,30]" nzShowSizeChanger >
+        <nz-table
+          *ngIf="listNotiBatch != null"
+          class="col-10"
+          [nzData]="listNotiBatch"
+          #basicTable
+          [nzPageSize]="5"
+          [nzPageSizeOptions]="[5, 10, 15, 20, 25, 30]"
+          nzShowSizeChanger
+        >
           <thead>
-              <tr>
-                  <!-- <th style="text-align: center">Mã kệ hàng</th> -->
-                  <th >Mã lô hàng</th>
-                  <th >Nội dung thông báo</th>
-                  <th style="text-align: center">Xem chi tiết lô hàng</th>
-              </tr>
+            <tr>
+              <!-- <th style="text-align: center">Mã kệ hàng</th> -->
+              <th>Mã lô hàng</th>
+              <th>Nội dung thông báo</th>
+              <th style="text-align: center">Xem chi tiết lô hàng</th>
+            </tr>
           </thead>
           <tbody>
-              <tr style="cursor: pointer;" *ngFor="let data of basicTable.data" >
-                  <td >{{ data.content }}</td>
-                  <td >{{ data.title }}</td>
-                  <td style="text-align: center">
-                    <a (click)="detailBatch(data.batchId, data.id)">
-                      <span nz-icon nzType="zoom-in" nzTheme="outline" style="color: rgb(119, 219, 250);font-size: 20px;"></span>
-                    </a>
-                  </td>
-              </tr>
+            <tr style="cursor: pointer" *ngFor="let data of basicTable.data">
+              <td>{{ data.content }}</td>
+              <td>{{ data.title }}</td>
+              <td style="text-align: center">
+                <a (click)="detailBatch(data.batchId, data.id)">
+                  <span
+                    nz-icon
+                    nzType="zoom-in"
+                    nzTheme="outline"
+                    style="color: rgb(119, 219, 250); font-size: 20px"
+                  ></span>
+                </a>
+              </td>
+            </tr>
           </tbody>
-      </nz-table>
+        </nz-table>
       </div>
     </nz-tab>
     <nz-tab nzTitle="Sản phẩm">
-      <h6 style>{{titleNotiQuantity}}</h6>
+      <h6 style>{{ titleNotiQuantity }}</h6>
       <div class="row">
         <div class="col-1"></div>
-        <nz-table *ngIf="listNotiQuantity!=null" class="col-10" nzLoading="false" [nzData]="listNotiQuantity" #basicTableProduct [nzPageSize]="5"
-          [nzPageSizeOptions]="[5,10,15,20,25,30]" nzShowSizeChanger >
+        <nz-table
+          *ngIf="listNotiQuantity != null"
+          class="col-10"
+          nzLoading="false"
+          [nzData]="listNotiQuantity"
+          #basicTableProduct
+          [nzPageSize]="5"
+          [nzPageSizeOptions]="[5, 10, 15, 20, 25, 30]"
+          nzShowSizeChanger
+        >
           <thead>
-              <tr>
-                  <!-- <th style="text-align: center">Mã kệ hàng</th> -->
-                  <th >Tên sản phẩm</th>
-                  <th >Nội dung thông báo</th>
-                  <th style="text-align: center">Xem chi tiết sản phẩm</th>
-              </tr>
+            <tr>
+              <!-- <th style="text-align: center">Mã kệ hàng</th> -->
+              <th>Tên sản phẩm</th>
+              <th>Nội dung thông báo</th>
+              <th style="text-align: center">Xem chi tiết sản phẩm</th>
+            </tr>
           </thead>
           <tbody>
-              <tr style="cursor: pointer;" *ngFor="let data of basicTableProduct.data" >
-                  <td >{{ data.content }}</td>
-                  <td >{{ data.title }}</td>
-                  <td style="text-align: center">
-                    <a (click)="detailProduct(data.productId, data.id)">
-                      <span nz-icon nzType="zoom-in" nzTheme="outline" style="color: rgb(119, 219, 250);font-size: 20px;"></span>
-                    </a>
-                  </td>
-              </tr>
+            <tr
+              style="cursor: pointer"
+              *ngFor="let data of basicTableProduct.data"
+            >
+              <td>{{ data.content }}</td>
+              <td>{{ data.title }}</td>
+              <td style="text-align: center">
+                <a (click)="detailProduct(data.productId, data.id)">
+                  <span
+                    nz-icon
+                    nzType="zoom-in"
+                    nzTheme="outline"
+                    style="color: rgb(119, 219, 250); font-size: 20px"
+                  ></span>
+                </a>
+              </td>
+            </tr>
           </tbody>
-      </nz-table>
+        </nz-table>
       </div>
     </nz-tab>
   </nz-tabset>
-
 </main>
