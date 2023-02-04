@@ -1,3 +1,4 @@
+
 import { PagesError404Component } from './pages/pages-error404/pages-error404.component';
 import { RouterModule } from '@angular/router';
 import { HomeModule } from './modules/home/home.module';
@@ -43,6 +44,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     HomeModule,
     RouterModule,
     AntdModule,
+
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,

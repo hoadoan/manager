@@ -1,3 +1,4 @@
+import { NgxPrintModule } from 'ngx-print';
 import { NgxBarcodeModule } from '@greatcloak/ngx-barcode'
 import { UsersProfileComponent } from './../../pages/users-profile/users-profile.component';
 import { DetailMedicineComponent } from './medicine/medicine/detail-medicine/detail-medicine.component';
@@ -139,6 +140,7 @@ const homeRoutes: Routes = [
     CommonModule,
     AntdModule,
     NgxBarcodeModule,
+    NgxPrintModule,
     NgxEchartsModule.forRoot({
       echarts: () => import('echarts')
     }),

@@ -45,8 +45,8 @@
               <thead>
                   <tr >
                       <th style="text-align: center">Mã số đăng kí</th>
-                      <th style="text-align: center">Mã barcode</th>
-                      <th style="text-align: center">Tên sản phẩm</th>
+                      <th >Mã barcode</th>
+                      <th >Tên sản phẩm</th>
                       <th style="text-align: center">Giá bán</th>
                       <!-- <th [nzFilters]="nameList"
                       [nzFilterMultiple]="true"
@@ -55,20 +55,21 @@
                       <th style="text-align: center">Tình trạng</th>
                       <th style="text-align: center">Điều chỉnh trạng thái</th>
                       <th style="text-align: center;">Xem chi tiết</th>
+                      <th style="text-align: center;">In barcode</th>
                   </tr>
               </thead>
               <tbody>
-                  <tr style="cursor: pointer;" *ngFor="let data of basicTable.data" style="text-align: center">
-                      <td >
+                  <tr style="cursor: pointer;" *ngFor="let data of basicTable.data">
+                      <td  style="text-align: center">
                           {{data.drugRegistrationNumber}}
                       </td>
-                      <td >
+                      <td id="print-barcode">
                           <ngx-barcode bc-value={{data.barcode}} [bc-display-value]="true" [bc-width]="width"
                               [bc-height]="height"></ngx-barcode>
                       </td>
                       <td >{{ data.name}}</td>
-                      <td >{{ data.productUnits[0].price| number }} đ/ {{data.productUnits[0].unit}}</td>
-                      <td>
+                      <td  style="text-align: center">{{ data.productUnits[0].price| number }} đ/ {{data.productUnits[0].unit}}</td>
+                      <td  style="text-align: center">
                         <a *ngIf="data.isActive == true; else isActive" >
                           <nz-tag [nzColor]="'green'">Còn bán</nz-tag>
                         </a>
@@ -77,7 +78,7 @@
                               <nz-tag [nzColor]="'red'">Ngừng bán</nz-tag>
                           </a>
                       </ng-template>
-                      <td>
+                      <td  style="text-align: center">
                         <!-- <a><button type="button" class="btn btn-outline-secondary">Cập nhật</button></a> -->
                         <!-- <nz-divider nzType="vertical"></nz-divider> -->
                         <span *ngIf="data.isActive == false; else ElseBan ">
@@ -90,9 +91,14 @@
                             (click)="isInActiveProduct(data.id)">Chặn</button>
                     </ng-template>
                       <td style="text-align: center;">
-                        <a (click)="detail(data.id)">
+                        <button class="btn btn-outline-primary" (click)="detail(data.id)">
                           <span nz-icon nzType="zoom-in" nzTheme="outline" style="color: rgb(119, 219, 250);font-size: 20px;"></span>
-                        </a>
+                        </button>
+                      </td>
+                      <td style="text-align: center;">
+                        <button class="btn btn-outline-primary" printSectionId="print-barcode" ngxPrint >
+                          <i class="fa fa-print" aria-hidden="true" style="color: rgb(119, 219, 250)"></i>
+                        </button>
                       </td>
                   </tr>
               </tbody>
